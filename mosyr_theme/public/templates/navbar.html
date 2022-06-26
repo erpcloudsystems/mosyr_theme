@@ -1,0 +1,136 @@
+<header class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+    role="navigation" id="layout-navbar">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+        </a>
+    </div>
+    <div class="navbar-nav-right d-flex align-items-center">
+        <div class="navbar-nav align-items-center" id="navbar-collapse" style="position: relative;">
+            <form class="form-inline fill-width justify-content-end" role="search" onsubmit="return false;">
+                <div class="nav-item d-flex align-items-center">
+                    <span class="search-icon">
+                        <svg class="icon icon-sm">
+                            <use xlink:href="#icon-search"></use>
+                        </svg>
+                    </span>
+                    <input id="navbar-search" type="text" class="form-control form-control border-0 shadow-none"
+                        placeholder="{%= __(" Search or type a command (Ctrl + G)") %}" aria-haspopup="true">
+                </div>
+            </form>
+        </div>
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-3 me-1"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item lang-switcher" href="#" onclick="return false;" data-lang="en">
+                            <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-4 me-1"></i>
+                            <span class="align-middle">English</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item lang-switcher" href="#" onclick="return false;" data-lang="ar">
+                            <i class="flag-icon flag-icon-ae flag-icon-squared rounded-circle fs-4 me-1"></i>
+                            <span class="align-middle">Arabic</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item me-2 me-xl-0">
+                <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+                    <i class="bx bx-sm"></i>
+                </a>
+            </li>
+            <li class="nav-item dropdown dropdown-notifications dropdown-mobile hidden">
+                <a class="nav-link notifications-icon text-muted" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true" href="#" onclick="return false;">
+                    <span class="notifications-seen">
+                        <svg class="icon icon-md">
+                            <use href="#icon-notification"></use>
+                        </svg>
+                    </span>
+                    <span class="notifications-unseen">
+                        <svg class="icon icon-md">
+                            <use href="#icon-notification-with-indicator"></use>
+                        </svg>
+                    </span>
+                </a>
+                <div class="dropdown-menu notifications-list dropdown-menu-right" role="menu">
+                    <div class="notification-list-header">
+                        <div class="header-items"></div>
+                        <div class="header-actions"></div>
+                    </div>
+                    <div class="notification-list-body">
+                        <div class="panel-notifications"></div>
+                        <div class="panel-events"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item dropdown dropdown-message dropdown-mobile hidden">
+                <a class="nav-link notifications-icon text-muted" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true" href="#" onclick="return false;">
+                    <span>
+                        <svg class="icon icon-md">
+                            <use href="#icon-small-message"></use>
+                        </svg>
+                    </span>
+                </a>
+            </li>
+            <li class="vertical-bar d-none d-sm-block"></li>
+            <li class="nav-item dropdown dropdown-help dropdown-mobile d-none d-lg-block">
+                <a class="nav-link" data-toggle="dropdown" href="#" onclick="return false;">
+                    {{ __("Help") }}
+                    <span>
+                        <svg class="icon icon-xs">
+                            <use href="#icon-small-down"></use>
+                        </svg>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" id="toolbar-help" role="menu">
+                    <div id="help-links"></div>
+                    <div class="dropdown-divider documentation-links"></div>
+                    {% for item in navbar_settings.help_dropdown %}
+                    {% if (!item.hidden) { %}
+                    {% if (item.route) { %}
+                    <a class="dropdown-item" href="{{ item.route }}">
+                        {%= __(item.item_label) %}
+                    </a>
+                    {% } else if (item.action) { %}
+                    <a class="dropdown-item" onclick="return {{ item.action }}">
+                        {%= __(item.item_label) %}
+                    </a>
+                    {% } else { %}
+                    <div class="dropdown-divider"></div>
+                    {% } %}
+                    {% } %}
+                    {% endfor %}
+                </div>
+            </li>
+            <li class="nav-item dropdown dropdown-navbar-user dropdown-mobile">
+                <a class="nav-link" data-toggle="dropdown" href="#" onclick="return false;">
+                    {{ avatar }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" id="toolbar-user" role="menu">
+                    {% for item in navbar_settings.settings_dropdown %}
+                    {% if (!item.hidden) { %}
+                    {% if (item.route) { %}
+                    <a class="dropdown-item" href="{{ item.route }}">
+                        {%= __(item.item_label) %}
+                    </a>
+                    {% } else if (item.action) { %}
+                    <a class="dropdown-item" onclick="return {{ item.action }}">
+                        {%= __(item.item_label) %}
+                    </a>
+                    {% } else { %}
+                    <div class="dropdown-divider"></div>
+                    {% } %}
+                    {% } %}
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>

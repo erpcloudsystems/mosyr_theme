@@ -1,0 +1,17 @@
+.navbar {
+    display: none !important;
+}
+.footer-logo-extension, 
+.footer-links, 
+.footer-info,
+.web-footer {
+    display: none !important;
+}
+
+main.container {
+    padding-right: unset !important;
+    padding-left: unset !important;
+}
+main.my-4 {
+    margin: 0 !important;
+}

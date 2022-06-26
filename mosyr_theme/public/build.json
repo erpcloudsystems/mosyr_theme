@@ -1,0 +1,28 @@
+{
+    "mosyr_theme/css/mosyr_theme.min.css": [
+        "public/css/custome_css.css",
+        "public/css/flag-icon.css",
+        "public/css/boxicons.css",
+        "public/css/theme-default.css"
+    ],
+    "mosyr_theme/css/web-css.min.css": [
+        "public/css/page-auth.css",
+        "public/css/core.css",
+        "public/css/demo.css",
+        "public/css/theme-default.css",
+        "public/css/web-css.css"
+
+    ],
+    "mosyr_theme/js/web-js.min.js": [
+        "public/js/web-js.js"
+    ],
+    "mosyr_theme/js/mosyr_theme.min.js": [
+        "public/templates/navbar.html",
+        "public/templates/list_sidebar.html",
+        "public/js/custome_js.js",
+        "public/js/custom_workspace.js",
+        "public/js/custome_base_list.js",
+        "public/js/custom_list_sidebar.js",
+        "public/js/custome_navbar.js"
+    ]
+}

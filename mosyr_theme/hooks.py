@@ -13,12 +13,14 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/mosyr_theme/css/mosyr_theme.css"
-# app_include_js = "/assets/mosyr_theme/js/mosyr_theme.js"
+app_include_css = ["/assets/mosyr_theme/css/mosyr_theme.min.css"]
+app_include_js = ["/assets/mosyr_theme/js/mosyr_theme.min.js"]
+
+# base_template = "templates/custome-base.html"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/mosyr_theme/css/mosyr_theme.css"
-# web_include_js = "/assets/mosyr_theme/js/mosyr_theme.js"
+web_include_css = ["/assets/mosyr_theme/css/web-css.min.css"]
+web_include_js =  ["/assets/mosyr_theme/js/web-js.min.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "mosyr_theme/public/scss/website"
@@ -40,7 +42,7 @@ app_license = "MIT"
 # ----------
 
 # application home page (will override Website Settings)
-# home_page = "login"
+home_page = "login"
 
 # website user home page (by Role)
 # role_home_page = {
@@ -186,3 +188,8 @@ user_data_fields = [
 # Recommended only for DocTypes which have limited documents with untranslated names
 # For example: Role, Gender, etc.
 # translated_search_doctypes = []
+
+
+website_redirect = [
+	{"source": "/app", "target": "/main"},
+]

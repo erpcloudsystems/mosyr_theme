@@ -1,0 +1,53 @@
+body {
+    font-family: 'Public Sans', sans-serif !important;
+}
+#body {
+    width: 100% !important;
+}
+a.menu-link:hover {
+    text-decoration: none !important;
+}
+ul.menu-inner {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+.layout-side-section {
+    padding-right: 0 !important;
+}
+
+.layout-main-section.frappe-card {
+    background-color: unset !important;
+    padding: 25px !important;
+    box-shadow: none;
+}
+.custome-cont {
+    background-color: #fff !important;
+    padding: 0 !important;
+}
+.page-head {
+    position: initial;
+}
+.page-head.drop-shadow {
+    box-shadow: none !important;
+    background-color: unset !important;
+}
+.layout-side-section .sidebar-label {
+    align-items: start !important;
+}
+.list-sidebar .sidebar-section,
+.list-sidebar .save-filter-section {
+    width: 100% !important;
+    padding: 0 15px !important;
+}
+
+.page-head .page-head-content {
+    height: auto !important;
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
+}
+.btn-primary {
+    color: #fff !important;
+    background-color: #696cff !important;
+    border-color: #696cff !important;
+    box-shadow: 0 0.125rem 0.25rem 0 rgb(105 108 255 / 40%) !important;
+}
