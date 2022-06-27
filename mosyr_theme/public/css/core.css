@@ -2144,7 +2144,7 @@ progress {
 .form-label {
   margin-bottom: 0.5rem;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 400;
   color: #566a7f;
 }
 
@@ -2428,20 +2428,20 @@ textarea.form-control-lg {
 }
 
 .form-check-input {
-  width: 1.2em;
-  height: 1.2em;
-  margin-top: 0.165em;
-  vertical-align: top;
-  background-color: #fff;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  border: 1px solid #d9dee3;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  -webkit-print-color-adjust: exact;
-          color-adjust: exact;
+  width: 1.2em !important;
+  height: 1.2em !important;
+  margin-top: 0.165em !important;
+  vertical-align: top !important;
+  background-color: #fff !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  border: 1px solid #d9dee3 !important;
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+  -webkit-print-color-adjust: exact !important;
+          color-adjust: exact !important;
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;

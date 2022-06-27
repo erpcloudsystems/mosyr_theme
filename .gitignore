@@ -4,3 +4,6 @@
 *.swp
 tags
 mosyr_theme/docs/current
+
+*.min.js
+*.min.css
