@@ -1,75 +1,322 @@
 <!DOCTYPE html>
 <html data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" class="layout-menu-fixed">
-	<head>
-		<!-- Chrome, Firefox OS and Opera -->
-		<meta name="theme-color" content="#0089FF">
-		<!-- Windows Phone -->
-		<meta name="msapplication-navbutton-color" content="#0089FF">
-		<!-- iOS Safari -->
-		<meta name="apple-mobile-web-app-status-bar-style" content="#0089FF">
-		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-		<meta content="utf-8" http-equiv="encoding">
-		<meta name="author" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,
+
+<head>
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#0089FF">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#0089FF">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#0089FF">
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,
 			maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="white">
-		<meta name="mobile-web-app-capable" content="yes">
-		<title>Frappe</title>
-		<link rel="shortcut icon"
-			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
-		<link rel="icon"
-			href="{{ favicon or "/assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
-		{% for include in include_css -%}
-		<link type="text/css" rel="stylesheet" href="{{ include }}?ver={{ build_version }}">
-		{%- endfor -%}
-		<!-- Core CSS -->
-		<link rel="stylesheet" href="/assets/mosyr_theme/css/core.css" class="template-customizer-core-css" />
-		<link rel="stylesheet" href="/assets/mosyr_theme/css/theme-default.css" class="template-customizer-theme-css" />
-		<link rel="stylesheet" href="/assets/mosyr_theme/css/demo.css" />
-		<link rel="stylesheet" href="/assets/mosyr_theme/css/custome_css.css" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
-	</head>
-	<body>
-		{% include "public/icons/timeless/symbol-defs.svg" %}
-		<div class="centered splash">
-			<img src="{{ splash_image or "/assets/frappe/images/frappe-framework-logo.png" }}"
-				style="max-width: 100px; max-height: 100px;">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>Frappe</title>
+	<link rel="shortcut icon" href="{{ favicon or " /assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
+	<link rel="icon" href="{{ favicon or " /assets/frappe/images/frappe-favicon.svg" }}" type="image/x-icon">
+	{% for include in include_css -%}
+	<link type="text/css" rel="stylesheet" href="{{ include }}?ver={{ build_version }}">
+	{%- endfor -%}
+	<!-- Core CSS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+
+
+	<script src="/assets/mosyr_theme/js/helpers.js"></script>
+</head>
+
+<body>
+	{% include "public/icons/timeless/symbol-defs.svg" %}
+	<div class="centered splash">
+		<img src="{{ splash_image or " /assets/frappe/images/frappe-framework-logo.png" }}"
+			style="max-width: 100px; max-height: 100px;">
+	</div>
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+			<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+				<div class="app-brand demo">
+					<a href="/app" class="app-brand-link">
+						<span class="app-brand-logo demo">
+							<img src="/assets/mosyr_theme/img/mosyrlogo.png" alt="mosyer-logo" />
+						</span>
+					</a>
+					<a href="javascript:void(0);"
+						class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+						<i class="bx bx-chevron-left bx-sm align-middle">****</i>
+					</a>
+				</div>
+
+				<div class="menu-inner-shadow"></div>
+
+				<ul class="menu-inner py-1">
+					<!-- Dashboard -->
+					<li class="menu-item active">
+						<a href="/app" class="menu-link">
+							<i class="menu-icon tf-icons bx bx-home-circle"></i>
+							<div data-i18n="Analytics">Dashboard</div>
+						</a>
+					</li>
+					<!-- Layouts -->
+					{% for item in side_items %}
+						<li class="menu-item">
+							<a href="javascript:void(0);" class="menu-link menu-toggle">
+								<i class="menu-icon {{ item.icon or 'folder-open' }}"></i>
+								<div data-i18n="Layouts">{{ _(item.label) or _(item.name)}}</div>
+							</a>
+							<ul class="menu-sub">
+								{% for itm in item.child_items %}
+									<li class="menu-item">
+										<a href="/app/{{itm.route}}" class="menu-link">
+											<div data-i18n="{{ _(itm.name) }}">{{ _(itm.name) }}</div>
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</li>
+					{% endfor %}
+					<li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+					  <li class="menu-item open" style="">
+						<a href="javascript:void(0);" class="menu-link menu-toggle">
+						  <i class="menu-icon tf-icons bx bx-dock-top"></i>
+						  <div data-i18n="Account Settings">Account Settings</div>
+						</a>
+						<ul class="menu-sub">
+						  <li class="menu-item">
+							<a href="pages-account-settings-account.html" class="menu-link">
+							  <div data-i18n="Account">Account</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-notifications.html" class="menu-link">
+							  <div data-i18n="Notifications">Notifications</div>
+							</a>
+						  </li>
+						  <li class="menu-item">
+							<a href="pages-account-settings-connections.html" class="menu-link">
+							  <div data-i18n="Connections">Connections</div>
+							</a>
+						  </li>
+						</ul>
+					  </li>
+				</ul>
+			</aside>
+			<!-- / Menu -->
+			<div class="layout-page">
+				<div class="main-section">
+					<header></header>
+					<div id="body"></div>
+					<footer></footer>
+				</div>
+			</div>
+
+			<!-- / Layout page -->
 		</div>
-		<div class="main-section">
-			<header></header>
-			<div id="body"></div>
-			<footer></footer>
-		</div>
 
-		<script type="text/javascript" src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
 
-		<script type="text/javascript">
-			window._version_number = "{{ build_version }}";
-			// browser support
-			window.app = true;
-			window.dev_server = {{ dev_server }};
 
-			if (!window.frappe) window.frappe = {};
+	<script type="text/javascript" src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
 
-			frappe.boot = {{ boot }};
-			frappe._messages = frappe.boot["__messages"];
-			frappe.csrf_token = "{{ csrf_token }}";
-		</script>
+	<script type="text/javascript">
+		window._version_number = "{{ build_version }}";
+		// browser support
+		window.app = true;
+		window.dev_server = {{ dev_server }};
 
-		{% for include in include_js %}
-		<script type="text/javascript" src="{{ include }}?ver={{ build_version }}"></script>
-		{% endfor %}
-		{% include "templates/includes/app_analytics/google_analytics.html" %}
-		{% include "templates/includes/app_analytics/mixpanel_analytics.html" %}
+		if (!window.frappe) window.frappe = {};
 
-		{% for sound in (sounds or []) %}
-		<audio preload="auto" id="sound-{{ sound.name }}" volume={{ sound.volume or 1 }}>
-			<source src="{{ sound.src }}"></source>
-		</audio>
-		{% endfor %}
-	</body>
+		frappe.boot = {{ boot }};
+		frappe._messages = frappe.boot["__messages"];
+		frappe.csrf_token = "{{ csrf_token }}";
+	</script>
+
+	{% for include in include_js %}
+	<script type="text/javascript" src="{{ include }}?ver={{ build_version }}"></script>
+	{% endfor %}
+	{% include "templates/includes/app_analytics/google_analytics.html" %}
+	{% include "templates/includes/app_analytics/mixpanel_analytics.html" %}
+
+	{% for sound in (sounds or []) %}
+	<audio preload="auto" id="sound-{{ sound.name }}" volume={{ sound.volume or 1 }}>
+		<source src="{{ sound.src }}">
+		</source>
+	</audio>
+	{% endfor %}
+
+	<script src="/assets/mosyr_theme/js/menu.js"></script>
+	<script src="/assets/mosyr_theme/js/main.js"></script>
+</body>
+
 </html>

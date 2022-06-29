@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "creation": "2022-03-09 15:35:30.287721",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enable",
+  "show_sidebar",
+  "sidebar_section",
+  "sidebar_labels",
+  "sidebar_item",
+  "homepage_shortcuts_section",
+  "shortcuts",
+  "homepage_charts_section",
+  "charts",
+  "notification_section",
+  "notifications"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "Enable",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "show_sidebar",
+   "fieldtype": "Check",
+   "label": "Show Sidebar"
+  },
+  {
+   "fieldname": "sidebar_section",
+   "fieldtype": "Section Break",
+   "label": "Sidebar"
+  },
+  {
+   "fieldname": "sidebar_labels",
+   "fieldtype": "Table",
+   "label": "Sidebar Label",
+   "options": "Sidebar Label"
+  },
+  {
+   "fieldname": "sidebar_item",
+   "fieldtype": "Table",
+   "label": "Sidebar Item",
+   "options": "SideBar Item Table"
+  },
+  {
+   "fieldname": "homepage_shortcuts_section",
+   "fieldtype": "Section Break",
+   "label": "Homepage Shortcuts"
+  },
+  {
+   "fieldname": "shortcuts",
+   "fieldtype": "Table",
+   "label": "Shortcuts",
+   "options": "System Shortcut"
+  },
+  {
+   "fieldname": "homepage_charts_section",
+   "fieldtype": "Section Break",
+   "label": "Homepage Charts"
+  },
+  {
+   "fieldname": "charts",
+   "fieldtype": "Table",
+   "label": "Charts",
+   "options": "Workspace Chart"
+  },
+  {
+   "fieldname": "notification_section",
+   "fieldtype": "Section Break",
+   "label": "Notification"
+  },
+  {
+   "fieldname": "notifications",
+   "fieldtype": "Table",
+   "label": "Notifications",
+   "options": "Notifications Table"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-06-27 16:29:42.731990",
+ "modified_by": "Administrator",
+ "module": "Mosyr Theme",
+ "name": "System Controller",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

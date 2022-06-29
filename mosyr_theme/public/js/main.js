@@ -95,7 +95,7 @@ let menu, animate;
   });
 
   // Auto update layout based on screen size
-  window.Helpers.setAutoUpdate(true);
+  window.Helpers.setAutoUpdate(false);
 
   // Toggle Password Visibility
   window.Helpers.initPasswordToggle();

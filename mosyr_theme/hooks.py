@@ -13,7 +13,10 @@ app_license = "MIT"
 # ------------------
 
 # include js, css files in header of desk.html
-app_include_css = ["/assets/mosyr_theme/css/mosyr_theme.min.css"]
+app_include_css = [
+	"/assets/mosyr_theme/css/mosyr_theme.min.css",
+	"/assets/mosyr_theme/css-rtl/mosyr_theme_rtl.min.css"
+]
 app_include_js = ["/assets/mosyr_theme/js/mosyr_theme.min.js"]
 
 # base_template = "templates/custome-base.html"
@@ -189,7 +192,4 @@ user_data_fields = [
 # For example: Role, Gender, etc.
 # translated_search_doctypes = []
 
-
-website_redirect = [
-	{"source": "/app", "target": "/main"},
-]
+extend_bootinfo = "mosyr_theme.boot.boot_session"

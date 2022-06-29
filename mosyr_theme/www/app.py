@@ -14,6 +14,8 @@ import frappe.sessions
 from frappe import _
 from frappe.utils.jinja import is_rtl
 
+from mosyr_theme.boot import get_sidebar_items
+
 
 def get_context(context):
 	if frappe.session.user == "Guest":
@@ -45,6 +47,8 @@ def get_context(context):
 
 	style_urls = hooks["app_include_css"]
 
+	sidebar_items = get_sidebar_items()
+
 	context.update(
 		{
 			"no_cache": 1,
@@ -60,6 +64,7 @@ def get_context(context):
 			"google_analytics_id": frappe.conf.get("google_analytics_id"),
 			"google_analytics_anonymize_ip": frappe.conf.get("google_analytics_anonymize_ip"),
 			"mixpanel_id": frappe.conf.get("mixpanel_id"),
+			"side_items": sidebar_items,
 		}
 	)
 

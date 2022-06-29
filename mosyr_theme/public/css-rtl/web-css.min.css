@@ -4996,7 +4996,7 @@ textarea.form-control-lg {
   border-top-color: #233446;
 }
 
-.bs-tooltip-end, .bs-tooltip-auto[data-popper-placement^=right] {
+.bs-tooltip-end, .bs-tooltip-auto[data-popper-placement^=left] {
   padding: 0 0.4rem;
 }
 .bs-tooltip-end .tooltip-arrow, .bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow {
@@ -5022,7 +5022,7 @@ textarea.form-control-lg {
   border-bottom-color: #233446;
 }
 
-.bs-tooltip-start, .bs-tooltip-auto[data-popper-placement^=left] {
+.bs-tooltip-start, .bs-tooltip-auto[data-popper-placement^=right] {
   padding: 0 0.4rem;
 }
 .bs-tooltip-start .tooltip-arrow, .bs-tooltip-auto[data-popper-placement^=left] .tooltip-arrow {
@@ -5212,8 +5212,8 @@ textarea.form-control-lg {
 }
 
 .carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev {
+.carousel-item-prev,
+.carousel-item-next {
   display: block;
 }
 .carousel-item-next:not(.carousel-item-start),
@@ -5231,8 +5231,8 @@ textarea.form-control-lg {
   transform: none;
 }
 .carousel-fade .carousel-item.active,
-.carousel-fade .carousel-item-next.carousel-item-start,
-.carousel-fade .carousel-item-prev.carousel-item-end {
+.carousel-fade .carousel-item-prev.carousel-item-start,
+.carousel-fade .carousel-item-next.carousel-item-end {
   z-index: 1;
   opacity: 1;
 }
@@ -5249,8 +5249,8 @@ textarea.form-control-lg {
   }
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+.carousel-control-next,
+.carousel-control-prev {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -5268,14 +5268,14 @@ textarea.form-control-lg {
   transition: opacity 0.15s ease;
 }
 @media (prefers-reduced-motion: reduce) {
-  .carousel-control-prev,
-.carousel-control-next {
+  .carousel-control-next,
+.carousel-control-prev {
     transition: none;
   }
 }
-.carousel-control-prev:hover, .carousel-control-prev:focus,
-.carousel-control-next:hover,
-.carousel-control-next:focus {
+.carousel-control-next:hover, .carousel-control-next:focus,
+.carousel-control-prev:hover,
+.carousel-control-prev:focus {
   color: #fff;
   text-decoration: none;
   outline: 0;
@@ -5290,8 +5290,8 @@ textarea.form-control-lg {
   left: 0;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
   display: inline-block;
   width: 2.55rem;
   height: 2.55rem;
@@ -16782,7 +16782,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
   direction: rtl !important;
 }
 
-[dir='rtl'] .rtl-only {
+[dir='ltr'] .ltr-only {
   display: block !important;
 }
 
