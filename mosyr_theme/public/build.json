@@ -13,11 +13,11 @@
     ],
     "mosyr_theme/css/web-css.min.css": [
         "public/css/page-auth.css",
+        "public/css/page-misc.css",
         "public/css/core.css",
         "public/css/demo.css",
         "public/css/theme-default.css",
         "public/css/web-css.css"
-
     ],
     "mosyr_theme/js/web-js.min.js": [
         "public/js/web-js.js"

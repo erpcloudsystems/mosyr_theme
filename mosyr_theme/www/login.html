@@ -9,7 +9,7 @@
 </div>
 <div class="mb-3 form-password-toggle">
     <div class="d-flex justify-content-between">
-        <label class="form-label sr-only" for="login_password">{{ _("Password") }}</label>
+        <label class="form-label" for="login_password">{{ _("Password") }}</label>
         <a href="#forgot">
             <small> {{ _("Forgot Password?") }}</small>
         </a>
@@ -22,7 +22,7 @@
 </div>
 <div class="mb-3">
     <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="remember-me" />
+        <input class="form-check-input" type="checkbox" id="remember-me" style="width: 1.2em !important;" />
         <label class="form-check-label" for="remember-me"> Remember Me </label>
     </div>
 </div>
@@ -55,8 +55,21 @@
     </a>
 </div>
 <!-- /Logo -->
-<h4 class="mb-2">Welcome to Sneat! 👋</h4>
-<p class="mb-4">Please sign-in to your account and start the adventure</p>
+{% endmacro %}
+
+{% macro login_wellcome_msg() %}
+    <h4 class="mb-2">Welcome to Sneat! 👋</h4>
+    <p class="mb-4">Please sign-in to your account and start the adventure</p>
+{% endmacro %}
+
+{% macro signup_wellcome_msg() %}
+    <h4 class="mb-2">Adventure starts here 🚀</h4>
+    <p class="mb-4">Make your app management easy and fun!</p>
+{% endmacro %}
+
+{% macro forget_wellcome_msg() %}
+    <h4 class="mb-2">Forgot Password? 🔒</h4>
+    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
 {% endmacro %}
 
 {% block page_content %}
@@ -71,12 +84,13 @@
                     href='https://enable-javascript.com/'>enable-javascript.com</a></p>") }}
         </div>
     </noscript>
-    <div class='container-xxl'>
+    <div id="for-login" class='container-xxl'>
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="login-content page-card authentication-inner">
                 <div class="card">
                     <div class="card-body">
                         {{ logo_section() }}
+                        {{ login_wellcome_msg() }}
                         <form class="form-signin form-login mb-3" role="form">
                             {%- if social_login -%}
                             <div class="page-card-body">
@@ -117,92 +131,103 @@
     </div>
 
     {%- if social_login -%}
-    <section class='for-email-login'>
-        <div class="login-content page-card">
-            {{ logo_section() }}
-            <form class="form-signin form-login" role="form">
-                {{ email_login_body() }}
-            </form>
-        </div>
-        {%- if not disable_signup -%}
-        <div class="text-center sign-up-message">
-            {{ _("Don't have an account?") }}
-            <a href="#signup">{{ _("Sign up") }}</a>
-        </div>
-        {%- endif -%}
-    </section>
-    {%- endif -%}
-    <section class='for-signup {{ "signup-disabled" if disable_signup else "" }}'>
-        <div class="login-content page-card">
-            {{ logo_section() }}
-            {%- if not disable_signup -%}
-            <form class="form-signin form-signup hide" role="form">
-                <div class="page-card-body">
-                    <div class="form-group">
-                        <label class="form-label sr-only" for="signup_fullname">Full Name</label>
-                        <input type="text" id="signup_fullname" class="form-control" placeholder="{{ _('Jane Doe') }}"
-                            required autofocus>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label sr-only" for="signup_email">Email</label>
-                        <input type="email" id="signup_email" class="form-control"
-                            placeholder="{{ _('jane@example.com') }}" required>
+    <div id="for-email-login" class='container-xxl'>
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="login-content page-card authentication-inner">
+                <div class="card">
+                    <div class="card-body">
+                        {{ logo_section() }}
+                        {{ login_wellcome_msg() }}
+                        <form class="form-signin form-login mb-3" role="form">
+                            {{ email_login_body() }}
+                        </form>
+                        {%- if not disable_signup -%}
+                        <p class="text-center">
+                            <span>New on our platform?</span>
+                            <a href="#signup">
+                                <span>Create an account</span>
+                            </a>
+                        </p>
+                        {%- endif -%}
                     </div>
                 </div>
-                <div class="page-card-actions">
-                    <button class="btn btn-sm btn-primary btn-block btn-signup" type="submit">{{ _("Sign up")
-                        }}</button>
-
-                    <p class="text-center sign-up-message">
-                        <a href="#login" class="blue">{{ _("Have an account? Login") }}</a>
-                    </p>
-                </div>
-            </form>
-            {%- else -%}
-            <div class='page-card-head mb-2'>
-                <span class='indicator gray'>{{_("Signup Disabled")}}</span>
-                <p class="text-muted text-normal sign-up-message mt-1 mb-8">{{_("Signups have been disabled for this
-                    website.")}}</p>
-                <div><a href='/' class='btn btn-primary btn-md'>{{ _("Home") }}</a></div>
             </div>
-            {%- endif -%}
         </div>
+    </div>
+    {%- endif -%}
+    <div id="for-signup" class='container-xxl {{ "signup-disabled" if disable_signup else "" }}'>
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="login-content page-card authentication-inner">
+                <div class="card">
+                    <div class="card-body">
+                        {{ logo_section() }}
+                        {{ signup_wellcome_msg() }}
+                        {%- if not disable_signup -%}
+                        <form class="form-signin form-login mb-3" role="form">
+                            <div class="mb-3">
+                                <label class="form-label" for="signup_fullname">Full Name</label>
+                                <input type="text" id="signup_fullname" class="form-control"
+                                    placeholder="{{ _('Jane Doe') }}" required autofocus>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="signup_email">Email</label>
+                                <input type="email" id="signup_email" class="form-control"
+                                    placeholder="{{ _('jane@example.com') }}" required>
+                            </div>
 
-    </section>
-
-    <section class='for-forgot'>
-        <div class="login-content page-card">
-            <form class="form-signin form-forgot hide" role="form">
-                <div class="page-card-head">
-                    <h4>{{ _('Forgot Password') }}</h4>
-                </div>
-                <div class="page-card-body">
-                    <div class="email-field">
-                        <input type="email" id="forgot_email" class="form-control"
-                            placeholder="{{ _('Email Address') }}" required autofocus>
-                        <svg class="field-icon email-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M2.5 7.65149V15.0757C2.5 15.4374 2.64367 15.7842 2.8994 16.04C3.15513 16.2957 3.50198 16.4394 3.86364 16.4394H16.1364C16.498 16.4394 16.8449 16.2957 17.1006 16.04C17.3563 15.7842 17.5 15.4374 17.5 15.0757V7.65149"
-                                stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square" />
-                            <path
-                                d="M17.5 7.57572V5.53026C17.5 5.1686 17.3563 4.82176 17.1006 4.56603C16.8449 4.31029 16.498 4.16663 16.1364 4.16663H3.86364C3.50198 4.16663 3.15513 4.31029 2.8994 4.56603C2.64367 4.82176 2.5 5.1686 2.5 5.53026V7.57572L10 10.8333L17.5 7.57572Z"
-                                stroke="#74808B" stroke-miterlimit="10" stroke-linecap="square" />
-                        </svg>
-
+                            <div class="page-card-actions mb-3">
+                                <button class="btn btn-primary d-grid w-100 btn-signup" type="submit">{{
+                                    _("Signup")}}</button>
+                            </div>
+                            <p class="text-center">
+                                <span>{{_("Already have an account?")}}</span>
+                                <a href="#login">
+                                    <span>{{_("Sign in instead")}}</span>
+                                </a>
+                            </p>
+                        </form>
+                        {%- else -%}
+                        <div class='page-card-head mb-2'>
+                            <span class='indicator gray'>{{_("Signup Disabled")}}</span>
+                            <p class="text-muted text-normal sign-up-message mt-1 mb-8">{{_("Signups have been
+                                disabled for this
+                                website.")}}</p>
+                            <div><a href='/' class='btn btn-primary btn-md'>{{ _("Home") }}</a></div>
+                        </div>
+                        {%- endif -%}
                     </div>
                 </div>
-                <div class="page-card-actions">
-                    <button class="btn btn-sm btn-primary btn-block btn-forgot" type="submit">{{ _("Reset Password")
-                        }}</button>
-                    <p class="text-center sign-up-message">
-                        <a href="#login">{{ _("Back to Login") }}</a>
-                    </p>
-                </div>
-
-            </form>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
+
+<div id='for-forgot' class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="login-content page-card authentication-inner">
+            <div class="card">
+                <div class="card-body">
+                    {{ logo_section() }}
+                    {{ forget_wellcome_msg() }}
+                    <form class="form-signin form-login mb-3" role="form">
+                        <div class="email-field mb-3">
+                            <input type="email" id="forgot_email" class="form-control"
+                                placeholder="{{ _('Enter Email Address') }}" required autofocus>
+                        </div>
+                        <div class="page-card-actions">
+                            <button class="btn btn-primary d-grid w-100 btn-forgot" type="submit">{{ _("Send Reset Link")}}</button>
+                        </div>
+                    </form>
+                    <div class="text-center">
+                        <a href="#login" class="d-flex align-items-center justify-content-center" style="color: #787bff;">
+                            <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                            Back to login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
