@@ -81,12 +81,12 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/menu.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "/assets/mosyr_theme/js/menu.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./js/menu.js":
+/***/ "/assets/mosyr_theme/js/menu.js":
 /*!********************!*\
   !*** ./js/menu.js ***!
   \********************/

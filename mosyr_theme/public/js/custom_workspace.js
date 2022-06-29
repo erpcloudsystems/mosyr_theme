@@ -82,19 +82,22 @@ frappe.views.Workspace.prototype.prepare_container = function () {
 
 frappe.views.Workspace.prototype.build_sidebar_section = function (title, items) {
 
-    // DO NOT REMOVE: Comment to load translation
-    // __("Modules") __("Domains") __("Places") __("Administration")
-
-    $(`<li class="menu-header small text-uppercase"><span class="menu-header-text">${__(title)}</span></li>`)
-        .appendTo(this.sidebar);
-
     const get_sidebar_item = function (item) {
         return $(`
             <li class="menu-item ${item.selected ? "active" : ""}">
-                <a href="/app/${frappe.router.slug(item.name)}" class="menu-link">
-                    <span class="menu-icon bx">${frappe.utils.icon(item.icon || "folder-normal", "md")}</span>
-                    <div data-i18n="${item.label || item.name}">${item.label || item.name}</div>
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon">${frappe.utils.icon(item.icon || "folder-open", "lg")}</i>
+                    <div data-i18n="${__(item.label) || __(item.name)}">${__(item.label) || __(item.name)}</div>
                 </a>
+                <ul class="menu-sub">
+                    ${item.child_items.map(el=>
+                        `<li class="menu-item">
+                            <a href="/app/${el.route}"  class="menu-link">
+                                <div data-i18n="${__(el.name)}">${__(el.name)}</div>
+                            </a>                        
+                        </li>`
+                    ).join("")} 
+                </ul>
             </li>
         `);
     };
@@ -114,7 +117,7 @@ frappe.views.Workspace.prototype.build_sidebar_section = function (title, items)
     items.forEach(item => make_sidebar_category_item(item));
 }
 
-frappe.views.Workspace.prototype.show_page = function(page) {
+frappe.views.Workspace.prototype.show_page = function (page) {
     if (this.current_page_name && this.pages[this.current_page_name]) {
         this.pages[this.current_page_name].hide();
     }
@@ -130,4 +133,8 @@ frappe.views.Workspace.prototype.show_page = function(page) {
     this.current_page = this.pages[page];
     $(".desk-page").addClass("container-xxl flex-grow-1 container-p-y")
     this.setup_dropdown();
+}
+
+frappe.views.Workspace.prototype.make_sidebar = function () {
+    this.build_sidebar_section("category", frappe.boot.sidebar_items);
 }
