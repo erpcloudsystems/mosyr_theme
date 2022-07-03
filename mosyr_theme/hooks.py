@@ -137,9 +137,10 @@ home_page = "login"
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "mosyr_theme.event.get_events"
-# }
+override_whitelisted_methods = {
+	"frappe.desk.desktop.get_desktop_page": "mosyr_theme.desktop.get_desktop_page",
+	"frappe.desk.desktop.reset_customization": "mosyr_theme.desktop.reset_customization"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -193,3 +194,8 @@ user_data_fields = [
 # translated_search_doctypes = []
 
 extend_bootinfo = "mosyr_theme.boot.boot_session"
+
+website_context = {
+    "favicon": "/assets/mosyr_theme/img/min-mosyrlogo.png",
+    "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
+}

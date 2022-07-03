@@ -23,7 +23,7 @@
 <div class="mb-3">
     <div class="form-check">
         <input class="form-check-input" type="checkbox" id="remember-me" style="width: 1.2em !important;" />
-        <label class="form-check-label" for="remember-me"> Remember Me </label>
+        <label class="form-check-label" for="remember-me"> {{ _("Remember Me") }}</label>
     </div>
 </div>
 
@@ -58,18 +58,18 @@
 {% endmacro %}
 
 {% macro login_wellcome_msg() %}
-    <h4 class="mb-2">Welcome to Mosyr! 👋</h4>
-    <p class="mb-4">Please sign-in to your account and start the adventure</p>
+    <h4 class="mb-2">{{ _("Welcome to Mosyr! 👋") }}</h4>
+    <p class="mb-4">{{ _("Please sign-in to your account and start the adventure") }}</p>
 {% endmacro %}
 
 {% macro signup_wellcome_msg() %}
-    <h4 class="mb-2">Adventure starts here 🚀</h4>
-    <p class="mb-4">Make your app management easy and fun!</p>
+    <h4 class="mb-2">{{ _("Adventure starts here 🚀") }}</h4>
+    <p class="mb-4">{{ _("Make your app management easy and fun!") }}</p>
 {% endmacro %}
 
 {% macro forget_wellcome_msg() %}
-    <h4 class="mb-2">Forgot Password? 🔒</h4>
-    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
+    <h4 class="mb-2"> {{ _("Forgot Password? 🔒") }} </h4>
+    <p class="mb-4"> {{ _("Enter your email and we'll send you instructions to reset your password ") }} </p>
 {% endmacro %}
 
 {% block page_content %}
@@ -118,9 +118,9 @@
                         </form>
                         {%- if not disable_signup -%}
                         <p class="text-center">
-                            <span>New on our platform?</span>
+                            <span> {{ _("New on our platform?") }} </span>
                             <a href="#signup">
-                                <span>Create an account</span>
+                                <span> {{ _("Create an account") }} </span>
                             </a>
                         </p>
                         {%- endif -%}
@@ -143,9 +143,9 @@
                         </form>
                         {%- if not disable_signup -%}
                         <p class="text-center">
-                            <span>New on our platform?</span>
+                            <span> {{ _("New on our platform?") }} </span>
                             <a href="#signup">
-                                <span>Create an account</span>
+                                <span> {{ _("Create an account") }} </span>
                             </a>
                         </p>
                         {%- endif -%}
@@ -221,7 +221,7 @@
                     <div class="text-center">
                         <a href="#login" class="d-flex align-items-center justify-content-center" style="color: #787bff;">
                             <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-                            Back to login
+                            {{ _("Back to login") }} 
                         </a>
                     </div>
                 </div>
