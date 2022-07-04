@@ -25,8 +25,10 @@
 	<!-- Core CSS -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
-		href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+		href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
 		rel="stylesheet">
 	<link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
 
@@ -62,28 +64,30 @@
 				<ul class="menu-inner py-1">
 					<!-- Dashboard -->
 					<li class="menu-item active">
-						<a href="/app" class="menu-link">
+						<a href="/app" class="menu-link sidebar-item" id="Home">
 							<i class="menu-icon tf-icons bx bx-home-circle"></i>
-							<div data-i18n="Analytics">{{ _("Home") }}</div>
+							<div id="Home" data-i18n="Home">{{ _("Home") }}</div>
 						</a>
 					</li>
 					<!-- Layouts -->
 					{% for item in side_items %}
-						<li class="menu-item">
-							<a href="javascript:void(0);" class="menu-link menu-toggle">
-								<i class="menu-icon {{ item.icon or 'folder-open' }}"></i>
-								<div data-i18n="Layouts">{{ _(item.label) or _(item.name)}}</div>
-							</a>
-							<ul class="menu-sub">
-								{% for itm in item.child_items %}
-									<li class="menu-item">
-										<a href="/app/{{itm.route}}" class="menu-link">
-											<div data-i18n="{{ _(itm.name) }}">{{ _(itm.name) }}</div>
-										</a>
-									</li>
-								{% endfor %}
-							</ul>
-						</li>
+					<li class="menu-item">
+						<a href="javascript:void(0);" class="menu-link menu-toggle" id="{{ item.label or item.name}}">
+							<div class="add-val"></div>
+							<span class="menu-icon sidebar-icon" icon-name="{{item.icon}}"></span>
+							<div id="{{item.label or item.name}}" data-i18n="{{item.label or item.name}}">{{
+								_(item.label) or _(item.name)}}</div>
+						</a>
+						<ul class="menu-sub">
+							{% for itm in item.child_items %}
+							<li class="menu-item">
+								<a href="/app/{{itm.route}}" class="menu-link" id="{{itm.name}}">
+									<div id="{{itm.name}}" data-i18n="{{itm.name}}">{{ _(itm.name) }}</div>
+								</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
 					{% endfor %}
 				</ul>
 			</aside>
