@@ -19,3 +19,19 @@ body {
 .layout-navbar .navbar-nav-right {
     width: 100% !important;
 }
+
+.hide {
+    display: none !important;
+}
+
+.flip-img {
+    transform: scaleX(-1) !important;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+    color: #fff !important;
+    background-color: #5f61e6 !important;
+    border-color: #5f61e6 !important;
+    box-shadow: 0 0.125rem 0.25rem 0 rgb(105 108 255 / 40%) !important;
+    transform: translateY(-1px) !important;
+}

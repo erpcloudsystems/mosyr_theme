@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700&display=swap');
 
 body {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Public Sans', sans-serif;
+    font-family: 'Tajawal', sans-serif !important;
 }
 .layout-container {
     flex-direction: row-reverse !important;
@@ -17,4 +18,20 @@ body {
 
 .layout-navbar .navbar-nav-right {
     width: 100% !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+.flip-img {
+    transform: scaleX(-1) !important;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+    color: #fff !important;
+    background-color: #5f61e6 !important;
+    border-color: #5f61e6 !important;
+    box-shadow: 0 0.125rem 0.25rem 0 rgb(105 108 255 / 40%) !important;
+    transform: translateY(-1px) !important;
 }

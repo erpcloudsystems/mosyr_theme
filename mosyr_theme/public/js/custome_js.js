@@ -5,7 +5,7 @@ $(document).ready(function () {
     $(".menu-item").removeClass("active")
     $(".menu-item").removeClass("open")
     let id = frappe.get_route()[1]
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", id);
+
     let element = $(id)
     element.closest('.menu-item').addClass("active")
     element.closest('ul').parent().addClass("active")
@@ -16,10 +16,24 @@ $(document).ready(function () {
     });
 
     load_sidbar_icons()
+    setTimeout(function(){
+        if(frappe.get_route()[1] == 'Home'){
+            $("#body .content.page-container").addClass("hide")
+            $(".custom_content").removeClass("hide")
+        }else {
+            $(".custom_content").addClass("hide")
+        }
+    }, 100)
 })
 
 function set_active_page(event){
     setTimeout(function() {
+        if(frappe.get_route()[1] == 'Home'){
+            $("#body .content.page-container").addClass("hide")
+            $(".custom_content").removeClass("hide")
+        }else {
+            $(".custom_content").addClass("hide")
+        }
         if ( event.target.id == frappe.get_route()[1]) {
             $(".menu-item").removeClass("active")
             $(".menu-item").removeClass("open")
@@ -27,6 +41,7 @@ function set_active_page(event){
             let elm = $(event.target).closest("ul")
             elm.parent().addClass("active")
             elm.parent().addClass("open")
+
         }
     }, 100);
 }
