@@ -6506,6 +6506,6 @@
   font-family: "boxicons";
   font-weight: normal;
   font-style: normal;
-  src: url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.eot");
-  src: url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.eot") format("embedded-opentype"), url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.woff2") format("woff2"), url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.woff") format("woff"), url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.ttf") format("truetype"), url("/assets/mosyr_theme/css/boxicons//assets/mosyr_theme/css/boxicons/boxicons.svg?#boxicons") format("svg");
+  src: url("/assets/mosyr_theme/css/boxicons/boxicons.eot");
+  src: url("/assets/mosyr_theme/css/boxicons/boxicons.eot") format("embedded-opentype"), url("/assets/mosyr_theme/css/boxicons/boxicons.woff2") format("woff2"), url("/assets/mosyr_theme/css/boxicons/boxicons.woff") format("woff"), url("/assets/mosyr_theme/css/boxicons/boxicons.ttf") format("truetype"), url("/assets/mosyr_theme/css/boxicons/boxicons.svg?#boxicons") format("svg");
 }

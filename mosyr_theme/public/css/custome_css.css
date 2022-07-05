@@ -65,3 +65,19 @@ a.menu-link:hover {
 .app-brand-logo {
     height: 50px;
 }
+
+.hide {
+    display: none !important;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+    border: 0 !important;
+}
+
+html[lang="ar"] .flip-img {
+    transform: scaleX(-1) !important;
+}
+
+.dropdown .btn {
+    box-shadow: none !important;
+}
