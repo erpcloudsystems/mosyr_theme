@@ -1,15 +1,6 @@
 $(document).ready(function () {
     $(".layout-container .layout-side-section").css("display", "none")
     $(".page-head  .sidebar-toggle-btn").css("display", "none")
-    
-    $(".menu-item").removeClass("active")
-    $(".menu-item").removeClass("open")
-    let id = frappe.get_route()[1]
-
-    let element = $(id)
-    element.closest('.menu-item').addClass("active")
-    element.closest('ul').parent().addClass("active")
-    element.closest('ul').parent().addClass("open")
 
     $(".menu-link").click(function (event) {
         set_active_page(event)
@@ -24,6 +15,8 @@ $(document).ready(function () {
             $(".custom_content").addClass("hide")
         }
     }, 100)
+
+    set_active_tab()
 })
 
 function set_active_page(event){
@@ -44,6 +37,18 @@ function set_active_page(event){
 
         }
     }, 100);
+}
+
+function set_active_tab(){
+    setTimeout(function(){
+        $(".menu-item").removeClass("active")
+        $(".menu-item").removeClass("open")
+        let id = frappe.get_route()[1]
+        let element = document.getElementById(id)
+        $(element).closest('.menu-item').addClass("active")
+        $(element).closest('ul').parent().addClass("active")
+        $(element).closest('ul').parent().addClass("open")
+    }, 100)
 }
 
 function load_sidbar_icons(){

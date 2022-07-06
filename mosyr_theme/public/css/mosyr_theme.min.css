@@ -6301,34 +6301,34 @@ label.btn {
 }
 
 .btn-secondary {
-  color: #fff;
-  background-color: #8592a3;
-  border-color: #8592a3;
-  box-shadow: 0 0.125rem 0.25rem 0 rgba(133, 146, 163, 0.4);
+  color: #fff !important;
+  background-color: #8592a3 !important;
+  border-color: #8592a3 !important;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(133, 146, 163, 0.4) !important;
 }
 .btn-secondary:hover {
-  color: #fff;
-  background-color: #788393;
-  border-color: #788393;
-  transform: translateY(-1px);
+  color: #fff !important;
+  background-color: #788393 !important;
+  border-color: #788393 !important;
+  transform: translateY(-1px) !important;
 }
 .btn-check:focus + .btn-secondary, .btn-secondary:focus, .btn-secondary.focus {
-  color: #fff;
-  background-color: #788393;
-  border-color: #788393;
-  transform: translateY(0);
-  box-shadow: none;
+  color: #fff !important;
+  background-color: #788393 !important;
+  border-color: #788393 !important;
+  transform: translateY(0) !important;
+  box-shadow: none !important;
 }
 .btn-check:checked + .btn-secondary, .btn-check:active + .btn-secondary, .btn-secondary:active, .btn-secondary.active, .show > .btn-secondary.dropdown-toggle {
-  color: #fff;
-  background-color: #717c8b;
-  border-color: #717c8b;
+  color: #fff !important;
+  background-color: #717c8b !important;
+  border-color: #717c8b !important;
 }
 .btn-check:checked + .btn-secondary:focus, .btn-check:active + .btn-secondary:focus, .btn-secondary:active:focus, .btn-secondary.active:focus, .show > .btn-secondary.dropdown-toggle:focus {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 .btn-secondary.disabled, .btn-secondary:disabled {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .btn-outline-secondary {
@@ -17578,22 +17578,13 @@ body {
 #body {
     width: 100% !important;
 }
-a.menu-link:hover {
+a:hover {
     text-decoration: none !important;
 }
-/* ul.menu-inner {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-} */
 .layout-side-section {
     padding-right: 0 !important;
 }
 
-.layout-main-section.frappe-card {
-    background-color: unset !important;
-    padding: 25px !important;
-    box-shadow: none;
-}
 .custome-cont {
     background-color: #fff !important;
     padding: 0 !important;
@@ -17654,6 +17645,80 @@ html[lang="ar"] .flip-img {
 
 .dropdown .btn {
     box-shadow: none !important;
+}
+
+.dropdown-menu{
+    z-index: 5000 !important;
+}
+
+.standard-filter-section input::placeholder,
+.form-control::placeholder  {
+    font-size: 12px !important;
+}
+
+.list-paging-area .btn-group .btn:first-child ,
+:not(.btn-group):not(.input-group) > .btn-group > .btn:not([class*=btn-outline-]):first-child {
+    border-right-color: #dce0e3 !important;
+    border-left-color: #dce0e3 !important;
+}
+.list-paging-area .btn-group .btn:last-child,
+:not(.btn-group):not(.input-group) > .btn-group > .btn:not([class*=btn-outline-]):last-child  {
+    border-left-color: #dce0e3 !important;
+    border-right-color: #dce0e3 !important;
+}
+
+.list-paging-area .btn-group .btn-paging.active-paging {
+    border-color: #696cff !important;
+    background-color: #696cff !important;
+    color: #fff !important;
+    box-shadow: 0 0.125rem 0.25rem rgb(105 108 255 / 40%) !important;
+}
+
+.active-paging:hover {
+    transform: none !important;
+}
+
+.layout-main-section .frappe-list {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.level.list-row-head {
+    border-bottom: 2px solid #d9dee3 !important;
+}
+.list-row-container {
+    border-color: #d9dee3 !important;
+}
+
+.list-row-head {
+    height: 40px !important;
+}
+
+.list-row {
+    height: 55px !important
+}
+
+.input-xs {
+    height: 30px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0px !important;
+    font-size: 12px !important;
+}
+
+.btn-xs {
+    border-radius: 5px !important;
+    padding: 2px 7px !important;
+
+}
+
+.awesomplete .input-with-feedback {
+    background-color: #fff !important;
+}
+
+.btn-secondary  {
+    color: #8592a3 !important;
+    border-color: transparent !important;
+    background: #ebeef0 !important;
 }
 .flag-icon-background,
 .flag-icon {

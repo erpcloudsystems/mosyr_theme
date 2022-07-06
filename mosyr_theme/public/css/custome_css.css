@@ -4,22 +4,13 @@ body {
 #body {
     width: 100% !important;
 }
-a.menu-link:hover {
+a:hover {
     text-decoration: none !important;
 }
-/* ul.menu-inner {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-} */
 .layout-side-section {
     padding-right: 0 !important;
 }
 
-.layout-main-section.frappe-card {
-    background-color: unset !important;
-    padding: 25px !important;
-    box-shadow: none;
-}
 .custome-cont {
     background-color: #fff !important;
     padding: 0 !important;
@@ -80,4 +71,78 @@ html[lang="ar"] .flip-img {
 
 .dropdown .btn {
     box-shadow: none !important;
+}
+
+.dropdown-menu{
+    z-index: 5000 !important;
+}
+
+.standard-filter-section input::placeholder,
+.form-control::placeholder  {
+    font-size: 12px !important;
+}
+
+.list-paging-area .btn-group .btn:first-child ,
+:not(.btn-group):not(.input-group) > .btn-group > .btn:not([class*=btn-outline-]):first-child {
+    border-right-color: #dce0e3 !important;
+    border-left-color: #dce0e3 !important;
+}
+.list-paging-area .btn-group .btn:last-child,
+:not(.btn-group):not(.input-group) > .btn-group > .btn:not([class*=btn-outline-]):last-child  {
+    border-left-color: #dce0e3 !important;
+    border-right-color: #dce0e3 !important;
+}
+
+.list-paging-area .btn-group .btn-paging.active-paging {
+    border-color: #696cff !important;
+    background-color: #696cff !important;
+    color: #fff !important;
+    box-shadow: 0 0.125rem 0.25rem rgb(105 108 255 / 40%) !important;
+}
+
+.active-paging:hover {
+    transform: none !important;
+}
+
+.layout-main-section .frappe-list {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.level.list-row-head {
+    border-bottom: 2px solid #d9dee3 !important;
+}
+.list-row-container {
+    border-color: #d9dee3 !important;
+}
+
+.list-row-head {
+    height: 40px !important;
+}
+
+.list-row {
+    height: 55px !important
+}
+
+.input-xs {
+    height: 30px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0px !important;
+    font-size: 12px !important;
+}
+
+.btn-xs {
+    border-radius: 5px !important;
+    padding: 2px 7px !important;
+
+}
+
+.awesomplete .input-with-feedback {
+    background-color: #fff !important;
+}
+
+.btn-secondary  {
+    color: #8592a3 !important;
+    border-color: transparent !important;
+    background: #ebeef0 !important;
 }

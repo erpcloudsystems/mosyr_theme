@@ -1,32 +1,45 @@
-frappe.views.BaseList.prototype.setup_page = function () {
-    this.page = this.parent.page;
-    this.$page = $(this.parent);
-    !this.hide_card_layout && this.page.main.addClass('frappe-card');
-    this.page.page_form.removeClass("row").addClass("flex");
-    this.hide_page_form && this.page.page_form.hide();
-    this.hide_sidebar && this.$page.addClass('no-list-sidebar');
-    this.setup_page_head();
+frappe.views.BaseList.prototype.setup_paging_area = function () {
+    const paging_values = [20, 100, 500];
+    this.$paging_area = $(
+        `<div class="list-paging-area level">
+            <div class="level-left">
+                <div class="btn-group">
+                    ${paging_values.map((value) => `
+                        <button type="button" class="btn btn-default btn-sm btn-paging"
+                            data-value="${value}">
+                            ${value}
+                        </button>
+                    `).join("")}
+                </div>
+            </div>
+            <div class="level-right">
+                <button class="btn btn-default btn-more btn-sm">
+                    ${__("Load More")}
+                </button>
+            </div>
+        </div>`
+    ).hide();
+    this.$frappe_list.append(this.$paging_area);
 
-    // $(".page-head").prependTo($(".layout-main-section-wrapper"));
-    // $("header").prependTo($(".layout-main-section-wrapper"));
-    // $(".page-body").removeClass("container");
-    // $(".layout-main").removeClass("row")
-    // $(".layout-main").addClass("layout-container")
-    // $(".layout-container .layout-side-section").removeClass("col-lg-2")
-    // $(".layout-container .layout-main-section-wrapper").removeClass("col")
-    // $(".layout-main-section-wrapper").addClass("layout-page")
-    // $(".layout-container").removeClass("layout-main");
-    // $(".layout-main-section").addClass("content-wrapper");
-    // $(".page-head-content").removeClass("row");
-    // $(".page-title").removeClass("col-md-4");
-    // $(".page-title").removeClass("col-sm-6");
-    // $(".page-title").removeClass("col-xs-8 ");
-    // $(".page-actions").removeClass("col");
+    // set default paging btn active
+    this.$paging_area
+        .find(`.btn-paging[data-value="${this.page_length}"]`)
+        .addClass("btn-info active-paging");
 
-    // $('<div class="custome-cont container-xxl flex-grow-1 container-p-y"></div>').appendTo(".layout-main-section")
-    // $(".page-form").appendTo(".custome-cont")
-}
+    this.$paging_area.on("click", ".btn-paging, .btn-more", (e) => {
+        const $this = $(e.currentTarget);
 
-frappe.views.BaseList.prototype.setup_list_wrapper =function() {
-    this.$frappe_list = $('<div class="frappe-list">').appendTo(".custome-cont");
+        if ($this.is(".btn-paging")) {
+            // set active button
+            this.$paging_area.find(".btn-paging").removeClass("btn-info active-paging");
+            $this.addClass("btn-info active-paging");
+
+            this.start = 0;
+            this.page_length = this.selected_page_count = $this.data().value;
+        } else if ($this.is(".btn-more")) {
+            this.start = this.start + this.page_length;
+            this.page_length = this.selected_page_count || 20;
+        }
+        this.refresh();
+    });
 }
