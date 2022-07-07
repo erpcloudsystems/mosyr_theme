@@ -94,9 +94,6 @@ def get_context(context):
         "SELECT SUM(total_leave_days) AS total FROM `tabLeave Application` WHERE status='Approved' and leave_type='Compensatory Off'", as_dict=True)
     total_leave_without_pay_leave_days = total_leave_without_pay_leave[0].total or 0
 
-    years = ["2022", "2021"]
-    list_1 = []
-    list_2 = []
     """ 
     1. Get today date . today() 
     2. Get current year from step 1.
@@ -111,22 +108,7 @@ def get_context(context):
     7 do sql 
     repeat with each month until you reach a 12 -- then stop .
 
-    
-
     """
-    employee_list = frappe.db.get_list("Employee", fields=["name", "date_of_joining"])
-    for row in employee_list:
-        date = row.get("date_of_joining").strftime("%Y")
-        if date in years:
-            if date == "2022":
-                month = row.get("date_of_joining").strftime("%m")
-                list_1.update({
-                    month: list_1.get(month)+1
-                })
-            if date == "2021":
-                list_2.update({
-                    month: list_2.get(month)+1
-                })
                 
 
     context.update(
