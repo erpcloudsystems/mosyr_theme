@@ -27,6 +27,7 @@
         "public/js/custome_js.js",
         "public/js/custom_form.js",
         "public/js/custome_navbar.js",
+        "public/js/dashboards-analytics.js",
         "public/js/custom_workspace.js"
     ]
 }

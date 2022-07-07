@@ -17520,7 +17520,7 @@ html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-lin
   direction: rtl !important;
 }
 
-[dir='rtl'] .rtl-only {
+[dir='ltr'] .ltr-only {
   display: block !important;
 }
 
@@ -17631,6 +17631,11 @@ html[lang="ar"] .flip-img {
 
 .dropdown .btn {
     box-shadow: none !important;
+}
+
+html[lang="ar"] .apexcharts-legend-marker {
+    margin-right: 8px !important;
+    margin-left: 0 !important;
 }
 .flag-icon-background,
 .flag-icon {

@@ -17655,6 +17655,11 @@ html[lang="ar"] .flip-img {
 .dropdown .btn {
     box-shadow: none !important;
 }
+
+html[lang="ar"] .apexcharts-legend-marker {
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+}
 .flag-icon-background,
 .flag-icon {
     background-size: contain;

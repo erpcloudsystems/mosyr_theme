@@ -420,6 +420,11 @@
 
   // Order Statistics Chart
   // --------------------------------------------------------------------
+  const total_casual_leave = $("#orderStatisticsChart").attr("total_casual_leave")
+  const total_sick_leave = $("#orderStatisticsChart").attr("total_sick_leave")
+  const total_leave_without_pay_leave = $("#orderStatisticsChart").attr("total_leave_without_pay_leave")
+  const total_compensatory_leave = $("#orderStatisticsChart").attr("total_compensatory_leave")
+
   const chartOrderStatistics = document.querySelector('#orderStatisticsChart'),
     orderChartConfig = {
       chart: {
@@ -427,8 +432,8 @@
         width: 130,
         type: 'donut'
       },
-      labels: ['Electronic', 'Sports', 'Decor', 'Fashion'],
-      series: [85, 15, 50, 50],
+      labels: ['Casual Leave', 'Sick Leave', 'Leave Without Pay', 'Compensatory Off'],
+      series: [parseInt(total_casual_leave), parseInt(total_sick_leave), parseInt(total_leave_without_pay_leave), parseInt(total_compensatory_leave)],
       colors: [config.colors.primary, config.colors.secondary, config.colors.info, config.colors.success],
       stroke: {
         width: 5,
@@ -473,9 +478,9 @@
                 show: true,
                 fontSize: '0.8125rem',
                 color: axisColor,
-                label: 'Weekly',
+                label: 'Monthly',
                 formatter: function (w) {
-                  return '38%';
+                  return '50%';
                 }
               }
             }
