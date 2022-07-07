@@ -1,10 +1,9 @@
+*.min.js
+*.min.css
+*.min.js.map
 .DS_Store
 *.pyc
 *.egg-info
 *.swp
 tags
 mosyr_theme/docs/current
-
-*.min.js
-*.min.css
-*.min.js.map

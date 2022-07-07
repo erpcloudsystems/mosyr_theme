@@ -23,7 +23,7 @@ def get_desktop_page(page='Home'):
     if frappe.session.user == 'Administrator':
         d = frappe.db.sql('SELECT name, status, employee, employee_name FROM `tabLeave Application` WHERE docstatus!=2', as_dict=True)[:5]
         if len(d) > 0:
-            latest['items'].appe({
+            latest['items'].update({
                 'Leave Application': d
             })
         d = frappe.db.sql('SELECT name, status, employee, employee_name FROM `tabAttendance` WHERE docstatus!=2', as_dict=True)[:5]
@@ -37,7 +37,7 @@ def get_desktop_page(page='Home'):
             employee = employee[0].name
             d = frappe.db.sql("""SELECT name, status, employee, employee_name FROM `tabLeave Application` WHERE docstatus!=2 AND employee='{}'""".format(employee), as_dict=True)[:5]
             if len(d) > 0:
-                latest['items'].appe({
+                latest['items'].update({
                     'Leave Application': d
                 })
             d = frappe.db.sql("""SELECT name, status, employee, employee_name FROM `tabAttendance` WHERE docstatus!=2 AND employee='{}'""".format(employee), as_dict=True)[:5]

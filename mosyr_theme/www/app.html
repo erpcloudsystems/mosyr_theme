@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" class="layout-menu-fixed">
+<html data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" class="layout-menu-fixed" style="overflow-x: hidden !important;">
 
 <head>
 	<!-- Chrome, Firefox OS and Opera -->
@@ -40,9 +40,9 @@
 </head>
 
 <body>
-	{% include "public/icons/timeless/symbol-defs.svg" %}
+	{% include "public/icons/timeless/icons.svg" %}
 	<div class="centered splash">
-		<img src="{{ splash_image or " /assets/frappe/images/frappe-framework-logo.png" }}"
+		<img src="{{ splash_image or "/assets/frappe/images/frappe-framework-logo.png" }}"
 			style="max-width: 100px; max-height: 100px;">
 	</div>
 	<div class="layout-wrapper layout-content-navbar">
@@ -50,7 +50,7 @@
 			<!-- Menu -->
 			<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 				<div class="app-brand demo">
-					<a href="/app" class="app-brand-link">
+					<a href="/app" class="app-brand-link" id="logo">
 						<span class="app-brand-logo demo">
 							<img src="/assets/mosyr_theme/img/mosyrlogo.png" alt="mosyer-logo" />
 						</span>

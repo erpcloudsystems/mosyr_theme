@@ -57,7 +57,7 @@ a:hover {
     height: 50px;
 }
 
-.hide {
+.custome_hide {
     display: none !important;
 }
 
@@ -73,6 +73,10 @@ html[lang="ar"] .flip-img {
     box-shadow: none !important;
 }
 
+html[lang="ar"] .apexcharts-legend-marker {
+    margin-left: 8px !important;
+    margin-right: 0 !important;
+}
 .dropdown-menu{
     z-index: 5000 !important;
 }
