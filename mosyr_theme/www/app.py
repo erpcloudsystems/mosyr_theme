@@ -7,6 +7,7 @@ from frappe.utils.jinja import is_rtl
 from frappe import _
 import frappe.sessions
 import frappe
+import time
 import re
 import os
 
@@ -93,6 +94,25 @@ def get_context(context):
         "SELECT SUM(total_leave_days) AS total FROM `tabLeave Application` WHERE status='Approved' and leave_type='Compensatory Off'", as_dict=True)
     total_leave_without_pay_leave_days = total_leave_without_pay_leave[0].total or 0
 
+    years = ["2022", "2021"]
+    list_1 = []
+    list_2 = []
+
+    employee_list = frappe.db.get_list("Employee", fields=["name", "date_of_joining"])
+    for row in employee_list:
+        date = row.get("date_of_joining").strftime("%Y")
+        if date in years:
+            if date == "2022":
+                month = row.get("date_of_joining").strftime("%m")
+                list_1.update({
+                    month: list_1.get(month)+1
+                })
+            if date == "2021":
+                list_2.update({
+                    month: list_2.get(month)+1
+                })
+                
+
     context.update(
         {
             "no_cache": 1,
@@ -120,7 +140,7 @@ def get_context(context):
             "total_casual_leave": total_casual_leave_days,
             "total_sick_leave": total_sick_leave_days,
             "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
-            "total_compensatory_leave": total_leave_without_pay_leave_days or 20
+            "total_compensatory_leave": total_leave_without_pay_leave_days
         }
     )
 

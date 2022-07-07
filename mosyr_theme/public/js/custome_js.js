@@ -20,11 +20,11 @@ $(document).ready(function () {
 
     load_sidbar_icons()
     setTimeout(function () {
-        if (frappe.get_route()[1] == 'Home') {
-            $("#body .content.page-container").addClass("f")
-            $(".custom_content").removeClass("f")
+        if ( frappe.get_route() == '' || frappe.get_route()[1] == 'Home') {
+            $("#body .content.page-container").addClass("custome_hide")
+            $(".custom_content").removeClass("custome_hide")
         } else {
-            $(".custom_content").addClass("f")
+            $(".custom_content").addClass("custome_hide")
         }
     }, 100)
 
@@ -34,10 +34,10 @@ $(document).ready(function () {
 function set_active_page(event) {
     setTimeout(function () {
         if (frappe.get_route()[1] == 'Home') {
-            $("#body .content.page-container").addClass("f")
-            $(".custom_content").removeClass("f")
+            $("#body .content.page-container").addClass("custome_hide")
+            $(".custom_content").removeClass("custome_hide")
         } else {
-            $(".custom_content").addClass("f")
+            $(".custom_content").addClass("custome_hide")
         }
         if (event.target.id == frappe.get_route()[1]) {
             $(".menu-item").removeClass("active")
