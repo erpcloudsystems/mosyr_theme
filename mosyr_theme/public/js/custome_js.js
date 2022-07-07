@@ -29,6 +29,7 @@ $(document).ready(function () {
     }, 100)
 
     load_chart()
+    set_active_tab()
 })
 
 function set_active_page(event) {
@@ -51,8 +52,21 @@ function set_active_page(event) {
     }, 100);
 }
 
-function load_sidbar_icons() {
-    $('.sidebar-icon').each(function (i, obj) {
+
+function set_active_tab(){
+    setTimeout(function(){
+        $(".menu-item").removeClass("active")
+        $(".menu-item").removeClass("open")
+        let id = frappe.get_route()[1]
+        let element = document.getElementById(id)
+        $(element).closest('.menu-item').addClass("active")
+        $(element).closest('ul').parent().addClass("active")
+        $(element).closest('ul').parent().addClass("open")
+    }, 100)
+}
+
+function load_sidbar_icons(){
+    $('.sidebar-icon').each(function(i, obj) {
         let icon_name = $(obj).attr('icon-name')
         $(obj).append(frappe.utils.icon(icon_name || "folder-normal", "md"))
     });
