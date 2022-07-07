@@ -97,7 +97,23 @@ def get_context(context):
     years = ["2022", "2021"]
     list_1 = []
     list_2 = []
+    """ 
+    1. Get today date . today() 
+    2. Get current year from step 1.
+    3. sql to get emp join in this year . ( total employee for year X)
+    4. sql to get emp join in this year-1 . ( total employee for year Y)
 
+    5- For year Y example 1.1.2021 , get last month for the current date 31.1.2021 this month number 1 
+    Now we have from and To to get employees .
+    6- Sql total number like step 4 and 4.
+    7- add 1 month to year Y .
+    8 - get last month 
+    7 do sql 
+    repeat with each month until you reach a 12 -- then stop .
+
+    
+
+    """
     employee_list = frappe.db.get_list("Employee", fields=["name", "date_of_joining"])
     for row in employee_list:
         date = row.get("date_of_joining").strftime("%Y")
