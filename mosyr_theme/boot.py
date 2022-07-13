@@ -4,6 +4,7 @@ from operator import le
 import frappe
 
 def boot_session(bootinfo):
+    bootinfo.language = frappe.local.lang
     bootinfo.sidebar_items = get_sidebar_items()
     bootinfo.desk_settings = get_desk_settings()
 
