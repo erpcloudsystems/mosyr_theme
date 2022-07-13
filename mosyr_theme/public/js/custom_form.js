@@ -41,28 +41,12 @@ frappe.ui.form.Form.prototype.setup = function() {
     this.setup_file_drop();
     this.setup_doctype_actions();
     this.setup_notify_on_rename();
-
-    // $(".page-head").prependTo($(".layout-main-section-wrapper"));
-    // $("header").prependTo($(".layout-main-section-wrapper"));
-    // $(".page-body").removeClass("container");
-    // $(".layout-main").removeClass("row")
-    // $(".layout-main").addClass("layout-container")
-    // $(".layout-container .layout-side-section").removeClass("col-lg-2")
-    // $(".layout-container .layout-main-section-wrapper").removeClass("col")
-    // $(".layout-main-section-wrapper").addClass("layout-page")
-    // $(".layout-container").removeClass("layout-main");
-    // $(".layout-main-section").addClass("content-wrapper");
-    // $(".page-head-content").removeClass("row");
-    // $(".page-title").removeClass("col-md-4");
-    // $(".page-title").removeClass("col-sm-6");
-    // $(".page-title").removeClass("col-xs-8 ");
-    // $(".page-actions").removeClass("col");
     
-
-    // $(".content-wrapper").addClass("container-xxl flex-grow-1 container-p-y")
     $(".form-footer").addClass("container-xxl flex-grow-1 container-p-y")
 
     $(".form-page .form-section").removeClass("row")
+
+    $(".layout-side-section").css("display", "none")
 
     this.setup_done = true;
 }

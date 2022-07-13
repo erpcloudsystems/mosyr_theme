@@ -24,6 +24,7 @@
     ],
     "mosyr_theme/js/mosyr_theme.min.js": [
         "public/templates/navbar.html",
+        "public/js/custom_list_sidebar.js",
         "public/js/custome_js.js",
         "public/js/custom_form.js",
         "public/js/custome_navbar.js",
