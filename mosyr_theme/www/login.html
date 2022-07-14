@@ -1,23 +1,25 @@
 {% extends "templates/web.html" %}
 
 {% macro email_login_body() -%}
-<div class="mb-3">
-    <label class="form-label" for="login_email">{{ login_label or _("Email or Username")}}</label>
-    <input type="text" id="login_email" class="form-control"
-        placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
-        required autofocus>
-</div>
-<div class="mb-3 form-password-toggle">
-    <div class="d-flex justify-content-between">
-        <label class="form-label" for="login_password">{{ _("Password") }}</label>
-        <a href="#forgot">
-            <small> {{ _("Forgot Password?") }}</small>
-        </a>
+<div class="page-card-body">
+    <div class="mb-3">
+        <label class="form-label" for="login_email">{{ login_label or _("Email or Username")}}</label>
+        <input type="text" id="login_email" class="form-control"
+            placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
+            required autofocus>
     </div>
-    <div class="input-group input-group-merge">
-        <input type="password" id="login_password" class="form-control" placeholder="•••••"
-            autocomplete="current-password" required>
-        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+    <div class="mb-3 form-password-toggle">
+        <div class="d-flex justify-content-between">
+            <label class="form-label" for="login_password">{{ _("Password") }}</label>
+            <a href="#forgot">
+                <small> {{ _("Forgot Password?") }}</small>
+            </a>
+        </div>
+        <div class="input-group input-group-merge">
+            <input type="password" id="login_password" class="form-control" placeholder="•••••"
+                autocomplete="current-password" required>
+            <span toggle="#login_password" class="input-group-text cursor-pointer toggle-password text-muted" style="font-size: 10px;">{{ _('Show') }}</span>
+        </div>
     </div>
 </div>
 <div class="mb-3">
@@ -28,7 +30,7 @@
 </div>
 
 <div class="page-card-actions mb-3">
-    <button class="btn btn-primary d-grid w-100" type="submit">{{ _("Login") }}</button>
+    <button class="btn btn-primary d-grid w-100 btn-login" type="submit">{{ _("Login") }}</button>
 
     {% if ldap_settings and ldap_settings.enabled %}
     <button class="btn btn-sm btn-default btn-block btn-login btn-ldap-login">
@@ -232,7 +234,7 @@
 {% endblock %}
 
 {% block script %}
-<script>{% include "templates/includes/login/login.js" %}</script>
+<script>{% include "templates/includes/login.js" %}</script>
 {% endblock %}
 
 {% block sidebar %}{% endblock %}

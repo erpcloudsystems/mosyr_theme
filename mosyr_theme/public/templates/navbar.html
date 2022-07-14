@@ -22,7 +22,11 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-3 me-1"></i>
+                    {% if frappe.boot.language == "en" %}
+                        <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-3 me-1"></i>
+                    {% else %}
+                        <i class="flag-icon flag-icon-sa flag-icon-squared rounded-circle fs-4 me-1"></i>
+                    {% endif %}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>

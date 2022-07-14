@@ -39,3 +39,8 @@
 a {
     text-decoration: none !important;
 }
+
+.page-card-body.invalid input[type=text],
+.page-card-body.invalid .input-group-merge {
+    border: 1px solid red !important;
+}
