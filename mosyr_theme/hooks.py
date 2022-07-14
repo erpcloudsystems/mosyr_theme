@@ -199,18 +199,3 @@ website_context = {
     "favicon": "/assets/mosyr_theme/img/min-mosyrlogo.png",
     "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
 }
-
-fixtures = [
-    {
-        "dt": "DocType",
-        "filters": [
-            [
-                "name",
-                "in",
-                [
-					"System Controller"
-				]
-			]
-		]
-	}
-]
