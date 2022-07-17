@@ -60,7 +60,9 @@ a:hover {
 .custome_hide {
     display: none !important;
 }
-
+.side_hide {
+    display: none;
+}
 .btn-outline-primary:not(:disabled):not(.disabled):active {
     border: 0 !important;
 }
@@ -149,4 +151,23 @@ html[lang="ar"] .apexcharts-legend-marker {
     color: #8592a3 !important;
     border-color: transparent !important;
     background: #ebeef0 !important;
+}
+.form-links .document-link .document-link-badge .count {
+    display: inline-block;
+    font-family: 'Public Sans', sans-serif !important;
+}
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1{
+    line-height: inherit !important;
+}
+
+@media (max-width: 991px){
+    .layout-side-section {
+        display: unset !important;
+    }
+}
+
+@media (min-width: 992px){
+    .layout-side-section {
+        display: none;
+    }
 }
