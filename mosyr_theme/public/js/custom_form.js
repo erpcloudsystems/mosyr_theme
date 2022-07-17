@@ -46,7 +46,6 @@ frappe.ui.form.Form.prototype.setup = function() {
 
     $(".form-page .form-section").removeClass("row")
 
-    $(".layout-side-section").css("display", "none")
 
     this.setup_done = true;
 }

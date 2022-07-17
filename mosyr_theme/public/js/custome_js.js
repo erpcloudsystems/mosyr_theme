@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    $(".layout-container .layout-side-section").css("display", "none")
-    $(".page-head  .sidebar-toggle-btn").css("display", "none")
-
     $(".menu-item").removeClass("active")
     $(".menu-item").removeClass("open")
     let id = frappe.get_route()[1]
@@ -29,6 +26,9 @@ $(document).ready(function () {
     }, 100)
 
     set_active_tab()
+    $(".custom-menu-btn").click(function (event){
+        $("html").toggleClass("layout-menu-expanded")
+    })
 })
 
 function set_active_page(event) {
