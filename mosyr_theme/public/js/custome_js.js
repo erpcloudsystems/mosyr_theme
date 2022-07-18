@@ -12,10 +12,9 @@ $(document).ready(function () {
         set_active_page(event)
     });
     $("#logo").click(function (event) {
-        window.location.reload();
         set_active_page(event)
     });
-    $("#Home").click(function (event) {
+    $("#Employee").click(function (event) {
         window.location.reload();
     });
 
@@ -27,7 +26,7 @@ $(document).ready(function () {
         } else {
             $(".custom_content").addClass("custome_hide")
         }
-    }, 1000)
+    }, 100)
 
     set_active_tab()
     $(".custom-menu-btn").click(function (event){
@@ -52,7 +51,7 @@ function set_active_page(event) {
             elm.parent().addClass("open")
 
         }
-    }, 1000);
+    }, 100);
 }
 
 
