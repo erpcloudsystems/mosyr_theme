@@ -137,10 +137,10 @@ home_page = "login"
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
-	"frappe.desk.desktop.get_desktop_page": "mosyr_theme.desktop.get_desktop_page",
-	"frappe.desk.desktop.reset_customization": "mosyr_theme.desktop.reset_customization"
-}
+# override_whitelisted_methods = {
+# 	"frappe.desk.desktop.get_desktop_page": "mosyr_theme.desktop.get_desktop_page",
+# 	"frappe.desk.desktop.reset_customization": "mosyr_theme.desktop.reset_customization"
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -200,6 +200,6 @@ website_context = {
     "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
 }
 
-website_redirects = [
-    {"source": "/app/home", "target": "/app"}
-]
+# website_redirects = [
+#     {"source": "/app/home", "target": "/app"}
+# ]
