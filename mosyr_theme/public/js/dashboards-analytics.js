@@ -14,16 +14,20 @@
 
   // Total Revenue Report Chart - Bar Chart
   // --------------------------------------------------------------------
+  const lst1 = $("#totalRevenueChart").attr("current_year_lst")
+  const lst2 = $("#totalRevenueChart").attr("prev_year_lst")
+  const current_year = $("#totalRevenueChart").attr("current_year")
+  const prev_year = $("#totalRevenueChart").attr("prev_year")
   const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
     totalRevenueChartOptions = {
       series: [
         {
-          name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          name: current_year,
+          data: JSON.parse(lst1)
         },
         {
-          name: '2020',
-          data: [-13, -18, -9, -14, -5, -17, -15]
+          name: prev_year,
+          data: JSON.parse(lst2)
         }
       ],
       chart: {
@@ -35,7 +39,7 @@
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: '33%',
+          columnWidth: '50%',
           borderRadius: 12,
           startingShape: 'rounded',
           endingShape: 'rounded'
@@ -78,7 +82,7 @@
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', "Aug", "Sep", "Oct", "Nov", "Dec"],
         labels: {
           style: {
             fontSize: '13px',

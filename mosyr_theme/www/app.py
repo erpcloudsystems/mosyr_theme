@@ -112,10 +112,16 @@ def get_context(context):
 
     """
 
+    # Employee Growth Persentage
     result = get_growth_persentage()
     growth_persentage = result.get("growth_persentage")
     total_employees_in_current_year = result.get("total_employees_in_current_year")
     total_employees_in_prev_year = result.get("total_employees_in_prev_year")
+
+    # Number og Employee Joined Every Month in current and last year
+    total_resutl = get_total_emps_every_month()
+    current_year_totals_list = total_resutl.get("current_year_totals_list")
+    prev_year_totals_list = total_resutl.get("prev_year_totals_list")
 
     context.update(
         {
@@ -145,11 +151,14 @@ def get_context(context):
             "total_sick_leave": total_sick_leave_days,
             "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
             "total_compensatory_leave": total_leave_without_pay_leave_days,
-            "growth_persentage": growth_persentage,
+            "growth_persentage": int(growth_persentage),
             "current_year": date.today().year,
             "prev_year": (date.today().year) - 1,
             "total_employees_in_current_year": total_employees_in_current_year,
-            "total_employees_in_prev_year": total_employees_in_prev_year
+            "total_employees_in_prev_year": total_employees_in_prev_year,
+            "current_year_totals_list": current_year_totals_list,
+            "prev_year_totals_list": prev_year_totals_list
+
         }
     )
 
@@ -236,3 +245,53 @@ def get_growth_persentage():
         "total_employees_in_current_year": total_employees_in_current_year,
         "total_employees_in_prev_year":total_employees_in_prev_year
     }
+
+
+def get_total_employee_on_month(month):
+    first_day_in_month = ""
+    last_day_in_month = ""
+
+    result = frappe.db.sql("""
+            SELECT
+                name
+            FROM
+                `tabEmployee`
+            WHERE
+                status=%(status)s AND date_of_joining BETWEEN %(first_day)s AND %(last_day)s
+        """, {"status": "Active", "first_day": first_day_in_month, "last_day": last_day_in_month}, as_dict=True)
+
+    return len(result)
+
+def get_total_emps_every_month():
+    """
+        GET EVERY Month Joined Employee in current and prev years
+    """
+    import datetime
+    current_year = datetime.date.today().year
+    prev_year = current_year - 1
+
+    def get_total_employee_on_month(year):
+        year_totals_list = []
+        for month in range(1, 13):
+            first_day_in_month = datetime.date(year, month, 1).replace(day=1)
+            next_month = datetime.date(year, month, 1).replace(day=28) + datetime.timedelta(days=4)
+            last_day_in_month = next_month - datetime.timedelta(days=next_month.day)
+
+            result = frappe.db.sql("""
+                    SELECT
+                        name
+                    FROM
+                        `tabEmployee`
+                    WHERE
+                        status=%(status)s AND date_of_joining BETWEEN %(first_day)s AND %(last_day)s
+                """, {"status": "Active", "first_day": first_day_in_month, "last_day": last_day_in_month}, as_dict=True)
+            
+            year_totals_list.append(len(result))
+
+        return year_totals_list
+
+    current_year_totals_list = get_total_employee_on_month(current_year)
+    prev_year_totals_list = get_total_employee_on_month(prev_year)
+
+    return {"current_year_totals_list":current_year_totals_list, "prev_year_totals_list":prev_year_totals_list}
+

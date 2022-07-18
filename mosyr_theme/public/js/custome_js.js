@@ -12,7 +12,11 @@ $(document).ready(function () {
         set_active_page(event)
     });
     $("#logo").click(function (event) {
+        window.location.reload();
         set_active_page(event)
+    });
+    $("#Home").click(function (event) {
+        window.location.reload();
     });
 
     load_sidbar_icons()
