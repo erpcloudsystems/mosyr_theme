@@ -2,11 +2,13 @@
 # MIT License. See license.txt
 
 from __future__ import print_function, unicode_literals
+import this
 from mosyr_theme.boot import get_sidebar_items
 from frappe.utils.jinja import is_rtl
 from frappe import _
 import frappe.sessions
 import frappe
+from datetime import date
 import time
 import re
 import os
@@ -109,7 +111,11 @@ def get_context(context):
     repeat with each month until you reach a 12 -- then stop .
 
     """
-                
+
+    result = get_growth_persentage()
+    growth_persentage = result.get("growth_persentage")
+    total_employees_in_current_year = result.get("total_employees_in_current_year")
+    total_employees_in_prev_year = result.get("total_employees_in_prev_year")
 
     context.update(
         {
@@ -138,7 +144,12 @@ def get_context(context):
             "total_casual_leave": total_casual_leave_days,
             "total_sick_leave": total_sick_leave_days,
             "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
-            "total_compensatory_leave": total_leave_without_pay_leave_days
+            "total_compensatory_leave": total_leave_without_pay_leave_days,
+            "growth_persentage": growth_persentage,
+            "current_year": date.today().year,
+            "prev_year": (date.today().year) - 1,
+            "total_employees_in_current_year": total_employees_in_current_year,
+            "total_employees_in_prev_year": total_employees_in_prev_year
         }
     )
 
@@ -183,3 +194,45 @@ def get_desk_assets(build_version):
                 pass
 
     return {"build_version": data["build_version"], "boot": data["boot"], "assets": assets}
+
+
+@frappe.whitelist()
+def get_growth_persentage():
+    """
+        Calculate growth persentage
+        20 - 10  = 10
+        10/10 = 1
+        1 * 100 = 100%
+    """
+    from datetime import date
+
+    def get_total_emp(year):
+        first_day_of_year = date(year, 1, 1)
+        last_day_of_year = date(year, 12, 31)
+
+        result = frappe.db.sql("""
+            SELECT
+                name
+            FROM
+                `tabEmployee`
+            WHERE
+                status=%(status)s AND date_of_joining BETWEEN %(first_day)s AND %(last_day)s
+        """, {"status": "Active", "first_day": first_day_of_year, "last_day": last_day_of_year}, as_dict=True)
+
+        return len(result)
+
+    current_year = date.today().year
+    prev_year = current_year - 1
+
+    total_employees_in_current_year = get_total_emp(current_year)
+    total_employees_in_prev_year = get_total_emp(prev_year)
+
+    diff_no = total_employees_in_current_year - total_employees_in_prev_year
+
+    growth_persentage = (diff_no / (total_employees_in_prev_year or 1)) * 100
+
+    return {
+        "growth_persentage":growth_persentage,
+        "total_employees_in_current_year": total_employees_in_current_year,
+        "total_employees_in_prev_year":total_employees_in_prev_year
+    }

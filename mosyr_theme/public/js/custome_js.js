@@ -23,7 +23,7 @@ $(document).ready(function () {
         } else {
             $(".custom_content").addClass("custome_hide")
         }
-    }, 100)
+    }, 1000)
 
     set_active_tab()
     $(".custom-menu-btn").click(function (event){
@@ -48,7 +48,7 @@ function set_active_page(event) {
             elm.parent().addClass("open")
 
         }
-    }, 100);
+    }, 1000);
 }
 
 

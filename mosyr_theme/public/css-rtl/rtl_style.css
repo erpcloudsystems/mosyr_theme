@@ -104,7 +104,7 @@ a:hover {
 .list-row {
     height: 55px !important
 }
-.input-xs {
+.input-xs:not([type="checkbox"]) {
     height: 30px !important;
     padding-top: 0 !important;
     padding-bottom: 0px !important;

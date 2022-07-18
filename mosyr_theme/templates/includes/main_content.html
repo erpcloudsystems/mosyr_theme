@@ -97,43 +97,29 @@
                         </div>
                         <div class="col-md-4">
                             <div class="card-body">
-                                <div class="text-center">
-                                    <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
-                                            id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            2022
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                            <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div id="growthChart"></div>
-                            <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                            <div id="growthChart" growth_persentage="{{ growth_persentage }}"></div>
+                            <div class="text-center fw-semibold pt-3 mb-2"> {{ _(growth_persentage) }}% {{ _("Company Employees Growth") }}</div>
 
                             <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                                 <div class="d-flex">
                                     <div class="me-2">
                                         <span class="badge bg-label-primary p-2"><i
-                                                class="bx bx-dollar text-primary"></i></span>
+                                                class="bx bx-user text-primary"></i></span>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <small>2022</small>
-                                        <h6 class="mb-0">$32.5k</h6>
+                                        <small>{{ current_year }}</small>
+                                        <h6 class="mb-0">{{ total_employees_in_current_year }}</h6>
                                     </div>
                                 </div>
                                 <div class="d-flex">
                                     <div class="me-2">
                                         <span class="badge bg-label-info p-2"><i
-                                                class="bx bx-wallet text-info"></i></span>
+                                                class="bx bx-user text-info"></i></span>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <small>2021</small>
-                                        <h6 class="mb-0">$41.2k</h6>
+                                        <small>{{ prev_year }}</small>
+                                        <h6 class="mb-0">{{ total_employees_in_prev_year }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +234,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="d-flex flex-column align-items-center gap-1">
                                 <h2 class="mb-2">{{ approved_leave }}</h2>
-                                <span>{{ _("Approved Leave ") }}</span>
+                                <span>{{ _("Approved Leave") }}</span>
                             </div>
                             <div id="orderStatisticsChart" total_casual_leave="{{ total_casual_leave }}" total_sick_leave="{{ total_sick_leave }}" 
                             total_leave_without_pay_leave="{{ total_leave_without_pay_leave }}" total_compensatory_leave="{{ total_compensatory_leave }}"></div>

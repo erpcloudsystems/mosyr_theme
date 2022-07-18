@@ -276,9 +276,10 @@
 
   // Growth Chart - Radial Bar Chart
   // --------------------------------------------------------------------
+  const growth_persentage = $("#growthChart").attr("growth_persentage")
   const growthChartEl = document.querySelector('#growthChart'),
     growthChartOptions = {
-      series: [78],
+      series: [parseInt(growth_persentage)],
       labels: ['Growth'],
       chart: {
         height: 240,
