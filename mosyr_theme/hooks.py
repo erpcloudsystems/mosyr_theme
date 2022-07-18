@@ -199,3 +199,7 @@ website_context = {
     "favicon": "/assets/mosyr_theme/img/min-mosyrlogo.png",
     "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
 }
+
+website_redirects = [
+    {"source": "/app/home", "target": "/app"}
+]

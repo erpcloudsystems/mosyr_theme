@@ -1,5 +1,4 @@
 frappe.views.ListSidebar.prototype.make = function () {
-    console.log("vv54545454547544444444445");
     var sidebar_content = frappe.render_template("list_sidebar", { doctype: this.doctype });
 
     this.sidebar = $('<div class="list-sidebar overlay-sidebar hidden-xs hidden-sm"></div>')

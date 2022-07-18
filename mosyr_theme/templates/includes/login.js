@@ -24,7 +24,6 @@ login.bind_events = function () {
 			frappe.msgprint('{{ _("Both login and password required") }}');
 			return false;
 		}
-		console.log("bbbbbbbbbbb555555555555555555", args);
 		login.call(args);
 		return false;
 	});
@@ -149,7 +148,6 @@ login.call = function (args, callback) {
 }
 
 login.set_status = function (message, color) {
-	console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", message);
 	$('div:visible .btn-primary').text(message)
 	if (color == "red") {
 		$('div:visible .page-card-body').addClass("invalid");
