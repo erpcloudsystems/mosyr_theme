@@ -14,14 +14,11 @@ $(document).ready(function () {
     $("#logo").click(function (event) {
         set_active_page(event)
     });
-    $("#Employee").click(function (event) {
-        window.location.reload();
-    });
 
     load_sidbar_icons()
     setTimeout(function () {
         if ( frappe.get_route() == '' || frappe.get_route()[1] == 'Home') {
-            $("#body .content.page-container").addClass("custome_hide")
+            $("#body .content.page-container").css("display","none")
             $(".custom_content").removeClass("custome_hide")
         } else {
             $(".custom_content").addClass("custome_hide")
@@ -37,7 +34,7 @@ $(document).ready(function () {
 function set_active_page(event) {
     setTimeout(function () {
         if (frappe.get_route()[1] == 'Home') {
-            $("#body .content.page-container").addClass("custome_hide")
+            $("#body .content.page-container").css("display","none")
             $(".custom_content").removeClass("custome_hide")
         } else {
             $(".custom_content").addClass("custome_hide")
