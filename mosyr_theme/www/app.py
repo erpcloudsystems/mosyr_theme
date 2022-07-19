@@ -152,7 +152,7 @@ def get_context(context):
             "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
             "total_compensatory_leave": total_leave_without_pay_leave_days,
             "growth_persentage": int(growth_persentage),
-            "current_year": date.today().year,
+            "current_year": 2022,
             "prev_year": (date.today().year) - 1,
             "total_employees_in_current_year": total_employees_in_current_year,
             "total_employees_in_prev_year": total_employees_in_prev_year,
