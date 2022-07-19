@@ -23,11 +23,11 @@
       series: [
         {
           name: current_year,
-          data: JSON.parse(lst1)
+          data: [5,3,8,5,6,7,9]
         },
         {
           name: prev_year,
-          data: JSON.parse(lst2)
+          data: [5,3,8,8,6,8,10]
         }
       ],
       chart: {
