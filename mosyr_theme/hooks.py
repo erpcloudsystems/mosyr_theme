@@ -200,6 +200,6 @@ website_context = {
     "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
 }
 
-# website_redirects = [
-#     {"source": "/app/home", "target": "/app"}
-# ]
+website_redirects = [
+    {"source": "/app/home", "target": "/app"}
+]
