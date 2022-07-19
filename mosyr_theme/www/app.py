@@ -17,7 +17,7 @@ no_cache = 1
 base_template_path = "templates/www/app.html"
 
 
-def get_context(context):
+async def get_context(context):
     if frappe.session.user == "Guest":
         frappe.throw(_("Log in to access this page."), frappe.PermissionError)
     elif frappe.db.get_value("User", frappe.session.user, "user_type") == "Website User":
@@ -126,7 +126,7 @@ def get_context(context):
     context.update(
         {
             "no_cache": 1,
-            "current_year": 2022,
+            "current_year_mosyr": 2022,
             "build_version": frappe.utils.get_build_version(),
             "include_js": hooks["app_include_js"],
             "include_css": get_rtl_styles(style_urls) if is_rtl() else style_urls,
