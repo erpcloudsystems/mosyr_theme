@@ -126,6 +126,7 @@ def get_context(context):
     context.update(
         {
             "no_cache": 1,
+            "current_year": 2022,
             "build_version": frappe.utils.get_build_version(),
             "include_js": hooks["app_include_js"],
             "include_css": get_rtl_styles(style_urls) if is_rtl() else style_urls,
@@ -152,7 +153,6 @@ def get_context(context):
             "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
             "total_compensatory_leave": total_leave_without_pay_leave_days,
             "growth_persentage": int(growth_persentage),
-            "current_year": 2022,
             "prev_year": (date.today().year) - 1,
             "total_employees_in_current_year": total_employees_in_current_year,
             "total_employees_in_prev_year": total_employees_in_prev_year,
