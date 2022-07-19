@@ -9,6 +9,7 @@ $(document).ready(function () {
     element.closest('ul').parent().addClass("open")
 
     $(".menu-link").click(function (event) {
+        window.location.reload();
         set_active_page(event)
     });
     $("#logo").click(function (event) {
