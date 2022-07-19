@@ -9,7 +9,9 @@ $(document).ready(function () {
     element.closest('ul').parent().addClass("open")
 
     $(".menu-link").click(function (event) {
-        window.location.reload();
+        if ( frappe.get_route() == '' || frappe.get_route()[1] == 'Home') {
+            window.location.reload();
+        }
         set_active_page(event)
     });
     $("#logo").click(function (event) {
