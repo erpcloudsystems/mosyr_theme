@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     var pushState = history.pushState;
     history.pushState = function () {
         pushState.apply(history, arguments);
@@ -9,7 +10,7 @@ $(document).ready(function () {
             $(".custom_content").addClass("custome_hide")
         }
         };
-        
+
     $(".menu-item").removeClass("active")
     $(".menu-item").removeClass("open")
     let id = frappe.get_route()[1]
@@ -19,12 +20,20 @@ $(document).ready(function () {
     element.closest('ul').parent().addClass("active")
     element.closest('ul').parent().addClass("open")
 
-    // $(".menu-link").click(function (event) {
-    //     set_active_page(event)
-    // });
-    // $("#logo").click(function (event) {
-    //     set_active_page(event)
-    // });
+    $(".menu-link-mosyer").click(function (event) {
+        set_active_page(event)
+        // frappe.router.push_state("/app")
+    });
+
+
+
+    $("#home").click(function (event) {
+        frappe.router.push_state("/app")
+    });
+    $("#logo").click(function (event) {
+        // set_active_page(event)
+        frappe.router.push_state("/app")
+    });
 
     load_sidbar_icons()
     setTimeout(function () {
