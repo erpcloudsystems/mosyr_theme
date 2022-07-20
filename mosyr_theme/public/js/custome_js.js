@@ -33,7 +33,7 @@ $(document).ready(function () {
 
 function set_active_page(event) {
     setTimeout(function () {
-        if (frappe.get_route()[1] == 'Home') {
+        if (frappe.get_route() == '') {
             $("#body .content.page-container").css("display","none")
             $(".custom_content").removeClass("custome_hide")
         } else {
