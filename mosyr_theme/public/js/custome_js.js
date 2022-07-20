@@ -19,12 +19,12 @@ $(document).ready(function () {
     element.closest('ul').parent().addClass("active")
     element.closest('ul').parent().addClass("open")
 
-    $(".menu-link").click(function (event) {
-        set_active_page(event)
-    });
-    $("#logo").click(function (event) {
-        set_active_page(event)
-    });
+    // $(".menu-link").click(function (event) {
+    //     set_active_page(event)
+    // });
+    // $("#logo").click(function (event) {
+    //     set_active_page(event)
+    // });
 
     load_sidbar_icons()
     setTimeout(function () {
