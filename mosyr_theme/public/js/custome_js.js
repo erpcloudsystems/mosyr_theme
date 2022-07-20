@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    var pushState = history.pushState;
+    history.pushState = function () {
+        pushState.apply(history, arguments);
+        if (frappe.get_route() == '') {
+            $("#body .content.page-container").css("display","none")
+            $(".custom_content").removeClass("custome_hide")
+        } else {
+            $(".custom_content").addClass("custome_hide")
+        }
+        };
+        
     $(".menu-item").removeClass("active")
     $(".menu-item").removeClass("open")
     let id = frappe.get_route()[1]
@@ -70,3 +81,4 @@ function load_sidbar_icons(){
         $(obj).append(frappe.utils.icon(icon_name || "folder-normal", "md"))
     });
 }
+
