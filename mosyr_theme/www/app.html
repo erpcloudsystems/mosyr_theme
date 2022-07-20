@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="{{ desk_theme.lower() }}" dir={{ layout_direction }} lang="{{ lang }}" class="layout-menu-fixed"
+<html data-theme="{{ desk_theme }}" dir={{ layout_direction }} lang="{{ lang }}" class="layout-menu-fixed"
 	style="overflow-x: hidden !important;">
 
 <head>
@@ -221,7 +221,7 @@
 														<div id="totalRevenueChart" class="px-2"
 															current_year_lst="{{ current_year_totals_list }}"
 															prev_year_lst="{{ prev_year_totals_list }}"
-															current_year="{{ current_year }}"
+															current_year="{{ current_year_mosyr }}"
 															prev_year="{{ prev_year }}"></div>
 													</div>
 													<div class="col-md-4">
@@ -241,7 +241,7 @@
 																			class="bx bx-user text-primary"></i></span>
 																</div>
 																<div class="d-flex flex-column">
-																	<small>{{ current_year }}</small>
+																	<small>{{ current_year_mosyr }}</small>
 																	<h6 class="mb-0">{{ total_employees_in_current_year
 																		}}</h6>
 																</div>

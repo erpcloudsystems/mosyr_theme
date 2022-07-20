@@ -17,7 +17,7 @@ no_cache = 1
 base_template_path = "templates/www/app.html"
 
 
-async def get_context(context):
+def get_context(context):
     if frappe.session.user == "Guest":
         frappe.throw(_("Log in to access this page."), frappe.PermissionError)
     elif frappe.db.get_value("User", frappe.session.user, "user_type") == "Website User":
