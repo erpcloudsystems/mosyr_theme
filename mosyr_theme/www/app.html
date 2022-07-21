@@ -213,52 +213,214 @@
 										</div>
 										<!-- Total Revenue -->
 										<div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-											<div class="card">
-												<div class="row row-bordered g-0">
-													<div class="col-md-8">
-														<h5 class="card-header m-0 me-2 pb-3">{{ _("Total Employee") }}
-														</h5>
-														<div id="totalRevenueChart" class="px-2"
-															current_year_lst="{{ current_year_totals_list }}"
-															prev_year_lst="{{ prev_year_totals_list }}"
-															current_year="{{ current_year_mosyr }}"
-															prev_year="{{ prev_year }}"></div>
+											<div class="">
+												<div class="row">
+													<!-- Order Statistics -->
+													<div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+														<div class="card h-100">
+															<div
+																class="card-header d-flex align-items-center justify-content-between pb-0">
+																<div class="card-title mb-0">
+																	<h5 class="m-0 me-2">{{ _("Leave Statistics") }}
+																	</h5>
+																	<small class="text-muted"> {{
+																		total_leave_application }} Total
+																		leaves </small>
+																</div>
+																<div class="dropdown">
+																	<button class="btn p-0" type="button"
+																		id="orederStatistics" data-bs-toggle="dropdown"
+																		aria-haspopup="true" aria-expanded="false">
+																		<i class="bx bx-dots-vertical-rounded"></i>
+																	</button>
+																	<div class="dropdown-menu dropdown-menu-end"
+																		aria-labelledby="orederStatistics">
+																		<a class="dropdown-item"
+																			href="javascript:void(0);">Select
+																			All</a>
+																		<a class="dropdown-item"
+																			href="javascript:void(0);">Refresh</a>
+																		<a class="dropdown-item"
+																			href="javascript:void(0);">Share</a>
+																	</div>
+																</div>
+															</div>
+															<div class="card-body">
+																<div
+																	class="d-flex justify-content-between align-items-center mb-3">
+																	<div
+																		class="d-flex flex-column align-items-center gap-1">
+																		<h2 class="mb-2">{{ approved_leave }}</h2>
+																		<span>{{ _("Approved Leave") }}</span>
+																	</div>
+																	<div id="orderStatisticsChart"
+																		total_casual_leave="{{ total_casual_leave }}"
+																		total_sick_leave="{{ total_sick_leave }}"
+																		total_leave_without_pay_leave="{{ total_leave_without_pay_leave }}"
+																		total_compensatory_leave="{{ total_compensatory_leave }}">
+																	</div>
+																</div>
+																<ul class="p-0 m-0">
+																	<li class="d-flex mb-4 pb-1">
+																		<div class="avatar flex-shrink-0 me-3">
+																			<span
+																				class="avatar-initial rounded bg-label-primary"><i
+																					class="bx bx-log-out"></i></span>
+																		</div>
+																		<div
+																			class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+																			<div class="me-2">
+																				<h6 class="mb-0">{{ _("Casual Leave") }}
+																				</h6>
+																				<small class="text-muted">{{ _("Casual
+																					Leave")
+																					}}</small>
+																			</div>
+																			<div class="user-progress">
+																				<small class="fw-semibold">{{
+																					total_casual_leave
+																					}}</small>
+																			</div>
+																		</div>
+																	</li>
+																	<li class="d-flex mb-4 pb-1">
+																		<div class="avatar flex-shrink-0 me-3">
+																			<span
+																				class="avatar-initial rounded bg-label-success"><i
+																					class="bx bx-health"></i></span>
+																		</div>
+																		<div
+																			class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+																			<div class="me-2">
+																				<h6 class="mb-0">{{ _("Sick Leave") }}
+																				</h6>
+																				<small class="text-muted">{{ _("Sick
+																					Leave")
+																					}}</small>
+																			</div>
+																			<div class="user-progress">
+																				<small class="fw-semibold">{{
+																					total_sick_leave
+																					}}</small>
+																			</div>
+																		</div>
+																	</li>
+																	<li class="d-flex mb-4 pb-1">
+																		<div class="avatar flex-shrink-0 me-3">
+																			<span
+																				class="avatar-initial rounded bg-label-info"><i
+																					class="bx bx-run"></i></span>
+																		</div>
+																		<div
+																			class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+																			<div class="me-2">
+																				<h6 class="mb-0">{{ _("Leave Without
+																					Pay") }}</h6>
+																				<small class="text-muted">{{ _("Leave
+																					Without Pay")
+																					}}</small>
+																			</div>
+																			<div class="user-progress">
+																				<small class="fw-semibold">{{
+																					total_leave_without_pay_leave
+																					}}</small>
+																			</div>
+																		</div>
+																	</li>
+																	<li class="d-flex">
+																		<div class="avatar flex-shrink-0 me-3">
+																			<span
+																				class="avatar-initial rounded bg-label-secondary"><i
+																					class="bx bx-home-alt"></i></span>
+																		</div>
+																		<div
+																			class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+																			<div class="me-2">
+																				<h6 class="mb-0">{{ _("Compensatory
+																					Off") }}</h6>
+																				<small class="text-muted">{{
+																					_("Compensatory Off")
+																					}}</small>
+																			</div>
+																			<div class="user-progress">
+																				<small class="fw-semibold">{{
+																					total_compensatory_leave }}</small>
+																			</div>
+																		</div>
+																	</li>
+																</ul>
+															</div>
+														</div>
 													</div>
-													<div class="col-md-4">
-														<div class="card-body">
-														</div>
-														<div id="growthChart"
-															growth_persentage="{{ growth_persentage }}"></div>
-														<div class="text-center fw-semibold pt-3 mb-2"> {{
-															_(growth_persentage) }}% {{ _("Company Employees Growth") }}
-														</div>
+													<!--/ Order Statistics -->
 
-														<div
-															class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-															<div class="d-flex">
-																<div class="me-2">
-																	<span class="badge bg-label-primary p-2"><i
-																			class="bx bx-user text-primary"></i></span>
-																</div>
-																<div class="d-flex flex-column">
-																	<small>{{ current_year_mosyr }}</small>
-																	<h6 class="mb-0">{{ total_employees_in_current_year
-																		}}</h6>
-																</div>
+													<!-- Expense Overview -->
+													<div class="col-md-6 col-lg-6 order-1 mb-4">
+														<div class="card h-100">
+															<div class="card-header">
+																<ul class="nav nav-pills" role="tablist">
+																	<li class="nav-item">
+																		<button type="button" class="nav-link active"
+																			role="tab" data-bs-toggle="tab"
+																			data-bs-target="#navs-tabs-line-card-income"
+																			aria-controls="navs-tabs-line-card-income"
+																			aria-selected="true">
+																			Income
+																		</button>
+																	</li>
+																	<li class="nav-item">
+																		<button type="button" class="nav-link"
+																			role="tab">Expenses</button>
+																	</li>
+																	<li class="nav-item">
+																		<button type="button" class="nav-link"
+																			role="tab">Profit</button>
+																	</li>
+																</ul>
 															</div>
-															<div class="d-flex">
-																<div class="me-2">
-																	<span class="badge bg-label-info p-2"><i
-																			class="bx bx-user text-info"></i></span>
-																</div>
-																<div class="d-flex flex-column">
-																	<small>{{ prev_year }}</small>
-																	<h6 class="mb-0">{{ total_employees_in_prev_year }}
-																	</h6>
+															<div class="card-body px-0">
+																<div class="tab-content p-0">
+																	<div class="tab-pane fade show active"
+																		id="navs-tabs-line-card-income" role="tabpanel">
+																		<div class="d-flex p-4 pt-3">
+																			<div class="avatar flex-shrink-0 me-3">
+																				<img src="/assets/mosyr_theme/img/icons/unicons/wallet.png"
+																					alt="User" />
+																			</div>
+																			<div>
+																				<small class="text-muted d-block">Total
+																					Balance</small>
+																				<div class="d-flex align-items-center">
+																					<h6 class="mb-0 me-1">$459.10</h6>
+																					<small
+																						class="text-success fw-semibold">
+																						<i class="bx bx-chevron-up"></i>
+																						42.9%
+																					</small>
+																				</div>
+																			</div>
+																		</div>
+																		<div id="incomeChart"></div>
+																		<div
+																			class="d-flex justify-content-center pt-4 gap-2">
+																			<div class="flex-shrink-0">
+																				<div id="expensesOfWeek"></div>
+																			</div>
+																			<div>
+																				<p class="mb-n1 mt-1">Expenses This Week
+																				</p>
+																				<small class="text-muted">$39 less than
+																					last
+																					week</small>
+																			</div>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
+													<!--/ Expense Overview -->
+
 												</div>
 											</div>
 										</div>
@@ -366,7 +528,7 @@
 									<div class="row">
 										<!-- Order Statistics -->
 										<div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-											<div class="card h-100">
+											<!-- <div class="card h-100">
 												<div
 													class="card-header d-flex align-items-center justify-content-between pb-0">
 													<div class="card-title mb-0">
@@ -480,13 +642,13 @@
 														</li>
 													</ul>
 												</div>
-											</div>
+											</div> -->
 										</div>
 										<!--/ Order Statistics -->
 
 										<!-- Expense Overview -->
 										<div class="col-md-6 col-lg-4 order-1 mb-4">
-											<div class="card h-100">
+											<!-- <div class="card h-100">
 												<div class="card-header">
 													<ul class="nav nav-pills" role="tablist">
 														<li class="nav-item">
@@ -543,7 +705,7 @@
 														</div>
 													</div>
 												</div>
-											</div>
+											</div> -->
 										</div>
 										<!--/ Expense Overview -->
 
