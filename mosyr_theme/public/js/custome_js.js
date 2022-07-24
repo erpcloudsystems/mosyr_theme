@@ -20,7 +20,7 @@ $(document).ready(function () {
     element.closest('ul').parent().addClass("active")
     element.closest('ul').parent().addClass("open")
 
-    $(".menu-link-mosyer").click(function (event) {
+    $(".custom-side-link").click(function (event) {
         set_active_page(event)
         // frappe.router.push_state("/app")
     });
@@ -48,6 +48,15 @@ $(document).ready(function () {
     set_active_tab()
     $(".custom-menu-btn").click(function (event){
         $("html").toggleClass("layout-menu-expanded")
+    })
+
+    $(".create-new-doc").click(function(event){
+        const doctype = "Technical support";
+        const options = {};
+        frappe.new_doc(doctype, options);
+        setTimeout(function () {
+            $(".custom_content").addClass("custome_hide")
+        }, 100)
     })
 })
 
@@ -90,4 +99,3 @@ function load_sidbar_icons(){
         $(obj).append(frappe.utils.icon(icon_name || "folder-normal", "md"))
     });
 }
-
