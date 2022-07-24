@@ -160,6 +160,13 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1{
     line-height: inherit !important;
 }
 
+.custom-bg {
+    background-image: url(/assets/mosyr_theme/img/illustrations/man-with-laptop-light.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+
 @media (max-width: 991px){
     .layout-side-section {
         display: unset !important;

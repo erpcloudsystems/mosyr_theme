@@ -9,9 +9,7 @@
         "public/css/theme-default.css"
     ],
     "mosyr_theme/css-rtl/mosyr_theme_rtl.min.css": [
-        "public/css-rtl/rtl_style.css",
-        "public/css/demo.css",
-        "public/css/core.css"
+        "public/css-rtl/rtl_style.css"
     ],
     "mosyr_theme/css/web-css.min.css": [
         "public/css/page-auth.css",
