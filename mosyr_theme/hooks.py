@@ -45,7 +45,7 @@ web_include_js =  ["/assets/mosyr_theme/js/web-js.min.js"]
 # ----------
 
 # application home page (will override Website Settings)
-home_page = "app"
+# home_page = "app"
 
 # website user home page (by Role)
 # role_home_page = {

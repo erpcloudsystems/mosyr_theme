@@ -157,8 +157,8 @@ def get_context(context):
             "total_employees_in_current_year": total_employees_in_current_year,
             "total_employees_in_prev_year": total_employees_in_prev_year,
             "current_year_totals_list": current_year_totals_list,
-            "prev_year_totals_list": prev_year_totals_list
-
+            "prev_year_totals_list": prev_year_totals_list,
+            "is_first_startup": frappe.db.get_value("System Settings", "System Settings", "is_first_startup") or 0
         }
     )
 
