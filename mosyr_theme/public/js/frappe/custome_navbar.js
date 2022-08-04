@@ -12,7 +12,6 @@ frappe.ui.toolbar.Toolbar.prototype.bind_events = function () {
             },
             callback: function(r){
                 window.location.reload();
-                console.log(r);
             }
         })
     });
