@@ -1,0 +1,42 @@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="/app" class="app-brand-link" id="logo">
+            <span class="app-brand-logo demo">
+                <img src="/assets/mosyr_theme/img/mosyrlogo.png" alt="mosyer-logo" />
+            </span>
+        </a>
+        <a href="javascript:void(0);"
+            class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+    <div class="menu-inner-shadow"></div>
+    <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item active">
+            <a href="/app" class="menu-link  sidebar-item" id="home">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div id="Home" data-i18n="Home">{{ __("Home") }}</div>
+            </a>
+        </li>
+        <!-- Layouts -->
+        {% for item in side_items %}
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle custom-side-link" id="{{ item.label || item.name}}">
+                <div class="add-val"></div>
+                <span class="menu-icon sidebar-icon" icon-name="{{item.icon}}"></span>
+                <div id="{{item.label || item.name}}" data-i18n="{{item.label || item.name}}">{{ __(item.label) || __(item.name)}}</div>
+            </a>
+            <ul class="menu-sub">
+                {% for itm in item.child_items %}
+                <li class="menu-item">
+                    <a href="/app/{{itm.route}}" class="menu-link" id="{{itm.name}}">
+                        <div id="{{itm.name}}" data-i18n="{{itm.name}}">{{ _(itm.name) }}</div>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</aside>

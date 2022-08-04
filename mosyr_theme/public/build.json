@@ -1,5 +1,18 @@
 {
-    "mosyr_theme/css/mosyr_theme.min.css": [
+    "mosyr_theme/build/css/web/web-css.min.css": [
+        "public/css/page-auth.css",
+        "public/css/page-misc.css",
+        "public/css/core.css",
+        "public/css/demo.css",
+        "public/css/theme-default.css",
+        "public/css/web-css.css"
+    ],
+    "mosyr_theme/build/js/web/web-js.min.js": [
+        "public/js/web-js.js"
+    ],
+
+
+    "mosyr_theme/build/css/mosyr_theme.min.css": [
         "public/css/core.css",
         "public/css/theme-default.css",
         "public/css/demo.css",
@@ -8,29 +21,24 @@
         "public/css/boxicons.css",
         "public/css/theme-default.css"
     ],
-    "mosyr_theme/css-rtl/mosyr_theme_rtl.min.css": [
+    "mosyr_theme/build/css-rtl/mosyr_theme_rtl.min.css": [
         "public/css-rtl/rtl_style.css"
     ],
-    "mosyr_theme/css/web-css.min.css": [
-        "public/css/page-auth.css",
-        "public/css/page-misc.css",
-        "public/css/core.css",
-        "public/css/demo.css",
-        "public/css/theme-default.css",
-        "public/css/web-css.css"
-    ],
-    "mosyr_theme/js/web-js.min.js": [
-        "public/js/web-js.js"
-    ],
-    "mosyr_theme/js/mosyr_theme.min.js": [
-        "public/templates/navbar.html",
-        "public/js/custom_list_sidebar.js",
-        "public/js/custom_page.js",
-        "public/js/custome_js.js",
-        "public/js/custom_form.js",
-        "public/js/custome_navbar.js",
+    "mosyr_theme/build/js/frappe-custom.min.js":[
+        "public/js/frappe/custom_list_sidebar.js",
+        "public/js/frappe/custom_page.js",
+        "public/js/frappe/custome_js.js",
+        "public/js/frappe/custom_form.js",
+        "public/js/frappe/custome_navbar.js",
         "public/js/dashboards-analytics.js",
-        "public/js/custom_workspace.js",
-        "public/js/custome_base_list.js"
+        "public/js/frappe/custom_workspace.js",
+        "public/js/frappe/custome_base_list.js",
+        "public/js/frappe/aside.js",
+        "public/js/frappe/custom_router.js"
+    ],
+    "mosyr_theme/build/ui/mosyr_theme.min.js": [
+        "public/templates/navbar.html",
+        "public/templates/sidebar.html",
+        "public/templates/workspace.html"
     ]
 }

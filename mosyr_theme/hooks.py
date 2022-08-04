@@ -14,16 +14,21 @@ app_license = "MIT"
 
 # include js, css files in header of desk.html
 app_include_css = [
-	"/assets/mosyr_theme/css/mosyr_theme.min.css",
-	"/assets/mosyr_theme/css-rtl/mosyr_theme_rtl.min.css"
+	"/assets/mosyr_theme/build/css/mosyr_theme.min.css",
+	"/assets/mosyr_theme/build/css-rtl/mosyr_theme_rtl.min.css"
 ]
-app_include_js = ["/assets/mosyr_theme/js/mosyr_theme.min.js"]
+
+app_include_js = [
+	"/assets/mosyr_theme/build/js/web/web-js.min.js",
+	"/assets/mosyr_theme/build/js/frappe-custom.min.js",
+	"/assets/mosyr_theme/build/ui/mosyr_theme.min.js",
+]
 
 # base_template = "templates/custome-base.html"
 
 # include js, css files in header of web template
-web_include_css = ["/assets/mosyr_theme/css/web-css.min.css"]
-web_include_js =  ["/assets/mosyr_theme/js/web-js.min.js"]
+web_include_css = ["/assets/mosyr_theme/build/css/web/web-css.min.css"]
+web_include_js =  ["/assets/mosyr_theme/build/js/web/web-js.min.js"]
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "mosyr_theme/public/scss/website"
@@ -200,6 +205,6 @@ website_context = {
     "splash_image": "/assets/mosyr_theme/img/mosyrlogo.png"
 }
 
-website_redirects = [
-    {"source": "/app/home", "target": "/app"}
-]
+# website_redirects = [
+#     {"source": "/app/home", "target": "/app"}
+# ]

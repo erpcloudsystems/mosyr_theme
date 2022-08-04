@@ -86,7 +86,7 @@
                     href='https://enable-javascript.com/'>enable-javascript.com</a></p>") }}
         </div>
     </noscript>
-    <div id="for-login" class='container-xxl'>
+    <div id="for-login" class='container-xxl frm-hide'>
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="login-content page-card authentication-inner">
                 <div class="card">
@@ -133,7 +133,7 @@
     </div>
 
     {%- if social_login -%}
-    <div id="for-email-login" class='container-xxl'>
+    <div id="for-email-login" class='container-xxl frm-hide'>
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="login-content page-card authentication-inner">
                 <div class="card">
@@ -157,7 +157,7 @@
         </div>
     </div>
     {%- endif -%}
-    <div id="for-signup" class='container-xxl {{ "signup-disabled" if disable_signup else "" }}'>
+    <div id="for-signup" class='container-xxl frm-hide {{ "signup-disabled" if disable_signup else "" }}'>
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="login-content page-card authentication-inner">
                 <div class="card">
@@ -204,7 +204,7 @@
     </div>
 </div>
 
-<div id='for-forgot' class="container-xxl">
+<div id='for-forgot' class="container-xxl frm-hide">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="login-content page-card authentication-inner">
             <div class="card">
@@ -231,6 +231,9 @@
         </div>
     </div>
 </div>
+<style>
+    .container-xxl.frm-hide{ display: none;}
+</style>
 {% endblock %}
 
 {% block script %}

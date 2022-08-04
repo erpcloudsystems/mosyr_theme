@@ -20,28 +20,21 @@
             </form>
         </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    {% if frappe.boot.language == "ar" %}
-                        <i class="flag-icon flag-icon-sa flag-icon-squared rounded-circle fs-4 me-1"></i>
-                    {% else %}
-                        <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-3 me-1"></i>
-                    {% endif %}
+            <li class="nav-item dropdown dropdown-lang dropdown-mobile d-none d-lg-block">
+                {% if frappe.boot.language != "ar" %}
+                <a class="nav-link lang-switcher" data-toggle="dropdown" href="#" data-lang="ar">
+                    <span data-lang="ar">
+                        <i data-lang="ar" class="flag-icon flag-icon-sa flag-icon-squared fs-4 me-1"></i>
+                        <span data-lang="ar">عربي</span>
+                    </span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item lang-switcher2" href="#" onclick="return false;" data-lang="en">
-                            <i class="flag-icon flag-icon-us flag-icon-squared rounded-circle fs-4 me-1"></i>
-                            <span class="align-middle">English</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item lang-switcher2" href="#" onclick="return false;" data-lang="ar">
-                            <i class="flag-icon flag-icon-sa flag-icon-squared rounded-circle fs-4 me-1"></i>
-                            <span class="align-middle">Arabic</span>
-                        </a>
-                    </li>
-                </ul>
+                {% else %}
+                <a class="nav-link lang-switcher" data-toggle="dropdown" href="#" data-lang="en">
+                    <span data-lang="en">
+                        <i data-lang="en" class="flag-icon flag-icon-us flag-icon-squared fs-3 me-1"></i>
+                        <span data-lang="en">English</span>
+                    </span>
+                    {% endif %}
             </li>
             <li class="nav-item dropdown dropdown-notifications dropdown-mobile hidden">
                 <a class="nav-link notifications-icon text-muted" data-toggle="dropdown" aria-haspopup="true"

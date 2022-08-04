@@ -1,6 +1,8 @@
 // login.js
 // don't remove this line (used in test)
-
+if(frappe.session.user!='Guest'){
+	location.href = '/app'
+}
 window.disable_signup = {{ disable_signup and "true" or "false" }};
 
 window.login = {};
@@ -93,10 +95,10 @@ login.route = function () {
 
 login.reset_sections = function (hide) {
 	if (hide || hide === undefined) {
-		$("section.for-login").toggle(false);
-		$("section.for-email-login").toggle(false);
-		$("section.for-forgot").toggle(false);
-		$("section.for-signup").toggle(false);
+		$("#for-login").toggle(false);
+		$("#for-email-login").toggle(false);
+		$("#for-forgot").toggle(false);
+		$("#for-signup").toggle(false);
 	}
 	$('section:not(.signup-disabled) .indicator').each(function () {
 		$(this).removeClass().addClass('indicator').addClass('blue')
@@ -106,30 +108,30 @@ login.reset_sections = function (hide) {
 
 login.login = function () {
 	login.reset_sections();
-	$(".for-login").toggle(true);
+	$("#for-login").toggle(true);
 }
 
 login.email = function () {
 	login.reset_sections();
-	$(".for-email-login").toggle(true);
+	$("#for-email-login").toggle(true);
 	$("#login_email").focus();
 }
 
 login.steptwo = function () {
 	login.reset_sections();
-	$(".for-login").toggle(true);
+	$("#for-login").toggle(true);
 	$("#login_email").focus();
 }
 
 login.forgot = function () {
 	login.reset_sections();
-	$(".for-forgot").toggle(true);
+	$("#for-forgot").toggle(true);
 	$("#forgot_email").focus();
 }
 
 login.signup = function () {
 	login.reset_sections();
-	$(".for-signup").toggle(true);
+	$("#for-signup").toggle(true);
 	$("#signup_fullname").focus();
 }
 
@@ -263,7 +265,7 @@ login.login_handlers = (function () {
 frappe.ready(function () {
 
 	login.bind_events();
-
+	
 	if (!window.location.hash) {
 		window.location.hash = "#login";
 	} else {

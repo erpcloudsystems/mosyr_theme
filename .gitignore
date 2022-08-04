@@ -7,3 +7,4 @@
 *.swp
 tags
 mosyr_theme/docs/current
+mosyr_theme/public/build/

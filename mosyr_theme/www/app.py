@@ -141,24 +141,7 @@ def get_context(context):
             "mixpanel_id": frappe.conf.get("mixpanel_id"),
             "side_items": sidebar_items,
             "user_name": user_name,
-            "total_loans_amount": total_loans_amount,
-            "total_salaries_amount": total_salaries_amount,
-            "timesheet_list": timesheet_list,
-            "total_leave_encashment_amount": total_leave_encashment_amount,
-            "total_employee": len(employee),
-            "total_leave_application": total_leave_days,
-            "approved_leave": approved_leave_days,
-            "total_casual_leave": total_casual_leave_days,
-            "total_sick_leave": total_sick_leave_days,
-            "total_leave_without_pay_leave": total_leave_without_pay_leave_days,
-            "total_compensatory_leave": total_leave_without_pay_leave_days,
-            "growth_persentage": int(growth_persentage),
-            "prev_year": (date.today().year) - 1,
-            "total_employees_in_current_year": total_employees_in_current_year,
-            "total_employees_in_prev_year": total_employees_in_prev_year,
-            "current_year_totals_list": current_year_totals_list,
-            "prev_year_totals_list": prev_year_totals_list,
-            "is_first_startup": frappe.db.get_value("System Settings", "System Settings", "is_first_startup") or 0
+            "setup_complete": frappe.utils.cint(frappe.db.get_value("System Settings", "System Settings", "setup_complete") or 0)
         }
     )
 
