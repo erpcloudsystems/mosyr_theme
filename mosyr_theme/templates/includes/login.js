@@ -1,8 +1,8 @@
 // login.js
 // don't remove this line (used in test)
-if(frappe.session.user!='Guest'){
+/*if(frappe.session.user!='Guest'){
 	location.href = '/app'
-}
+}*/
 window.disable_signup = {{ disable_signup and "true" or "false" }};
 
 window.login = {};
