@@ -208,6 +208,9 @@ h1,
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+#hide-sidebar #mosyrsidebar {
+    display: none !important;
+}
 
 #page-Workspaces .layout-main-section-wrapper,
 #page-Workspaces .layout-main-section {
