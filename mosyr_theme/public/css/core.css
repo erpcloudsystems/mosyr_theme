@@ -2182,7 +2182,7 @@ progress {
   padding: 0.4375rem 0.875rem;
   font-size: 0.9375rem;
   font-weight: 400;
-  line-height: 1.53;
+  line-height: 1.9;
   color: #697a8d;
   background-color: #fff;
   background-clip: padding-box;
@@ -2758,7 +2758,7 @@ textarea.form-control-lg {
 .btn {
   display: inline-block;
   font-weight: 400;
-  line-height: 1.53;
+  line-height: 1.9;
   color: #697a8d;
   text-align: center;
   vertical-align: middle;

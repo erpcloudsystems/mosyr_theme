@@ -216,10 +216,12 @@ h1,
     border-radius: 10px;
     margin-bottom: 60px;
 }
-#page-Workspaces .layout-main-section{
+
+#page-Workspaces .layout-main-section {
     background-color: #fff;
     box-shadow: 0 0 0.375rem 0.25rem rgb(161 172 184 / 15%);
 }
+
 .layout-main-section.frappe-card {
     border-radius: 10px;
     border-width: 0;
@@ -242,12 +244,38 @@ h1,
 }
 
 #page-Workspaces .card {
-    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px, 
-                rgb(27 31 35 / 15%) 0px 0px 0px 1px;
+    box-shadow: rgb(0 0 0 / 2%) 0px 1px 3px 0px,
+        rgb(27 31 35 / 15%) 0px 0px 0px 1px;
 }
-body.modal-open[style^="padding-right"] header.navbar{
+
+body.modal-open[style^="padding-right"] header.navbar {
     margin-left: auto !important;
     margin-right: auto !important;
 }
-#page-Workspaces .layout-main>div:first-child{display: none !important}
-#page-Workspaces .layout-main-section-wrapper{padding: 0 13px;}
+
+#page-Workspaces .layout-main>div:first-child {
+    display: none !important
+}
+
+#page-Workspaces .layout-main-section-wrapper {
+    padding: 0 13px;
+}
+
+.btn-sm {
+    line-height: 20px;
+    height: 27px;
+}
+
+.menu-item ul.menu-sub {
+    background: #fff;
+    overflow: hidden;
+    color: #000;
+
+    transition: all .5s ease-in-out !important;
+    height: 0;
+}
+
+.menu-item.open ul.menu-sub {
+    height: auto;
+    transition: all .5s ease-in-out !important;
+}

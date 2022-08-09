@@ -18,9 +18,16 @@ frappe.ui.toolbar.MosyrSidebar = class {
 	bind_events() {
 		$("#mosyrsidebar .menu-item > a.menu-link.menu-toggle").on('click', function (ev) {
 			ev.stopPropagation()
-			$(".menu-inner .menu-item").removeClass("open")
-			// $("mosyrsidebar ul.menu-inner > li.menu-item").removeClass("open")
-			$($(ev.target).parent()).addClass("open")
+			if ($($(ev.target).parent()).hasClass('open')){
+				$("#mosyrsidebar .menu-item").removeClass("open")
+				return
+			}
+			$("#mosyrsidebar .menu-item").removeClass("open")
+			$("#mosyrsidebar .menu-item").removeClass("active")
+
+			$(ev.target).parent().addClass("open")
+			$(ev.target).parent().addClass("active")
+
 		})
 	}
 };
