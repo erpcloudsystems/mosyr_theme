@@ -1,0 +1,32 @@
+[
+ {
+  "condition": "doc.status==\"Open\"",
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 0,
+  "enabled": 1,
+  "modified": "2022-08-11 13:24:22.073139",
+  "name": "HOOK-0001",
+  "naming_series": "HOOK-.####",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "request_method": "POST",
+  "request_structure": "JSON",
+  "request_url": "http://saas.mosyr.io/api/method/saas.api.open_client_issue",
+  "webhook_data": [],
+  "webhook_docevent": "on_submit",
+  "webhook_doctype": "Technical Support",
+  "webhook_headers": [
+   {
+    "key": "Content-Type",
+    "parent": "HOOK-0001",
+    "parentfield": "webhook_headers",
+    "parenttype": "Webhook",
+    "value": "application/json"
+   }
+  ],
+  "webhook_json": "{{doc|tojson|safe}}",
+  "webhook_secret": null
+ }
+]
