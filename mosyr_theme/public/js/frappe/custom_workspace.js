@@ -28,8 +28,8 @@ frappe.views.Workspace.prototype.make_page = function(page) {
         "prev_year_totals_list": 0,
     });
     $(this.body).html('')
-    $($temp).find('#new-tech-support').click(ev => { frappe.new_doc('Technical Support') })
     $($temp).appendTo(this.body);
+    $('#new-tech-support').click(ev => { frappe.new_doc('Technical Support') })
 }
 
 frappe.views.Workspace.prototype.show_or_hide_sidebar = function(){
