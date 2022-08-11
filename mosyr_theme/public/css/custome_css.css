@@ -282,3 +282,7 @@ body.modal-open[style^="padding-right"] header.navbar {
     height: auto;
     transition: all .5s ease-in-out !important;
 }
+.menu-vertical .menu-inner{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
