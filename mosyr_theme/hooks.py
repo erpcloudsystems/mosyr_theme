@@ -208,3 +208,20 @@ website_context = {
 # website_redirects = [
 #     {"source": "/app/home", "target": "/app"}
 # ]
+
+fixtures = [
+    {"dt": "Role", "filters": [
+        [
+            "name", "in", [
+                "Complete Tech Support"
+            ]
+        ]
+    ]},
+	{"dt": "Webhook", "filters": [
+        [
+            "name", "in", [
+                "HOOK-0001"
+            ]
+        ]
+    ]}
+]
