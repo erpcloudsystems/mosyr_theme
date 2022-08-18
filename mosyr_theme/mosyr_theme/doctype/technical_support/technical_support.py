@@ -8,6 +8,8 @@ class TechnicalSupport(Document):
 	# def autoname(self):
 	# 	self.issue_date = frappe.utils.nowdate()
 	def validate(self):
+		self.ticket_url = f"{frappe.request.host_url}app/technical-support/{self.name}"
+
 		if self.docstatus == 0:
 			if not self.issue_date:
 				self.issue_date = frappe.utils.nowdate()
