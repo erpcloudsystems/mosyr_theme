@@ -16,6 +16,7 @@
   "description",
   "company_name",
   "user_name",
+  "ticket_url",
   "user_email",
   "amended_from"
  ],
@@ -102,12 +103,19 @@
    "options": "Technical Support",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "ticket_url",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Ticket URL",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-08-11 13:18:12.033890",
+ "modified": "2022-08-18 15:53:26.599151",
  "modified_by": "Administrator",
  "module": "Mosyr Theme",
  "name": "Technical Support",
