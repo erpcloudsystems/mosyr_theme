@@ -19,5 +19,10 @@ frappe.ui.form.on('Technical Support', {
 
 			})
 		}
+	},
+	validate: function(frm){
+		if(!frm.doc.ticket_url){
+			frm.set_value('ticket_url', location.href)
+		}
 	}
 });
