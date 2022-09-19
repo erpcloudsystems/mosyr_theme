@@ -24,7 +24,7 @@
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle custom-side-link" id="{{ item.label || item.name}}">
                 <div class="add-val"></div>
-                <span class="menu-icon sidebar-icon" icon-name="{{item.icon}}">{{ frappe.utils.icon(item.icon || "folder") }}</span>
+                <span class="menu-icon sidebar-icon" icon-name="{{item.icon}}">{{ frappe.utils.icon(item.icon || "folder-normal") }}</span>
                 <div id="{{item.label || item.name}}" data-i18n="{{item.label || item.name}}">{{ __(item.label) || __(item.name)}}</div>
             </a>
             <ul class="menu-sub">
