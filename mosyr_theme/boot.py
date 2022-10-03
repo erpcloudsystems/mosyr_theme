@@ -1,12 +1,12 @@
 
-from cmath import log
-from operator import le
 import frappe
+from erpnext.hr.doctype.leave_application.leave_application import get_leave_details
 
 def boot_session(bootinfo):
     bootinfo.language = frappe.local.lang
     bootinfo.sidebar_items = get_sidebar_items()
     bootinfo.desk_settings = get_desk_settings()
+    bootinfo.home_details = get_home_details()
 
 def get_sidebar_items():
     system_controller = frappe.get_single('System Controller')
@@ -47,3 +47,49 @@ def get_desk_settings():
         desk_settings['form_sidebar'] = 1
     return desk_settings
 
+def get_home_details():    
+    home_details = {}
+    current_user = frappe.get_doc("User", frappe.session.user)
+    salary_details = 0
+    loans = "nothing to show"
+    leave_details = {}
+
+    current_employee = get_employee_by_user_id(frappe.session.user)
+    if current_employee:
+        current_employee = {
+            'emp_name': current_employee.employee_name,
+            'emp_route': "/app/employee/"+current_employee.name
+        }
+        
+        emp = current_employee.get("name", False)
+        if emp:
+            leave_details = get_leave_details(emp, frappe.utils.nowdate())
+            paid_salaries = frappe.db.sql("""SELECT SUM(base_gross_pay) as base_gross_pay, SUM(base_total_deduction) base_total_deduction FROM `tabSalary Slip` WHERE employee='{}' """.format(emp), as_dict=True)
+            loans = frappe.db.sql("""SELECT SUM(loan_amount) as total_loans FROM `tabLoan` WHERE applicant_type='Employee' applicant='{}' """.format(emp), as_dict=True)
+    else:
+        current_employee = {
+            'emp_name': current_user.full_name,
+            'emp_route': "/app/user/"+current_user.name
+        }
+        paid_salaries = frappe.db.sql("""SELECT SUM(base_gross_pay) as base_gross_pay, SUM(base_total_deduction) base_total_deduction FROM `tabSalary Slip` """, as_dict=True)
+        loans = frappe.db.sql("""SELECT SUM(loan_amount) as total_loans FROM `tabLoan`""", as_dict=True)
+
+    if len(loans) > 0:
+        loans = loans[0].get("total_loans", 0)
+    else:
+        loans = 0
+    home_details.update({
+        "current_user": current_user,
+        "current_employee": current_employee,
+        "salary_details": salary_details,
+        "leave_details": leave_details,
+        "loans": loans,
+    })
+    print(home_details)
+    return home_details
+
+def get_employee_by_user_id(user_id):
+	emp_id = frappe.db.exists("Employee", {"user_id": user_id})
+	if emp_id:
+		return frappe.get_doc("Employee", emp_id)
+	return None

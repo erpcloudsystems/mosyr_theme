@@ -8,7 +8,8 @@ frappe.views.Workspace.prototype.show = function () {
 frappe.views.Workspace.prototype.make_page = function(page) {
     page = 'Home'
     $(this.wrapper).find('.sidebar-toggle-btn').remove()
-    let $temp = frappe.render_template("workspace", {
+    let workspace_html = "workspace"
+    let workspace_details = {
         "total_loans_amount": 0,
         "total_salaries_amount": 0,
         "timesheet_list": [],
@@ -26,7 +27,13 @@ frappe.views.Workspace.prototype.make_page = function(page) {
         "total_employees_in_prev_year": 0,
         "current_year_totals_list": 0,
         "prev_year_totals_list": 0,
-    });
+    }
+
+    if (frappe.boot.user && frappe.boot.user.user_type == "Employee Self Service" ){
+        workspace_html = "self_service"
+        workspace_details = {...workspace_details, ...(frappe.boot.home_details || {})} 
+    }
+    let $temp = frappe.render_template(workspace_html, workspace_details);
     $(this.body).html('')
     $($temp).appendTo(this.body);
     $('#new-tech-support').click(ev => { frappe.new_doc('Technical Support') })

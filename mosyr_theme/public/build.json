@@ -10,8 +10,6 @@
     "mosyr_theme/build/js/web/web-js.min.js": [
         "public/js/web-js.js"
     ],
-
-
     "mosyr_theme/build/css/mosyr_theme.min.css": [
         "public/css/core.css",
         "public/css/theme-default.css",
@@ -39,6 +37,7 @@
     "mosyr_theme/build/ui/mosyr_theme.min.js": [
         "public/templates/navbar.html",
         "public/templates/sidebar.html",
-        "public/templates/workspace.html"
+        "public/templates/workspace.html",
+        "public/templates/self_service.html"
     ]
 }

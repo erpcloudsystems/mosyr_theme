@@ -1,0 +1,296 @@
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-lg-8 mb-4 order-0">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+                    <div class="card" style="min-height: 120px;">
+                        <div class="card-body custom-bg">
+                            <h5 class="m-0 me-2">{{ __("Welcome") }} {{ current_employee.emp_name }}</h5>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <a href="{{ current_employee.emp_route }}" class="text-primary create-new-doc" style="font-size: 1.125rem; font-weight: 500;">
+                                    {{ __("View Profile") }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+                    <div class="card" style="min-height: 120px;">
+                        <div class="card-body">
+                            <h5 class="m-0 me-2">{{ __("Date") }}</h5>
+                            <div class="d-flex align-items-start justify-content-between">
+                                <div class="d-flex align-items-end mt-2">
+                                    <h4 class="mb-0 me-2 text-secondary" id="current-clock-datetime">10</h4>
+                                </div>
+                                <script>
+                                    function currentTime() {
+                                            let date = new Date(); 
+                                            let hh = date.getHours();
+                                            let mm = date.getMinutes();
+                                            let ss = date.getSeconds();
+                                            let session = "AM";
+
+                                            if(hh == 0){
+                                                hh = 12;
+                                            }
+                                            if(hh > 12){
+                                                hh = hh - 12;
+                                                session = "PM";
+                                            }
+
+                                            hh = (hh < 10) ? "0" + hh : hh;
+                                            mm = (mm < 10) ? "0" + mm : mm;
+                                            ss = (ss < 10) ? "0" + ss : ss;
+                                                
+                                            let time = hh + ":" + mm + ":" + ss + " " + session;
+
+                                            document.getElementById("current-clock-datetime").innerText = time; 
+                                            let t = setTimeout(function(){ currentTime() }, 1000);
+                                            }
+                                            currentTime();
+                                </script>
+                                <span class="badge bg-label-warning rounded p-2">
+                                    <i class="bx bx-time bx-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                                    <div class="card-title">
+                                        <h5 class="text-nowrap mb-2">Profile Report</h5>
+                                        <span class="badge bg-label-warning rounded-pill">Year
+                                            2021</span>
+                                    </div>
+                                    <div class="mt-sm-auto">
+                                        <small class="text-success text-nowrap fw-semibold"><i
+                                                class="bx bx-chevron-up"></i>
+                                            68.2%</small>
+                                        <h3 class="mb-0">$84,686k</h3>
+                                    </div>
+                                </div>
+                                <div id="profileReportChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 order-1 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                            <div class="card-title mb-0">
+                                <h5 class="m-0 me-2">{{ __("Leave Statistics") }}
+                                </h5>
+                                <small class="text-muted"> 290 Total leaves </small>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                                    <a class="dropdown-item" href="javascript:void(0);">Select
+                                        All</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex flex-column align-items-center gap-1">
+                                    <h2 class="mb-2">20</h2>
+                                    <span>{{ __("Approved Leave") }}</span>
+                                </div>
+                                <div id="orderStatisticsChart" total_casual_leave="1" total_sick_leave="2"
+                                    total_leave_without_pay_leave="3" total_compensatory_leave="4">
+                                </div>
+                            </div>
+                            <ul class="p-0 m-0">
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-primary"><i
+                                                class="bx bx-log-out"></i></span>
+                                    </div>
+                                    <div
+                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">{{ __("Casual Leave") }}
+                                            </h6>
+                                            <small class="text-muted">{{ __("Casual Leave") }}</small>
+                                        </div>
+                                        <div class="user-progress"> 90</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-success"><i
+                                                class="bx bx-health"></i></span>
+                                    </div>
+                                    <div
+                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">{{ __("Sick Leave") }}
+                                            </h6>
+                                            <small class="text-muted">{{ __("Sick Leave") }}</small>
+                                        </div>
+                                        <div class="user-progress">
+                                            <small class="fw-semibold">10</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="d-flex mb-4 pb-1">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-info"><i
+                                                class="bx bx-run"></i></span>
+                                    </div>
+                                    <div
+                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">{{ __("Leave Without Pay") }}</h6>
+                                            <small class="text-muted">{{ __("Leave Without Pay") }}</small>
+                                        </div>
+                                        <div class="user-progress">
+                                            <small class="fw-semibold">20</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="d-flex">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-initial rounded bg-label-secondary"><i
+                                                class="bx bx-home-alt"></i></span>
+                                    </div>
+                                    <div
+                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                        <div class="me-2">
+                                            <h6 class="mb-0">{{ __("Compensatory Off") }}</h6>
+                                            <small class="text-muted">{{ __("Compensatory Off") }}</small>
+                                        </div>
+                                        <div class="user-progress">
+                                            <small class="fw-semibold">9000</small>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 order-1">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="/assets/mosyr_theme/img/icons/unicons/chart-success.png"
+                                        alt="chart success" class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                        <a class="dropdown-item" href="javascript:void(0);">View
+                                            More</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
+                            <h3 class="card-title mb-2"> 35 </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="/assets/mosyr_theme/img/icons/unicons/cc-warning.png" alt="Credit Card"
+                                        class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                        <a class="dropdown-item" href="javascript:void(0);">View
+                                            More</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span>{{ __("Active Employee") }}</span>
+                            <h3 class="card-title text-nowrap mb-1">20
+                            </h3>
+                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
+                                +28.42%</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="/assets/mosyr_theme/img/icons/unicons/paypal.png" alt="Credit Card"
+                                        class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                        <a class="dropdown-item" href="javascript:void(0);">View
+                                            More</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="d-block mb-1">{{ __("Paid salaries") }}</span>
+                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>{{ salary_details.base_gross_pay || 20560 }}</small><br>
+                            <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>{{ salary_details.base_total_deduction || 0}}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title d-flex align-items-start justify-content-between">
+                                <div class="avatar flex-shrink-0">
+                                    <img src="/assets/mosyr_theme/img/icons/unicons/wallet-info.png" alt="Credit Card"
+                                        class="rounded" />
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                        <a class="dropdown-item" href="javascript:void(0);">View
+                                            More</a>
+                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">{{ __("Leave Encashment") }}</span>
+                            <h3 class="card-title mb-2">20</h3>
+                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>+28.14%</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
