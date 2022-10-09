@@ -10,7 +10,7 @@
                                 <div class="d-flex align-items-end mt-2">
                                     <h4 class="mb-0 me-2 text-secondary">10</h4>
                                 </div>
-                                <span class="badge bg-label-warning rounded p-2">
+                                <span class="badge bg-label-warning rounded p-2" style="line-height: 1;">
                                     <i class="bx bx-time bx-sm"></i>
                                 </span>
                             </div>
@@ -22,104 +22,38 @@
                         <div class="card-body custom-bg">
                             <h5 class="m-0 me-2">{{ __("Technical support") }}</h5>
                             <div class="d-flex align-items-center justify-content-between">
-                                <a id="new-tech-support" class="text-primary create-new-doc" style="font-size: 1.125rem; font-weight: 500;">{{
-                                    __("New Application") }}</a>
+                                <a id="new-tech-support" class="text-primary create-new-doc"
+                                    style="font-size: 1.125rem; font-weight: 500;">{{__("New Application") }}</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
+                <div class="col-md-12 col-lg-12 col-xl-12 order-0 mb-4">
+                    {% if(employee>0) { %}
                     <div class="card mb-2">
                         <div class="card-body">
                             <div class="card-title">
                                 <h5 class="text-nowrap mb-2">{{ __("Employees") }}</h5>
-                                <span class="badge bg-label-warning rounded-pill">{{ __("20 FROM 10000 Employee")
-                                    }}</span>
+                                <span class="badge bg-label-warning rounded-pill">
+                                    {{ active_employee }}
+                                    {{ __("FROM")}}
+                                    {{ employee }}
+                                    {{ __("Employee") }}</span>
                             </div>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
-                                    style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                style="width: 
+                                calc({{ active_employee }} * 100% / {{ employee }})
+                                "
+                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-2">
-                        <div class="card-header">
-                            <ul class="nav nav-pills" role="tablist">
-                                <li class="nav-item">
-                                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
-                                        data-bs-target="#navs-tabs-line-card-income"
-                                        aria-controls="navs-tabs-line-card-income" aria-selected="true">
-                                        Income
-                                    </button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" class="nav-link" role="tab">Expenses</button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" class="nav-link" role="tab">Profit</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body px-0">
-                            <div class="tab-content p-0">
-                                <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                                    <div class="d-flex p-4 pt-3">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <img src="/assets/mosyr_theme/img/icons/unicons/wallet.png" alt="User" />
-                                        </div>
-                                        <div>
-                                            <small class="text-muted d-block">Total
-                                                Balance</small>
-                                            <div class="d-flex align-items-center">
-                                                <h6 class="mb-0 me-1">$459.10</h6>
-                                                <small class="text-success fw-semibold">
-                                                    <i class="bx bx-chevron-up"></i>
-                                                    42.9%
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="incomeChart"></div>
-                                    <div class="d-flex justify-content-center pt-4 gap-2">
-                                        <div class="flex-shrink-0">
-                                            <div id="expensesOfWeek"></div>
-                                        </div>
-                                        <div>
-                                            <p class="mb-n1 mt-1">Expenses This Week
-                                            </p>
-                                            <small class="text-muted">$39 less than
-                                                last
-                                                week</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                                <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                                    <div class="card-title">
-                                        <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Year
-                                            2021</span>
-                                    </div>
-                                    <div class="mt-sm-auto">
-                                        <small class="text-success text-nowrap fw-semibold"><i
-                                                class="bx bx-chevron-up"></i>
-                                            68.2%</small>
-                                        <h3 class="mb-0">$84,686k</h3>
-                                    </div>
-                                </div>
-                                <div id="profileReportChart"></div>
-                            </div>
-                        </div>
-                    </div>
+                    {% } %}
                 </div>
-                <div class="col-md-6 col-lg-6 order-1 mb-4">
+                <div class="col-md-12 col-lg-12 order-1 mb-4">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between pb-0">
                             <div class="card-title mb-0">
@@ -127,18 +61,7 @@
                                 </h5>
                                 <small class="text-muted"> 290 Total leaves </small>
                             </div>
-                            <div class="dropdown">
-                                <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                                    <a class="dropdown-item" href="javascript:void(0);">Select
-                                        All</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -242,23 +165,10 @@
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h5 class="card-title m-0 me-2">{{ __("Timesheet") }}</h5>
-                            <div class="dropdown">
-                                <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                    <a class="dropdown-item" href="javascript:void(0);">Last 28
-                                        Days</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Last
-                                        Month</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Last
-                                        Year</a>
-                                </div>
-                            </div>
                         </div>
                         <div class="card-body">
                             <ul class="p-0 m-0">
+                                {% if(timesheet_list.length) { %}
                                 {% for row in timesheet_list %}
                                 <li class="d-flex mb-4 pb-1">
                                     <div class="avatar flex-shrink-0 me-3">
@@ -272,125 +182,386 @@
                                             <h6 class="mb-0">{{ row.customer }} - {{ row.parent_project }}</h6>
                                         </div>
                                         <div class="user-progress d-flex align-items-center gap-1">
-                                            <h6 class="mb-0">{{ (row.total_hours)|round(2) }}
+                                            <h6 class="mb-0">{{ (row.total_hours) }}
                                             </h6>
                                         </div>
                                     </div>
                                 </li>
                                 {% endfor %}
+                                {% else %}
+                                <h3 class="card-title text-nowrap mb-1">{{__("Nothing to show")}}</h3>
+                                {% } %}
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
+                    <div class="card" style="min-height: 174px;">
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/chart-success.png"
                                         alt="chart success" class="rounded" />
-                                </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                            More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                     </div>
+                                    
                                 </div>
-                            </div>
-                            <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
-                            <h3 class="card-title mb-2"> 35 </h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                +72.80%</small>
+                                <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
+                                {% if(loans>0) { %}
+                            <h3 class="card-title mb-2"> {{loans}} </h3>
+                            {% else %}
+                            <h5 class="card-title  mb-1" >{{__("Nothing to show")}}</h5>
+                            {% } %}
+
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
+                    <div class="card" style="min-height: 174px;">
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/cc-warning.png" alt="Credit Card"
-                                        class="rounded" />
+                                    class="rounded" />
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                            More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <span>{{ __("Active Employee") }}</span>
-                            <h3 class="card-title text-nowrap mb-1">20
-                            </h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>
-                                +28.42%</small>
+                            {% if(active_employee>0) { %}
+                            <h3 class="card-title text-nowrap mb-1">{{active_employee}}</h3>
+                            {% else %}
+                            <h5 class="card-title  mb-1" >{{__("No employee active")}}</h5>
+                            {% } %}
                         </div>
                     </div>
                 </div>
                 <div class="col-6 mb-4">
-                    <div class="card">
+                    <div class="card" style="min-height: 174px;">
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/paypal.png" alt="Credit Card"
-                                        class="rounded" />
+                                    class="rounded" />
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                            More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                    </div>
-                                </div>
+                                
                             </div>
                             <span class="d-block mb-1">{{ __("Paid salaries") }}</span>
-                            <h3 class="card-title text-nowrap mb-2">25000k</h3>
-                            <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i>
-                                -14.82%</small>
+                            {% if(paid_salaries[0].base) { %}
+                            <h3 class="card-title text-nowrap mb-2">{{paid_salaries[0].base}}</h3>
+                            {% else %}
+                            <h5 class="card-title  mb-2" >{{__("Nothing to show")}}</h5>
+                            {% } %}
                         </div>
                     </div>
                 </div>
                 <div class="col-6 mb-4">
-                    <div class="card">
+                    <div class="card" style="min-height: 174px;">
                         <div class="card-body">
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/wallet-info.png" alt="Credit Card"
                                         class="rounded" />
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                        <a class="dropdown-item" href="javascript:void(0);">View
-                                            More</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                    </div>
-                                </div>
+
                             </div>
                             <span class="fw-semibold d-block mb-1">{{ __("Leave Encashment") }}</span>
-                            <h3 class="card-title mb-2">20</h3>
-                            <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i>+28.14%</small>
+                            {% if(leave_encashment[0].encashable_days) { %}
+                            <h3 class="card-title mb-2">{{leave_encashment[0].encashable_days}}</h3>
+                            {% else %}
+                            <h5 class="card-title  mb-1" >{{__("Nothing to show")}}</h5>
+                            {% } %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <h2>Self Services</h2>
+    <div class="row">
+        {% if(salary_details.salary_details.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Salary Details") }}</h5>
+                    {% for item in salary_details.salary_details %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/salary-details/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(salary_details.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/salary-details">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(work_experience.work_experience.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Work Experience") }}</h5>
+                    {% for item in work_experience.work_experience %}
+                        <div class="d-flex align-items-start justify-content-between">
+                            <div class="d-flex align-items-end mt-2">
+                                <h6 class="mb-0">
+                                    <a href="/app/work-experience/{{ item.name }}">{{ item.name }}</a>
+                                </h6>
+                            </div>
+                            <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                                {{ item.workflow_state }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                    {% if(work_experience.len > 3   ) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a class="" href="/app/work-experience">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(dependants_details.dependants_details.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Dependants Details") }}</h5>
+                    {% for item in dependants_details.dependants_details %}
+                        <div class="d-flex align-items-start justify-content-between">
+                            <div class="d-flex align-items-end mt-2">
+                                <h6 class="mb-0">
+                                    <a href="/app/dependants-details/{{ item.name }}">{{ item.name }}</a>
+                                </h6>
+                            </div>
+                            <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                                {{ item.workflow_state }}
+                            </span>
+                        </div>
+                    {% endfor %}
+                    {% if(dependants_details.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/dependants-details">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(passport_detail.passport_detail.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Passport Detail") }}</h5>
+                    {% for item in passport_detail.passport_detail %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/passport-detail/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(passport_detail.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/passport-detail">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(health_insurance.health_insurance.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Health Insurance") }}</h5>
+                    {% for item in health_insurance.health_insurance %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/health-insurance/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(health_insurance.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/health-insurance">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(contact_details.contact_details.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Contact Details") }}</h5>
+                    {% for item in contact_details.contact_details %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/contact-details/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(contact_details.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/contact-details">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(emergency_contact.emergency_contact.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Emergency Contact") }}</h5>
+                    {% for item in emergency_contact.emergency_contact %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/emergency-contact/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(emergency_contact.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/emergency-contact">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(educational_qualification.educational_qualification.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Educational Qualification") }}</h5>
+                    {% for item in educational_qualification.educational_qualification %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/educational-qualification/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(educational_qualification.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/educational-qualification">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(personal_details.personal_details.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Personal Details") }}</h5>
+                    {% for item in personal_details.personal_details %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/personal-details/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(personal_details.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/personal-details">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(employee_info_update_form.employee_info_update_form.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Employee Info Update Form") }}</h5>
+                    {% for item in employee_info_update_form.employee_info_update_form %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/employee-info-update-form/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.status }} rounded p-2" style="line-height: 1;">
+                            {{ item.status }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(employee_info_update_form.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/employee-info-update-form">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
+        {% if(lateness_permission.lateness_permission.length) { %}
+        <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
+            <div class="card" style="min-height: 120px;height:180px">
+                <div class="card-body">
+                    <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
+                    {% for item in lateness_permission.lateness_permission %}
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/lateness-permission/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
+                        </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                    {% if(lateness_permission.len > 3) { %}
+                    <span style="float: right;margin-top: 12px;">
+                        <a  href="/app/lateness-permission">Show More</a>
+                    </span>
+                    {% } %}
+                </div>
+            </div>
+        </div>
+        {% } %}
     </div>
 </div>
