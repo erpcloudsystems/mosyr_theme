@@ -31,8 +31,8 @@ frappe.views.Workspace.prototype.make_page = function(page) {
 
     if (frappe.boot.user && frappe.boot.user.user_type == "Employee Self Service" ){
         workspace_html = "self_service"
-        workspace_details = {...workspace_details, ...(frappe.boot.home_details || {})} 
     }
+    workspace_details = {...workspace_details, ...(frappe.boot.home_details || {})} 
     let $temp = frappe.render_template(workspace_html, workspace_details);
     $(this.body).html('')
     $($temp).appendTo(this.body);
