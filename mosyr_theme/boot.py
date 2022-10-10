@@ -29,11 +29,27 @@ def get_sidebar_items():
                 route = '-'.join(row.doc_name.lower().split(' '))
 
             if label.get('label') == row.parent_name:
-                label.get('child_items').append({
-                    'name': row.doc_name, 'label': row.label,
-                    'has_permission': has_permission, 'icon': row.icon, 'route': route
-                })
-    return labels
+                user_type = frappe.get_doc("User" , frappe.session.user).user_type
+                if user_type == "Employee Self Service":
+                    user_doctypes=frappe.get_doc("User Type" , "Employee Self Service").user_doctypes
+                    for doctype in user_doctypes:
+                        if doctype.document_type == row.doc_name:
+                            label.get('child_items').append({
+                                'name': row.doc_name, 'label': row.label,
+                                'has_permission': has_permission, 'icon': row.icon, 'route': route
+                            })
+                        
+
+                else :
+                    label.get('child_items').append({
+                                'name': row.doc_name, 'label': row.label,
+                                'has_permission': has_permission, 'icon': row.icon, 'route': route
+                            })
+    final_labels = []
+    for l in labels:
+        if l.get("child_items"):
+            final_labels.append(l)
+    return final_labels
 
 
 def get_desk_settings():
