@@ -264,27 +264,12 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Payroll Employee Detail",
-            "parent_name": "الرواتب والاجور"
-        },
-        {
-            "type": "DocType",
             "doc_name": "Payroll Entry",
             "parent_name": "الرواتب والاجور"
         },
         {
             "type": "DocType",
             "doc_name": "Payroll Period",
-            "parent_name": "الرواتب والاجور"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Payroll Period Date",
-            "parent_name": "الرواتب والاجور"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Salary Component Table",
             "parent_name": "الرواتب والاجور"
         },
         {
@@ -300,16 +285,6 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Salary Slip",
-            "parent_name": "الرواتب والاجور"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Salary Slip Leave",
-            "parent_name": "الرواتب والاجور"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Salary Slip Timesheet",
             "parent_name": "الرواتب والاجور"
         },
         {
@@ -334,17 +309,7 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Appraisal Goal",
-            "parent_name": "اداء الموظفين"
-        },
-        {
-            "type": "DocType",
             "doc_name": "Appraisal Template",
-            "parent_name": "اداء الموظفين"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Appraisal Template Goal",
             "parent_name": "اداء الموظفين"
         },
         {
@@ -360,11 +325,6 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Travel Request",
-            "parent_name": "الاجازات"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Travel Request Costing",
             "parent_name": "الاجازات"
         },
         {
@@ -400,11 +360,6 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Vehicle Log",
-            "parent_name": "ادارة المركبات"
-        },
-        {
-            "type": "DocType",
-            "doc_name": "Vehicle Service",
             "parent_name": "ادارة المركبات"
         },
         {
