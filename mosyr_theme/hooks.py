@@ -67,7 +67,8 @@ web_include_js =  ["/assets/mosyr_theme/build/js/web/web-js.min.js"]
 # ------------
 
 # before_install = "mosyr_theme.install.before_install"
-# after_install = "mosyr_theme.install.after_install"
+after_install = "mosyr_theme.install.after_install"
+
 
 # Uninstallation
 # ------------
