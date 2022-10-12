@@ -37,6 +37,59 @@ frappe.views.Workspace.prototype.make_page = function(page) {
     $(this.body).html('')
     $($temp).appendTo(this.body);
     $('#new-tech-support').click(ev => { frappe.new_doc('Technical Support') })
+
+
+    if (!jQuery.isEmptyObject(frappe.boot.home_details.leave_details.leave_allocation)){
+        let taken = [];
+        let rem = [];
+        let pend = [];
+        let total = [];
+
+        let labels = []
+
+        for(const [key, value] of Object.entries(frappe.boot.home_details.leave_details.leave_allocation || {})) {
+            labels.push(key)
+            taken.push(value['leaves_taken'] || "")
+            rem.push(value['remaining_leaves'] || "")
+            pend.push(value['leaves_pending_approval'] || "")
+            total.push(value['total_leaves'] || "")
+        }
+        
+        const data = {
+            labels: labels,
+            datasets: [
+            {
+                name: "Taken",
+                values: taken,
+                chartType: 'bar'
+            },
+            {
+                name: "Remaining",
+                values: rem,
+                chartType: 'bar'
+            },
+            {
+                name: "Pending",
+                values:pend,
+                chartType: 'bar'
+            },
+            {
+                name: "Total",
+                values: total,
+                chartType: 'bar'
+            }
+            ]
+        }
+        
+        const chart = new frappe.Chart("#leaves-chart-container", { 
+            title: "Leave Statistics",
+            data: data,
+            type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+            height: 250,
+            colors: ['#71dd37', '#03c3ec' ,'#ffab00', '#743ee2']
+        })
+    }
+
 }
 
 frappe.views.Workspace.prototype.show_or_hide_sidebar = function(){
