@@ -198,6 +198,7 @@ def get_home_details():
         "current_user": current_user,
         "current_employee": current_employee,
         "leave_details": leave_details,
+        "len_leave_details" : len(leave_details),
         "loans": loans,
         "employee": employee,
         "active_employee": active_employee,
