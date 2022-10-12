@@ -109,96 +109,13 @@
                     </div>
                     {% } %}
                 </div>
+                {%  if (len_leave_details) { %}
                 <div class="col-md-12 col-lg-12 order-1 mb-4">
                     <div class="card">
-                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                            <div class="card-title mb-0">
-                                <h5 class="m-0 me-2">{{ __("Leave Statistics") }}
-                                </h5>
-                                <small class="text-muted"> 290 Total leaves </small>
-                            </div>
-
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <div class="d-flex flex-column align-items-center gap-1">
-                                    <h2 class="mb-2">20</h2>
-                                    <span>{{ __("Approved Leave") }}</span>
-                                </div>
-                                <div id="orderStatisticsChart" total_casual_leave="1" total_sick_leave="2"
-                                    total_leave_without_pay_leave="3" total_compensatory_leave="4">
-                                </div>
-                            </div>
-                            <ul class="p-0 m-0">
-                                <li class="d-flex mb-4 pb-1">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <span class="avatar-initial rounded bg-label-primary"><i
-                                                class="bx bx-log-out"></i></span>
-                                    </div>
-                                    <div
-                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                            <h6 class="mb-0">{{ __("Casual Leave") }}
-                                            </h6>
-                                            <small class="text-muted">{{ __("Casual Leave") }}</small>
-                                        </div>
-                                        <div class="user-progress"> 90</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex mb-4 pb-1">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <span class="avatar-initial rounded bg-label-success"><i
-                                                class="bx bx-health"></i></span>
-                                    </div>
-                                    <div
-                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                            <h6 class="mb-0">{{ __("Sick Leave") }}
-                                            </h6>
-                                            <small class="text-muted">{{ __("Sick Leave") }}</small>
-                                        </div>
-                                        <div class="user-progress">
-                                            <small class="fw-semibold">10</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex mb-4 pb-1">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <span class="avatar-initial rounded bg-label-info"><i
-                                                class="bx bx-run"></i></span>
-                                    </div>
-                                    <div
-                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                            <h6 class="mb-0">{{ __("Leave Without Pay") }}</h6>
-                                            <small class="text-muted">{{ __("Leave Without Pay") }}</small>
-                                        </div>
-                                        <div class="user-progress">
-                                            <small class="fw-semibold">20</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="d-flex">
-                                    <div class="avatar flex-shrink-0 me-3">
-                                        <span class="avatar-initial rounded bg-label-secondary"><i
-                                                class="bx bx-home-alt"></i></span>
-                                    </div>
-                                    <div
-                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                        <div class="me-2">
-                                            <h6 class="mb-0">{{ __("Compensatory Off") }}</h6>
-                                            <small class="text-muted">{{ __("Compensatory Off") }}</small>
-                                        </div>
-                                        <div class="user-progress">
-                                            <small class="fw-semibold">9000</small>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <div class="card-body" id="leaves-chart-container"></div>
                     </div>
                 </div>
+                {% } %}
             </div>
         </div>
         <div class="col-lg-4 col-md-4 order-1">
@@ -217,6 +134,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 mb-4">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
@@ -245,7 +163,7 @@
                                 </li>
                                 {% endfor %}
                                 {% else %}
-                                <h3 class="card-title text-nowrap mb-1">{{__("Nothing to show")}}</h3>
+                                <span class="card-title text-nowrap mb-1">{{__("Nothing to show")}}</span>
                                 {% } %}
                             </ul>
                         </div>
@@ -259,15 +177,9 @@
                                     <img src="/assets/mosyr_theme/img/icons/unicons/chart-success.png"
                                         alt="chart success" class="rounded" />
                                     </div>
-                                    
                                 </div>
                                 <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
-                                {% if(loans>0) { %}
-                            <h3 class="card-title mb-2"> {{loans}} </h3>
-                            {% else %}
-                            <h5 class="card-title  mb-1" >{{__("Nothing to show")}}</h5>
-                            {% } %}
-
+                            <h3 class="card-title mb-2"> {{loans || "0"}} </h3>
                         </div>
                     </div>
                 </div>
@@ -279,14 +191,9 @@
                                     <img src="/assets/mosyr_theme/img/icons/unicons/cc-warning.png" alt="Credit Card"
                                     class="rounded" />
                                 </div>
-                                
                             </div>
-                            <span>{{ __("Active Employee") }}</span>
-                            {% if(active_employee>0) { %}
-                            <h3 class="card-title text-nowrap mb-1">{{active_employee}}</h3>
-                            {% else %}
-                            <h5 class="card-title  mb-1" >{{__("No employee active")}}</h5>
-                            {% } %}
+                            <span class="fw-semibold d-block mb-1">{{ __("Active Employee") }}</span>
+                            <h3 class="card-title mb-2">{{active_employee || "0"}}</h3>
                         </div>
                     </div>
                 </div>
@@ -298,14 +205,9 @@
                                     <img src="/assets/mosyr_theme/img/icons/unicons/paypal.png" alt="Credit Card"
                                     class="rounded" />
                                 </div>
-                                
                             </div>
-                            <span class="d-block mb-1">{{ __("Paid salaries") }}</span>
-                            {% if(paid_salaries[0].base) { %}
-                            <h3 class="card-title text-nowrap mb-2">{{paid_salaries[0].base}}</h3>
-                            {% else %}
-                            <h5 class="card-title  mb-2" >{{__("Nothing to show")}}</h5>
-                            {% } %}
+                            <span class="fw-semibold d-block mb-1">{{ __("Paid salaries") }}</span>
+                            <h3 class="card-title mb-2">{{paid_salaries[0].base || "0"}}</h3>
                         </div>
                     </div>
                 </div>
@@ -320,11 +222,7 @@
 
                             </div>
                             <span class="fw-semibold d-block mb-1">{{ __("Leave Encashment") }}</span>
-                            {% if(leave_encashment[0].encashable_days) { %}
-                            <h3 class="card-title mb-2">{{leave_encashment[0].encashable_days}}</h3>
-                            {% else %}
-                            <h5 class="card-title  mb-1" >{{__("Nothing to show")}}</h5>
-                            {% } %}
+                            <h3 class="card-title mb-2">{{leave_encashment[0].encashable_days || "0"}}</h3>
                         </div>
                     </div>
                 </div>
@@ -361,17 +259,22 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Salary Details") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Salary Details") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
         </div>
         {% } %}
-        
-
         {% if(work_experience.work_experience.length) { %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
@@ -400,10 +303,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Work Experience") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Work Experience") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -437,10 +347,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Dependants Details") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Dependants Details") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -474,10 +391,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Passport Detail") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Passport Detail") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -511,10 +435,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Health Insurance") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Health Insurance") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -548,10 +479,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Contact Details") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Contact Details") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -585,10 +523,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Emergency Contact") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Emergency Contact") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -622,10 +567,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Educational Qualification") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Educational Qualification") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -659,10 +611,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Personal Details") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Personal Details") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -696,10 +655,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Employee Info Update Form") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Employee Info Update Form") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
@@ -733,10 +699,17 @@
         {% else %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
-                <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
-                    <div class="d-flex align-items-start justify-content-between">
-                           <h3 class="text-center"> No data to show</h3>
+                <div class="card-body" style="position: relative;">
+                    <div class="card-title">
+                        <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
+                    </div>
+                    <div class="d-flex align-items-start justify-content-center"
+                    style="width: 150px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);">
+                           <span class="text-center">No data to show</span>
                     </div>
                 </div>
             </div>
