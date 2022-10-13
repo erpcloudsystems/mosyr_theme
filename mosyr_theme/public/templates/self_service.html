@@ -59,11 +59,13 @@
                 </div>
             </div>
             <div class="row">
+                {%  if (len_leave_details) { %}
                 <div class="col-md-12 col-lg-12 order-1 mb-4">
                     <div class="card">
                         <div class="card-body" id="leaves-chart-container"></div>
                     </div>
                 </div>
+                {% } %}
             </div>
         </div>
         <div class="col-lg-4 col-md-4 order-1">
@@ -161,10 +163,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/salary-details/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -208,10 +210,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/work-experience/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -255,10 +257,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/dependants-details/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -302,10 +304,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/passport-detail/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -349,10 +351,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/health-insurance/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -396,10 +398,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/contact-details/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -443,10 +445,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/emergency-contact/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -490,10 +492,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/educational-qualification/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -537,10 +539,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/personal-details/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -584,10 +586,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/employee-info-update-form/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
@@ -631,10 +633,10 @@
                     style="width: 150px;
                     position: absolute;
                     left: 50%;
-                    top: 50%;
+                    top: 55%;
                     transform: translate(-50%, -50%);">
                            
-                        <span style="float: right;margin-top: 12px;" class="btn btn-primary">
+                        <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
                             <a  href="/app/lateness-permission/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
