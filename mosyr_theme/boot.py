@@ -1,8 +1,7 @@
 
 import frappe
 from erpnext.hr.doctype.leave_application.leave_application import get_leave_details
-
-
+from datetime import datetime
 def boot_session(bootinfo):
     bootinfo.language = frappe.local.lang
     bootinfo.sidebar_items = get_sidebar_items()
@@ -92,6 +91,7 @@ def get_home_details():
     employee_info_update_form = []
     lateness_permission = []
     timesheet_list = []
+    saas_config = {}
     current_employee = get_employee_by_user_id(frappe.session.user)
     user_type = current_user.user_type
     if user_type == 'Employee Self Service':
@@ -160,6 +160,22 @@ def get_home_details():
                 'emp_name': current_user.full_name,
                 'emp_route': "/app/user/"+current_user.name
             }
+        timediff = 0
+        if frappe.conf.get("subscription_end_date" or "") :
+            today = datetime.now()
+            d1 = today
+            d2 = frappe.conf.get("subscription_end_date" or "")
+            d2 = datetime.strptime(d2, '%Y-%m-%d')
+            timediff = abs(d2-d1).days
+        active_users = frappe.db.count('User', {'name' :[ 'not in', ['Administrator','Guest']]})
+        saas_config = {
+            "enable_saas":frappe.conf.get("enable_saas"  or ""),
+            "storage_space":frappe.conf.get("storage_space"  or ""),
+            "available_users":frappe.conf.get("available_users"  or ""),
+            "active_users" :active_users,
+            "remaining_days" : timediff ,
+            "subscription_end_date":frappe.conf.get("subscription_end_date" or ""),
+        }
         paid_salaries = frappe.db.sql(
             """SELECT SUM(base_gross_pay) as base, SUM(base_total_deduction) deduction FROM `tabSalary Slip` """, as_dict=True)
         loans = frappe.db.sql(
@@ -233,7 +249,9 @@ def get_home_details():
         "personal_details": {"personal_details": personal_details[:3], "len": len(personal_details)},
         "employee_info_update_form": {"employee_info_update_form": employee_info_update_form[:3], "len": len(employee_info_update_form)},
         "lateness_permission": {"lateness_permission": lateness_permission[:3], "len": len(lateness_permission)},
+        "saas_config" :saas_config,
     })
+    print(home_details.get("saas_config"))
     return home_details
 
 
