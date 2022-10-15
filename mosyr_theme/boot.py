@@ -1,7 +1,9 @@
 
+import subprocess
 import frappe
 from erpnext.hr.doctype.leave_application.leave_application import get_leave_details
 from datetime import datetime
+from frappe.utils import flt
 def boot_session(bootinfo):
     bootinfo.language = frappe.local.lang
     bootinfo.sidebar_items = get_sidebar_items()
@@ -171,6 +173,7 @@ def get_home_details():
         saas_config = {
             "enable_saas":frappe.conf.get("enable_saas"  or ""),
             "storage_space":frappe.conf.get("storage_space"  or ""),
+            "used_space" :get_site_size(),
             "available_users":frappe.conf.get("available_users"  or ""),
             "active_users" :active_users,
             "remaining_days" : timediff ,
@@ -251,7 +254,7 @@ def get_home_details():
         "lateness_permission": {"lateness_permission": lateness_permission[:3], "len": len(lateness_permission)},
         "saas_config" :saas_config,
     })
-    print(home_details.get("saas_config"))
+    print(home_details.get("saas_config"),'\n\n\n\n')
     return home_details
 
 
@@ -260,3 +263,36 @@ def get_employee_by_user_id(user_id):
     if emp_id:
         return frappe.get_doc("Employee", emp_id)
     return None
+
+def get_site_size():
+    # all possible file locations
+    from frappe.utils import flt
+    site_path = frappe.get_site_path()
+    private_files_path = site_path + '/private/files'
+    public_files_path  = site_path + '/public/files'
+    backup_files_path = site_path + '/private/backups'
+
+    # Calculating Sizes
+    private_files_size = get_directory_size(private_files_path)
+    backup_files_size = get_directory_size(backup_files_path)
+    public_files_size = get_directory_size(public_files_path)
+    total_size = private_files_size + backup_files_size + public_files_size
+    return flt(total_size,2)
+
+def get_directory_size(path):
+    """
+    returns total size of directory in MBs
+    """
+    import os
+ 
+    # assign size
+    size = 0
+    
+    # get size
+    for path, dirs, files in os.walk(path):
+        for f in files:
+            fp = os.path.join(path, f)
+            size += os.path.getsize(fp)
+    
+    # display size
+    return  int(str(size))/1000000.0
