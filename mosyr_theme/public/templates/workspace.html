@@ -79,10 +79,19 @@
                             </div>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="card mb-2">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="card-title m-0 me-2">{{ __("Employees") }}</h5>
+                        </div>
+                        
+                        <div class="card-body">
+                            <span class="card-title text-nowrap mb-1">{{__("Nothing to show")}}</span>
+                        </div>
+                    </div>
                     {% } %}
                 </div>
 
-                
                 <div class="col-6 mb-4">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
