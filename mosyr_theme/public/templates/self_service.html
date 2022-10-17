@@ -558,25 +558,25 @@
             </div>
         </div>
         {% } %}
-        {% if(employee_info_update_form.employee_info_update_form.length) { %}
+        {% if(employee_id.employee_id.length) { %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Employee Info Update Form") }}</h5>
-                    {% for item in employee_info_update_form.employee_info_update_form %}
+                    <h5 class="m-0 me-2">{{ __("Employee ID") }}</h5>
+                    {% for item in employee_id.employee_id %}
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="d-flex align-items-end mt-2">
                             <h6 class="mb-0">
-                                <a href="/app/employee-info-update-form/{{ item.name }}">{{ item.name }}</a>
+                                <a href="/app/employee-id/{{ item.name }}">{{ item.name }}</a>
                             </h6>
                         </div>
-                        <span class="badge {{ item.status }} rounded p-2" style="line-height: 1;">
-                            {{ item.status }}
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
                         </span>
                     </div>
                     {% endfor %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/employee-info-update-form/new">Add New</a>
+                        <a  href="/app/employee-id/new">Add New</a>
                     </span>
                 </div>
             </div>
@@ -586,7 +586,7 @@
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body" style="position: relative;">
                     <div class="card-title">
-                        <h5 class="m-0 me-2">{{ __("Employee Info Update Form") }}</h5>
+                        <h5 class="m-0 me-2">{{ __("Employee ID") }}</h5>
                     </div>
                     <div class="d-flex align-items-start justify-content-center"
                     style="width: 150px;
@@ -596,7 +596,7 @@
                     transform: translate(-50%, -50%);">
                            
                         <span style="float: right;margin-top: 12px;"  class="btn btn-primary btn-sm primary-action">
-                            <a  href="/app/employee-info-update-form/new" style="color: #fff;">Add New</a>
+                            <a  href="/app/employee-id/new" style="color: #fff;">Add New</a>
                         </span>
                     </div>
                 </div>

@@ -90,7 +90,7 @@ def get_home_details():
     emergency_contact = []
     educational_qualification = []
     personal_details = []
-    employee_info_update_form = []
+    employee_id = []
     shift_request = []
     timesheet_list = []
     saas_config = {}
@@ -131,8 +131,8 @@ def get_home_details():
                     """SELECT name,workflow_state FROM `tabEducational Qualification` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
                 personal_details = frappe.db.sql(
                     """SELECT name,workflow_state FROM `tabPersonal Details` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
-                employee_info_update_form = frappe.db.sql(
-                    """SELECT name,status FROM `tabEmployee Info Update Form` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
+                employee_id = frappe.db.sql(
+                    """SELECT name,workflow_state FROM `tabEmployee ID` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
                 shift_request = frappe.db.sql(
                     """SELECT name,status FROM `tabShift Request` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
         else:
@@ -209,8 +209,8 @@ def get_home_details():
             """SELECT name,workflow_state FROM `tabEducational Qualification`  limit 4""", as_dict=True)
         personal_details = frappe.db.sql(
             """SELECT name,workflow_state FROM `tabPersonal Details`  limit 4""", as_dict=True)
-        employee_info_update_form = frappe.db.sql(
-            """SELECT name,status FROM `tabEmployee Info Update Form`  limit 4""", as_dict=True)
+        employee_id = frappe.db.sql(
+            """SELECT name,workflow_state FROM `tabEmployee ID`  limit 4""", as_dict=True)
         shift_request = frappe.db.sql(
             """SELECT name,status FROM `tabShift Request`  limit 4""", as_dict=True)
         attendance_employee_present = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Present'  and late_entry=0 """, as_dict=True)
@@ -263,11 +263,10 @@ def get_home_details():
         "emergency_contact": {"emergency_contact": emergency_contact[:3], "len": len(emergency_contact)},
         "educational_qualification": {"educational_qualification": educational_qualification[:3], "len": len(educational_qualification)},
         "personal_details": {"personal_details": personal_details[:3], "len": len(personal_details)},
-        "employee_info_update_form": {"employee_info_update_form": employee_info_update_form[:3], "len": len(employee_info_update_form)},
+        "employee_id": {"employee_id": employee_id[:3], "len": len(employee_id)},
         "shift_request": {"shift_request": shift_request[:3], "len": len(shift_request)},
 
     })
-    print(home_details.get("attendance_pr"),'\n\n\n\n\n\n\n\n\n')
     return home_details
 
 
