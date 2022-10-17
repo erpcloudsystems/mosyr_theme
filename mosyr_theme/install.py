@@ -374,11 +374,6 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Contract Attachment",
-            "parent_name": "قائمة الموظفين"
-        },
-        {
-            "type": "DocType",
             "doc_name": "Leave Encashment",
             "parent_name": "الاجازات"
         },

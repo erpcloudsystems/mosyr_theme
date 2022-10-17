@@ -91,7 +91,7 @@ def get_home_details():
     educational_qualification = []
     personal_details = []
     employee_info_update_form = []
-    lateness_permission = []
+    shift_request = []
     timesheet_list = []
     saas_config = {}
     current_employee = get_employee_by_user_id(frappe.session.user)
@@ -133,8 +133,8 @@ def get_home_details():
                     """SELECT name,workflow_state FROM `tabPersonal Details` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
                 employee_info_update_form = frappe.db.sql(
                     """SELECT name,status FROM `tabEmployee Info Update Form` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
-                lateness_permission = frappe.db.sql(
-                    """SELECT name,workflow_state FROM `tabLateness Permission` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
+                shift_request = frappe.db.sql(
+                    """SELECT name,status FROM `tabShift Request` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
         else:
             current_employee = {
                 'emp_name': current_user.full_name,
@@ -211,9 +211,14 @@ def get_home_details():
             """SELECT name,workflow_state FROM `tabPersonal Details`  limit 4""", as_dict=True)
         employee_info_update_form = frappe.db.sql(
             """SELECT name,status FROM `tabEmployee Info Update Form`  limit 4""", as_dict=True)
-        lateness_permission = frappe.db.sql(
-            """SELECT name,workflow_state FROM `tabLateness Permission`  limit 4""", as_dict=True)
-
+        shift_request = frappe.db.sql(
+            """SELECT name,status FROM `tabShift Request`  limit 4""", as_dict=True)
+        attendance_employee_present = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Present'  and late_entry=0 """, as_dict=True)
+        attendance_employee_work_home= frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Work From Home'  and late_entry=0 """, as_dict=True)
+        attendance_employee_half_day = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Half Day'  and late_entry=0 """, as_dict=True)
+        attendance_employee_late_entry = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and late_entry=1 """, as_dict=True)
+        attendance_employee_absent = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Absent'  and late_entry=0 """, as_dict=True)
+        attendance_employee_on_leave = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='On Leave'  and late_entry=0 """, as_dict=True)
         if len(loans) > 0:
             loans = loans[0].get("total_loans", 0)
         else:
@@ -228,7 +233,15 @@ def get_home_details():
             active_employee = active_employee[0].get("employee", 0)
         else:
             active_employee = 0
-
+        home_details.update({
+            "saas_config" :saas_config,
+            "attendance_employee_present":attendance_employee_present,
+            "attendance_employee_work_home":attendance_employee_work_home,
+            "attendance_employee_half_day":attendance_employee_half_day,
+            "attendance_employee_late_entry":attendance_employee_late_entry,
+            "attendance_employee_absent":attendance_employee_absent,
+            "attendance_employee_on_leave":attendance_employee_on_leave,
+        })
     home_details.update({
         "current_user": current_user,
         "current_employee": current_employee,
@@ -251,10 +264,10 @@ def get_home_details():
         "educational_qualification": {"educational_qualification": educational_qualification[:3], "len": len(educational_qualification)},
         "personal_details": {"personal_details": personal_details[:3], "len": len(personal_details)},
         "employee_info_update_form": {"employee_info_update_form": employee_info_update_form[:3], "len": len(employee_info_update_form)},
-        "lateness_permission": {"lateness_permission": lateness_permission[:3], "len": len(lateness_permission)},
-        "saas_config" :saas_config,
+        "shift_request": {"shift_request": shift_request[:3], "len": len(shift_request)},
+
     })
-    print(home_details.get("saas_config"),'\n\n\n\n')
+    print(home_details.get("attendance_pr"),'\n\n\n\n\n\n\n\n\n')
     return home_details
 
 
