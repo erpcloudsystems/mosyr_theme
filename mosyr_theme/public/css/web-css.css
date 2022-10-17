@@ -44,3 +44,9 @@ a {
 .page-card-body.invalid .input-group-merge {
     border: 1px solid red !important;
 }
+
+div.card-body > div > div{
+    clear: both;
+    overflow: hidden;
+    white-space: nowrap;
+}
