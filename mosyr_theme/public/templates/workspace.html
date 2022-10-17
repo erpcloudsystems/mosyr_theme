@@ -5,7 +5,12 @@
                 <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
                     <div class="card" style="min-height: 120px;">
                         <div class="card-body custom-bg">
-                            <h5 class="m-0 me-2">{{ __("Welcome") }} {{ current_employee.emp_name }}</h5>
+                            <h5 class="m-0 me-2"
+                            style="clear: both;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            max-width: 250px;"
+                            >{{ __("Welcome") }} {{ __(current_employee.emp_name) }}</h5>
                             <div class="d-flex align-items-center justify-content-between">
                                 <a href="{{ current_employee.emp_route }}" class="text-primary create-new-doc" style="font-size: 1.125rem; font-weight: 500;">
                                     {{ __("View Profile") }}
@@ -28,6 +33,9 @@
                                             let hh = date.getHours();
                                             let mm = date.getMinutes();
                                             let ss = date.getSeconds();
+                                            let dd = date.getDate();
+                                            let m  = (date.getMonth())+1;
+                                            let yy = date.getFullYear();
                                             let session = "AM";
 
                                             if(hh == 0){
@@ -41,8 +49,8 @@
                                             hh = (hh < 10) ? "0" + hh : hh;
                                             mm = (mm < 10) ? "0" + mm : mm;
                                             ss = (ss < 10) ? "0" + ss : ss;
-                                                
-                                            let time = hh + ":" + mm + ":" + ss + " " + session;
+                                            
+                                            let time = `${dd}-${m}-${yy} ${hh}:${mm}:${ss} ${session}`;
 
                                             document.getElementById("current-clock-datetime").innerText = time; 
                                             let t = setTimeout(function(){ currentTime() }, 1000);
@@ -58,6 +66,7 @@
                 </div>
             </div>
             <div class="row">
+                
                 <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
                     {% if(employee>0) { %}
                     <div class="card mb-2">
@@ -153,6 +162,33 @@
                     </div>
                 </div>
                 {% } %}
+                <div class="col-md-12 col-lg-12 order-1 mb-4" style="min-height: 170px;">
+                    <div class="card" style="height: 100%;">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h5 class="m-0 me-2">{{ __("Daily Attendance Record") }}</h5>
+                            </div>
+                            <table class="table table-bordered text-center">
+                                <tr>
+                                  <th>{{__("Present")}}</th>
+                                  <th>{{__("Work From Home")}}</th>
+                                  <th>{{__("Half Day")}}</th>
+                                  <th>{{__("Late Entry")}}</th>
+                                  <th>{{__("Absent")}}</th>
+                                  <th>{{__("On Leave")}}</th>
+                                </tr>
+                                <tr >
+                                  <td>{{attendance_employee_present[0].count}}</td>
+                                  <td>{{attendance_employee_work_home[0].count}}</td>
+                                  <td>{{attendance_employee_half_day[0].count}}</td>
+                                  <td>{{attendance_employee_late_entry[0].count}}</td>
+                                  <td>{{attendance_employee_absent[0].count}}</td>
+                                  <td>{{attendance_employee_on_leave[0].count}}</td>
+                                </tr>
+                              </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 order-1">
@@ -289,10 +325,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <h2>Self Services</h2>
     <div class="row">
         {% if(salary_details.salary_details.length) { %}
@@ -735,16 +767,16 @@
             </div>
         </div>
         {% } %}
-        {% if(lateness_permission.lateness_permission.length) { %}
+        {% if(shift_request.shift_request.length) { %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
-                    {% for item in lateness_permission.lateness_permission %}
+                    <h5 class="m-0 me-2">{{ __("Shift Request") }}</h5>
+                    {% for item in shift_request.shift_request %}
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="d-flex align-items-end mt-2">
                             <h6 class="mb-0">
-                                <a href="/app/lateness-permission/{{ item.name }}">{{ item.name }}</a>
+                                <a href="/app/shift-request/{{ item.name }}">{{ item.name }}</a>
                             </h6>
                         </div>
                         <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
@@ -752,9 +784,9 @@
                         </span>
                     </div>
                     {% endfor %}
-                    {% if(lateness_permission.len > 3) { %}
+                    {% if(shift_request.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/lateness-permission">Show More</a>
+                        <a  href="/app/shift-request">Show More</a>
                     </span>
                     {% } %}
                 </div>
@@ -765,7 +797,7 @@
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body" style="position: relative;">
                     <div class="card-title">
-                        <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
+                        <h5 class="m-0 me-2">{{ __("Shift Request") }}</h5>
                     </div>
                     <div class="d-flex align-items-start justify-content-center"
                     style="width: 150px;
