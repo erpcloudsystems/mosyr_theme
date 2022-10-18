@@ -81,6 +81,7 @@ def get_home_details():
     employee = ""
     leave_encashment = []
     paid_salaries = []
+    total_leave_all_employees = {}
     # self services module
     work_experience = []
     dependants_details = []
@@ -162,6 +163,7 @@ def get_home_details():
                 'emp_name': current_user.full_name,
                 'emp_route': "/app/user/"+current_user.name
             }
+
         timediff = 0
         if frappe.conf.get("subscription_end_date" or "") :
             today = datetime.now()
@@ -179,6 +181,22 @@ def get_home_details():
             "remaining_days" : timediff ,
             "subscription_end_date":frappe.conf.get("subscription_end_date" or ""),
         }
+
+        if frappe.session.user == 'Administrator':
+            employees = frappe.get_list("Employee",pluck='name')
+            for emp in employees:
+                for k,v in get_leave_details(emp,frappe.utils.nowdate()).get('leave_allocation' or {}).items():
+                    total_leave_all_employees.update({
+                        k: {
+                            "total_leaves": v.get("total_leaves", 0)+total_leave_all_employees.get(k, {}).get("total_leaves", 0),
+                            "expired_leaves": v.get("expired_leaves", 0)+total_leave_all_employees.get(k, {}).get("expired_leaves", 0),
+                            "leaves_taken":v.get("leaves_taken", 0)+total_leave_all_employees.get(k, {}).get("leaves_taken", 0),
+                            "leaves_pending_approval":v.get("leaves_pending_approval", 0)+total_leave_all_employees.get(k, {}).get("leaves_pending_approval", 0),
+                            "remaining_leaves":v.get("remaining_leaves", 0)+total_leave_all_employees.get(k, {}).get("remaining_leaves", 0),
+                        }
+                    })
+            leave_details = {"leave_allocation":total_leave_all_employees}
+
         paid_salaries = frappe.db.sql(
             """SELECT SUM(base_gross_pay) as base, SUM(base_total_deduction) deduction FROM `tabSalary Slip` """, as_dict=True)
         loans = frappe.db.sql(
@@ -253,6 +271,7 @@ def get_home_details():
         "paid_salaries": paid_salaries,
         "leave_encashment": leave_encashment,
         "timesheet_list": timesheet_list,
+        "total_leave_all_employees":total_leave_all_employees,
         # Self Services
         "salary_details": {"salary_details": salary_details[:3], "len": len(salary_details)},
         "work_experience": {"work_experience": work_experience[:3], "len": len(work_experience)},
