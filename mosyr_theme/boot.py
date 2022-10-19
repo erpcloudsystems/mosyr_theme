@@ -92,7 +92,7 @@ def get_home_details():
     educational_qualification = []
     personal_details = []
     employee_id = []
-    shift_request = []
+    lateness_permission = []
     timesheet_list = []
     saas_config = {}
     current_employee = get_employee_by_user_id(frappe.session.user)
@@ -134,8 +134,8 @@ def get_home_details():
                     """SELECT name,workflow_state FROM `tabPersonal Details` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
                 employee_id = frappe.db.sql(
                     """SELECT name,workflow_state FROM `tabEmployee ID` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
-                shift_request = frappe.db.sql(
-                    """SELECT name,status FROM `tabShift Request` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
+                lateness_permission = frappe.db.sql(
+                    """SELECT name,workflow_state FROM `tabLateness Permission` WHERE employee ='{}' limit 4""".format(emp), as_dict=True)
         else:
             current_employee = {
                 'emp_name': current_user.full_name,
@@ -229,8 +229,8 @@ def get_home_details():
             """SELECT name,workflow_state FROM `tabPersonal Details`  limit 4""", as_dict=True)
         employee_id = frappe.db.sql(
             """SELECT name,workflow_state FROM `tabEmployee ID`  limit 4""", as_dict=True)
-        shift_request = frappe.db.sql(
-            """SELECT name,status FROM `tabShift Request`  limit 4""", as_dict=True)
+        lateness_permission = frappe.db.sql(
+            """SELECT name,workflow_state FROM `tabLateness Permission`  limit 4""", as_dict=True)
         attendance_employee_present = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Present'  and late_entry=0 """, as_dict=True)
         attendance_employee_work_home= frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Work From Home'  and late_entry=0 """, as_dict=True)
         attendance_employee_half_day = frappe.db.sql(f"""SELECT COUNT(name) as count FROM `tabAttendance` WHERE attendance_date='{today.date()}' and docstatus=1 and status='Half Day'  and late_entry=0 """, as_dict=True)
@@ -283,7 +283,7 @@ def get_home_details():
         "educational_qualification": {"educational_qualification": educational_qualification[:3], "len": len(educational_qualification)},
         "personal_details": {"personal_details": personal_details[:3], "len": len(personal_details)},
         "employee_id": {"employee_id": employee_id[:3], "len": len(employee_id)},
-        "shift_request": {"shift_request": shift_request[:3], "len": len(shift_request)},
+        "lateness_permission": {"lateness_permission": lateness_permission[:3], "len": len(lateness_permission)},
 
     })
     return home_details
