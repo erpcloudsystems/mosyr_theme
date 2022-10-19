@@ -767,16 +767,16 @@
             </div>
         </div>
         {% } %}
-        {% if(shift_request.shift_request.length) { %}
+        {% if(lateness_permission.lateness_permission.length) { %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body">
-                    <h5 class="m-0 me-2">{{ __("Shift Request") }}</h5>
-                    {% for item in shift_request.shift_request %}
+                    <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
+                    {% for item in lateness_permission.lateness_permission %}
                     <div class="d-flex align-items-start justify-content-between">
                         <div class="d-flex align-items-end mt-2">
                             <h6 class="mb-0">
-                                <a href="/app/shift-request/{{ item.name }}">{{ item.name }}</a>
+                                <a href="/app/lateness-permission/{{ item.name }}">{{ item.name }}</a>
                             </h6>
                         </div>
                         <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
@@ -784,9 +784,9 @@
                         </span>
                     </div>
                     {% endfor %}
-                    {% if(shift_request.len > 3) { %}
+                    {% if(lateness_permission.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/shift-request">Show More</a>
+                        <a  href="/app/lateness-permission">Show More</a>
                     </span>
                     {% } %}
                 </div>
@@ -797,7 +797,7 @@
             <div class="card" style="min-height: 120px;height:180px">
                 <div class="card-body" style="position: relative;">
                     <div class="card-title">
-                        <h5 class="m-0 me-2">{{ __("Shift Request") }}</h5>
+                        <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
                     </div>
                     <div class="d-flex align-items-start justify-content-center"
                     style="width: 150px;
