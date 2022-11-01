@@ -402,6 +402,16 @@ side_bar_static = {
             "doc_name": "Files in Saudi banks format",
             "parent_name": "الرواتب والاجور",
             "icon": ""
+        },
+        {
+            "type": "DocType",
+            "doc_name": "Employee Deduction",
+            "parent_name": "الرواتب والاجور"
+        },
+        {
+            "type": "DocType",
+            "doc_name": "Employee Benefit",
+            "parent_name": "الرواتب والاجور"
         }
     ],
     "shortcuts": [],
