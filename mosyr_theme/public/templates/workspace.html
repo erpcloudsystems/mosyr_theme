@@ -170,18 +170,20 @@
                             </div>
                             <table class="table table-bordered text-center">
                                 <tr>
-                                  <th>{{__("Present")}}</th>
-                                  <th>{{__("Work From Home")}}</th>
-                                  <th>{{__("Half Day")}}</th>
-                                  <th>{{__("Late Entry")}}</th>
-                                  <th>{{__("Absent")}}</th>
-                                  <th>{{__("On Leave")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Present")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Work From Home")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Half Day")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Late Entry")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Exit Early")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("Absent")}}</th>
+                                  <th class="attendance" style="cursor: pointer;">{{__("On Leave")}}</th>
                                 </tr>
                                 <tr >
                                   <td>{{attendance_employee_present[0].count}}</td>
                                   <td>{{attendance_employee_work_home[0].count}}</td>
                                   <td>{{attendance_employee_half_day[0].count}}</td>
                                   <td>{{attendance_employee_late_entry[0].count}}</td>
+                                  <td>{{attendance_employee_early_exit[0].count}}</td>
                                   <td>{{attendance_employee_absent[0].count}}</td>
                                   <td>{{attendance_employee_on_leave[0].count}}</td>
                                 </tr>

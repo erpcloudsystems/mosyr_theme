@@ -89,6 +89,58 @@ frappe.views.Workspace.prototype.make_page = function(page) {
             colors: ['#71dd37', '#03c3ec' ,'#ffab00', '#743ee2']
         })
     }
+    let attendance =  $('.attendance')
+    attendance.click(function(e){
+        let status = e.target.innerHTML
+        let early_exit = 0
+        let late_entry = 0
+        if (e.target.innerHTML == 'Late Entry'){
+            status = 'Present',
+            late_entry = 1
+        }
+        if (e.target.innerHTML == 'Exit Early'){
+            status = 'Present',
+            early_exit = 1
+        }
+        frappe.call({
+            method: 'frappe.client.get_list',
+            args: {
+                'doctype': "Attendance",
+                'filters': { 'attendance_date': frappe.datetime.get_today(),'status' : status ,'late_entry':late_entry,'early_exit':early_exit},
+                'fields': [
+                    'name',
+                    'employee_name',
+                ]
+            },
+            callback: function (r) {
+                if (!r.exc) {
+                    let attendance_list = r.message;
+                    let attendanceHTML = "<div>"
+                        + "<table style='width: 100%'>"
+                        + "<tr>"
+                        + "<th>Attendance</th>"
+                        + "<th>Employee</th>"
+                        + "</tr>";
+                    attendance_list.forEach(element => {
+                        attendanceHTML += "<tr>"
+                            + "<td><a href='app/attendance/" + element.name  +"'>" + element.name + "</a>  </td>"
+                            + "<td> " + element.employee_name + " </td>"
+                            + "</tr>";
+                    });
+                    attendanceHTML += "</table></div>";
+                    var d = new frappe.ui.Dialog({
+                        title: "Attendande Details",
+                        fields: [
+                            { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
+                        ]
+                    });
+        
+                    d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+                    d.show();
+                }
+            }
+        });
+    });
 
 }
 
