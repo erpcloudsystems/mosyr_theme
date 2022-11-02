@@ -31,18 +31,16 @@ def get_sidebar_items():
 
             if label.get('label') == row.parent_name:
                 user_type = frappe.get_doc("User" , frappe.session.user).user_type
-                if user_type == "Employee Self Service":
-                    user_doctypes=frappe.get_doc("User Type" , "Employee Self Service").user_doctypes
-                    for doctype in user_doctypes:
-                        if doctype.document_type == row.doc_name:
-                            label.get('child_items').append({
+                if user_type in ['System User' , 'Website User' , 'SaaS Manager']:
+                    label.get('child_items').append({
                                 'name': row.doc_name, 'label': row.label,
                                 'has_permission': has_permission, 'icon': row.icon, 'route': route
                             })
-                        
-
-                else :
-                    label.get('child_items').append({
+                else:
+                    user_doctypes=frappe.get_doc("User Type" , user_type).user_doctypes
+                    for doctype in user_doctypes:
+                        if doctype.document_type == row.doc_name:
+                            label.get('child_items').append({
                                 'name': row.doc_name, 'label': row.label,
                                 'has_permission': has_permission, 'icon': row.icon, 'route': route
                             })
