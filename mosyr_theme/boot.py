@@ -196,7 +196,6 @@ def get_home_details():
                         }
                     })
             leave_details = {"leave_allocation":total_leave_all_employees}
-
         paid_salaries = frappe.db.sql(
             """SELECT SUM(base_gross_pay) as base, SUM(base_total_deduction) deduction FROM `tabSalary Slip` """, as_dict=True)
         loans = frappe.db.sql(
@@ -268,6 +267,7 @@ def get_home_details():
         "current_employee": current_employee,
         "leave_details": leave_details,
         "len_leave_details" : len(leave_details),
+        "len_leave_allocation":len(leave_details.get('leave_allocation')),
         "loans": loans,
         "employee": employee,
         "active_employee": active_employee,
