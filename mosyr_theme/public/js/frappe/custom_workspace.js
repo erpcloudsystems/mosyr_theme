@@ -92,83 +92,134 @@ frappe.views.Workspace.prototype.make_page = function(page) {
     let attendance =  $('.attendance')
     attendance.click(function(e){
         let status = e.target.innerHTML
-        let early_exit = 0
-        let late_entry = 0
+        let filters = { 'attendance_date': frappe.boot.home_details.date ,'status':status}
         if (e.target.innerHTML == 'Late Entry'){
             status = 'Present',
-            late_entry = 1
+            filters = { 'attendance_date': frappe.boot.home_details.date ,'status':status ,'late_entry':1}
         }
-        if (e.target.innerHTML == 'Exit Early'){
+        else if (e.target.innerHTML == 'Exit Early'){
             status = 'Present',
-            early_exit = 1
+            filters = { 'attendance_date': frappe.boot.home_details.date ,'status':status ,'early_exit':1}
         }
-        frappe.call({
-            method: 'frappe.client.get_list',
-            args: {
-                'doctype': "Attendance",
-                'filters': { 'attendance_date': frappe.boot.home_details.date,'status' : status ,'late_entry':late_entry,'early_exit':early_exit},
-                'fields': [
-                    'name',
-                    'employee_name',
-                ]
-            },
-            callback: function (r) {
-                if (!r.exc) {
-                    if (r.message.length > 0){
-                        let attendance_list = r.message;
-                        let attendanceHTML = "<div>"
-                            + "<table style='width: 100%'>"
-                            + "<tr>"
-                            + "<th>Attendance</th>"
-                            + "<th>Employee</th>"
-                            + "</tr>";
-                        attendance_list.forEach(element => {
-                            attendanceHTML += "<tr>"
-                                + "<td><a href='app/attendance/" + element.name  +"'>" + element.name + "</a>  </td>"
-                                + "<td> " + element.employee_name + " </td>"
-                                + "</tr>";
-                        });
-                        attendanceHTML += "</table></div>";
-                        var d = new frappe.ui.Dialog({
-                            title: "Attendande Details",
-                            fields: [
-                                { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
-                            ]
-                        });
-                        d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+        if (e.target.innerHTML == 'Absent'){
+            console.log(frappe.boot.home_details.attendance_employee_absent.len);
+            if (frappe.boot.home_details.attendance_employee_absent.len){
+                let attendance_list = frappe.boot.home_details.attendance_employee_absent.attendance_employee_absent;
+                let attendanceHTML = "<div>"
+                    + "<table style='width: 100%'>"
+                    + "<tr>"
+                    + "<th>Employee</th>"
+                    + "</tr>";
+                attendance_list.forEach(element => {
+                    attendanceHTML += "<tr>"
+                        + "<td> " + element.employee_name + " </td>"
+                        + "</tr>";
+                });
+                attendanceHTML += "</table></div>";
+                var d = new frappe.ui.Dialog({
+                    title: "Employees " +  status,
+                    fields: [
+                        { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
+                    ]
+                });
+                d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
 
-                    }
-                    else {
-                        let attendanceHTML = `
-                                            <div class="col-md-12 col-lg-12 order-1 mb-4">
-                                                <div class="card">
-                                                    <div class="card-body" style="position: relative;">
-                                                        <div class="d-flex align-items-start justify-content-center"
-                                                        style="width: 100%;
-                                                        position: absolute;
-                                                        left: 50%;
-                                                        top: 50%;
-                                                        transform: translate(-50%, -50%);">
-                                                            <span class="text-center">No Employee ${e.target.innerHTML} today</span>
+            }
+            else {
+                let attendanceHTML = `
+                                    <div class="col-md-12 col-lg-12 order-1 mb-4">
+                                        <div class="card">
+                                            <div class="card-body" style="position: relative;">
+                                                <div class="d-flex align-items-start justify-content-center"
+                                                style="width: 100%;
+                                                position: absolute;
+                                                left: 50%;
+                                                top: 50%;
+                                                transform: translate(-50%, -50%);">
+                                                    <span class="text-center">No Employee ${e.target.innerHTML} today</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `
+                
+                var d = new frappe.ui.Dialog({
+                    title: "Attendande Details",
+                    fields: [
+                        { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
+                    ]
+                });    
+                d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+            }
+            
+            d.show();
+        }else {
+            frappe.call({
+                method: 'frappe.client.get_list',
+                args: {
+                    'doctype': "Attendance",
+                    'filters': filters,
+                    'fields': [
+                        'name',
+                        'employee_name',
+                    ]
+                },
+                callback: function (r) {
+                    if (!r.exc) {
+                        if (r.message.length > 0){
+                            let attendance_list = r.message;
+                            let attendanceHTML = "<div>"
+                                + "<table style='width: 100%'>"
+                                + "<tr>"
+                                + "<th>Employee</th>"
+                                + "</tr>";
+                            attendance_list.forEach(element => {
+                                attendanceHTML += "<tr>"
+                                    + "<td> " + element.employee_name + " </td>"
+                                    + "</tr>";
+                            });
+                            attendanceHTML += "</table></div>";
+                            var d = new frappe.ui.Dialog({
+                                title: "Employees " +  status,
+                                fields: [
+                                    { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
+                                ]
+                            });
+                            d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+    
+                        }
+                        else {
+                            let attendanceHTML = `
+                                                <div class="col-md-12 col-lg-12 order-1 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-body" style="position: relative;">
+                                                            <div class="d-flex align-items-start justify-content-center"
+                                                            style="width: 100%;
+                                                            position: absolute;
+                                                            left: 50%;
+                                                            top: 50%;
+                                                            transform: translate(-50%, -50%);">
+                                                                <span class="text-center">No Employee ${e.target.innerHTML} today</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        `
+                                            `
+                            
+                            var d = new frappe.ui.Dialog({
+                                title: "Attendande Details",
+                                fields: [
+                                    { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
+                                ]
+                            });    
+                            d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+                        }
                         
-                        var d = new frappe.ui.Dialog({
-                            title: "Attendande Details",
-                            fields: [
-                                { 'fieldname': "attendance_table", 'fieldtype': "HTML" }
-                            ]
-                        });    
-                        d.fields_dict.attendance_table.$wrapper.html(attendanceHTML);
+                        d.show();
                     }
-                    
-                    d.show();
                 }
-            }
-        });
+            });
+        }
     });
 
 }
