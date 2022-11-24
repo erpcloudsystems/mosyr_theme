@@ -276,11 +276,11 @@ def get_home_details():
                 if shift.enable_entry_grace_period:
                     grace_period = shift.late_entry_grace_period
                     shift.start_time += timedelta(minutes=shift.late_entry_grace_period)
-                time_shift = frappe.utils.get_time(shift.start_time)
-            if emp_time_check > time_shift:
-                employee_late_entry.append(check.employee)
-            else:
-                employee_present_in_time.append(check.employee)
+                    time_shift = frappe.utils.get_time(shift.start_time)
+                if emp_time_check > time_shift:
+                    employee_late_entry.append(check.employee)
+                else:
+                    employee_present_in_time.append(check.employee)
         employee_presents = employee_late_entry + employee_present_in_time + attendance_employee_half_day + attendance_employee_early_exit
         emoplyee_in_attendance = frappe.get_list("Attendance" , {'status':['!=', 'Absent'] ,'attendance_date':frappe.utils.today() },pluck='employee')
         for emp in employee_absents:
