@@ -270,12 +270,13 @@ def get_home_details():
         for check in employee_checkin:
             employee_check = frappe.get_doc("Employee Checkin" , check.name)
             emp_time_check = employee_check.time.time()
-            shift = frappe.get_doc("Shift Type", check.shift)
-            grace_period = 0
-            if shift.enable_entry_grace_period:
-                grace_period = shift.late_entry_grace_period
-                shift.start_time += timedelta(minutes=shift.late_entry_grace_period)
-            time_shift = frappe.utils.get_time(shift.start_time)
+            if check.shift:
+                shift = frappe.get_doc("Shift Type", check.shift)
+                grace_period = 0
+                if shift.enable_entry_grace_period:
+                    grace_period = shift.late_entry_grace_period
+                    shift.start_time += timedelta(minutes=shift.late_entry_grace_period)
+                time_shift = frappe.utils.get_time(shift.start_time)
             if emp_time_check > time_shift:
                 employee_late_entry.append(check.employee)
             else:
