@@ -248,59 +248,34 @@ def get_home_details():
             active_employee = active_employee[0].get("employee", 0)
         else:
             active_employee = 0
-
-                            
+        
+        attendance_employee_present = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present'},pluck='employee')
         attendance_employee_half_day = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Half Day'},pluck='employee')
+        attendance_employee_late_entry = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present' ,'late_entry':1 },pluck='employee')
         attendance_employee_early_exit = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present','early_exit':1},pluck='employee')
         attendance_employee_work_home = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Work From Home'},pluck='employee')
         attendance_employee_on_leave = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'On Leave'},pluck='employee')
+        attendance_employee_absent = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Absent'},pluck='employee')
 
-        employee_list = frappe.get_list("Employee" ,{"status" : 'Active'},pluck='name')
-        shift_assignment = frappe.get_list("Shift Assignment",['name','employee'],{"status" : 'Active' , 'docstatus' :1})
-        employee_checkin = frappe.db.sql(f"""select name, employee ,shift  from `tabEmployee Checkin` where date(time)='{frappe.utils.today()}' """ ,as_dict=1)
-        employee_not_absents = []
-        employee_absents = []
-        employee_late_entry = []
-        employee_present_in_time = []
-        for emp_check in employee_checkin:
-            employee_not_absents.append(emp_check.employee)
-        for emp in employee_list:
-            if  emp not in employee_not_absents:
-                employee_absents.append(emp)
-        for check in employee_checkin:
-            employee_check = frappe.get_doc("Employee Checkin" , check.name)
-            emp_time_check = employee_check.time.time()
-            if check.shift:
-                shift = frappe.get_doc("Shift Type", check.shift)
-                grace_period = 0
-                if shift.enable_entry_grace_period:
-                    grace_period = shift.late_entry_grace_period
-                    shift.start_time += timedelta(minutes=shift.late_entry_grace_period)
-                    time_shift = frappe.utils.get_time(shift.start_time)
-                    if emp_time_check > time_shift:
-                        employee_late_entry.append(check.employee)
-                    else:
-                        employee_present_in_time.append(check.employee)
-        employee_presents = employee_late_entry + employee_present_in_time + attendance_employee_half_day + attendance_employee_early_exit
-        emoplyee_in_attendance = frappe.get_list("Attendance" , {'status':['!=', 'Absent'] ,'attendance_date':frappe.utils.today() },pluck='employee')
-        for emp in employee_absents:
-            if emp in employee_presents:
-                employee_absents.remove(emp)
-        for emp in employee_absents:
-            if emp in attendance_employee_work_home:
-                employee_absents.remove(emp)
-        for emp in employee_absents:
-            if emp in attendance_employee_on_leave:
-                employee_absents.remove(emp)
+        active_employees_list = frappe.get_list("Employee",{'status':'Active'},pluck='name')
+        employees_not_absent = attendance_employee_present + attendance_employee_half_day + attendance_employee_late_entry + attendance_employee_early_exit + attendance_employee_work_home + attendance_employee_on_leave
+        for emp in active_employees_list:
+            if emp not in employees_not_absent:
+                attendance_employee_absent.append(emp)
+        attendance_employee_absent = set(attendance_employee_absent)
+        attendance_employee_name_absent = [] 
+        for emp in attendance_employee_absent:
+            emp_name = frappe.get_doc("Employee" , emp).get_title()
+            attendance_employee_name_absent.append({"employee" : emp , 'employee_name' : emp_name})
+
 
         employee_presents_final = []
         attendance_employee_work_home_final = []
         attendance_employee_half_day_final = []
         employee_late_entry_final = []
         attendance_employee_early_exit_final = []
-        attendance_employee_absent_final = []
         attendance_employee_on_leave_final = []
-        for emp in employee_presents:
+        for emp in attendance_employee_present:
             emp_name = frappe.get_doc("Employee" , emp).get_title()
             employee_presents_final.append({"employee" : emp , 'employee_name' : emp_name})
         for emp in attendance_employee_work_home:
@@ -309,18 +284,16 @@ def get_home_details():
         for emp in attendance_employee_half_day:
             emp_name = frappe.get_doc("Employee" , emp).get_title()
             attendance_employee_half_day_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in employee_late_entry:
+        for emp in attendance_employee_late_entry:
             emp_name = frappe.get_doc("Employee" , emp).get_title()
             employee_late_entry_final.append({"employee" : emp , 'employee_name' : emp_name})
         for emp in attendance_employee_early_exit:
             emp_name = frappe.get_doc("Employee" , emp).get_title()
             attendance_employee_early_exit_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in employee_absents:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_absent_final.append({"employee" : emp , 'employee_name' : emp_name})
         for emp in attendance_employee_on_leave:
             emp_name = frappe.get_doc("Employee" , emp).get_title()
             attendance_employee_on_leave_final.append({"employee" : emp , 'employee_name' : emp_name})
+        
 
 
         home_details.update({
@@ -330,8 +303,8 @@ def get_home_details():
             "attendance_employee_half_day": {"attendance_employee_half_day":attendance_employee_half_day_final,"len":len(attendance_employee_half_day_final)},
             "attendance_employee_late_entry": {"attendance_employee_late_entry":employee_late_entry_final,"len":len(employee_late_entry_final)},
             "attendance_employee_early_exit": {"attendance_employee_early_exit":attendance_employee_early_exit_final,"len":len(attendance_employee_early_exit_final)},
-            "attendance_employee_absent": {"attendance_employee_absent":attendance_employee_absent_final,"len":len(attendance_employee_absent_final)},
-            "attendance_employee_on_leave": {"attendance_employee_on_leave":attendance_employee_on_leave_final,"len":len(attendance_employee_on_leave)},
+            "attendance_employee_absent": {"attendance_employee_absent":attendance_employee_name_absent,"len":len(attendance_employee_name_absent)},
+            "attendance_employee_on_leave": {"attendance_employee_on_leave":attendance_employee_on_leave_final,"len":len(attendance_employee_on_leave_final)},
         })
     home_details.update({
         "date":date,
