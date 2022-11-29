@@ -91,7 +91,7 @@ frappe.views.Workspace.prototype.make_page = function(page) {
     }
     let attendance =  $('.attendance')
     attendance.click(function(e){
-        let status = e.target.innerHTML
+        let status = e.target.getAttribute('data-val')
         if(status == 'Present' && frappe.boot.home_details.attendance_employee_present.attendance_employee_present.length > 0){
                 let attendance_list = frappe.boot.home_details.attendance_employee_present.attendance_employee_present;
                 let attendanceHTML = "<div>"
