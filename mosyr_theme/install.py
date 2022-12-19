@@ -4,6 +4,24 @@ import frappe
 
 def after_install():
     set_sidebar()
+    make_settings_dropdown_clean()
+
+def make_settings_dropdown_clean():
+    print("$$$$$$$$$$$$$$$$$$")
+    print("$$$$$$$$$$$$$$$$$$")
+    print("$$$$$$$$$$$$$$$$$$")
+    print("$$$$$$$$$$$$$$$$$$")
+    print("$$$$$$$$$$$$$$$$$$")
+    for navbar_item in frappe.get_list("Navbar Item", filters={"parentfield": "settings_dropdown", "is_standard": 1}):
+        navbar_item = frappe.get_doc("Navbar Item", navbar_item.name)
+        if navbar_item.item_label in ["My Profile", "My Settings", "Logout"]:
+            continue
+        if navbar_item.item_type in ["Separator"]:
+            continue
+        navbar_item.delete()
+    frappe.db.commit()
+
+
 
 side_bar_static = {
     "enable": 1,

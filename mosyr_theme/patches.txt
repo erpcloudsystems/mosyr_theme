@@ -1,0 +1,1 @@
+mosyr_theme.patches.make_settings_dropdown_clean
