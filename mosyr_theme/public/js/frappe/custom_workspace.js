@@ -48,7 +48,7 @@ frappe.views.Workspace.prototype.make_page = function(page) {
         let labels = []
 
         for(const [key, value] of Object.entries(frappe.boot.home_details.leave_details.leave_allocation || {})) {
-            labels.push(key)
+            labels.push(__(key))
             taken.push(value['leaves_taken'] || "")
             rem.push(value['remaining_leaves'] || "")
             pend.push(value['leaves_pending_approval'] || "")
@@ -59,22 +59,22 @@ frappe.views.Workspace.prototype.make_page = function(page) {
             labels: labels,
             datasets: [
             {
-                name: "Taken",
+                name: __("Taken"),
                 values: taken,
                 chartType: 'bar'
             },
             {
-                name: "Remaining",
+                name: __("Remaining"),
                 values: rem,
                 chartType: 'bar'
             },
             {
-                name: "Pending",
+                name: __("Pending"),
                 values:pend,
                 chartType: 'bar'
             },
             {
-                name: "Total",
+                name: __("Total"),
                 values: total,
                 chartType: 'bar'
             }
@@ -82,7 +82,7 @@ frappe.views.Workspace.prototype.make_page = function(page) {
         }
         
         const chart = new frappe.Chart("#leaves-chart-container", { 
-            title: "Leave Statistics",
+            title: __("Leave Statistics"),
             data: data,
             type: 'axis-mixed', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
             height: 250,

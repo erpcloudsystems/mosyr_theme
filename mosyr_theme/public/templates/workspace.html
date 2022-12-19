@@ -152,7 +152,7 @@
                             left: 50%;
                             top: 50%;
                             transform: translate(-50%, -50%);">
-                                   <span class="text-center">No data to show</span>
+                                   <span class="text-center">{{ __("No data to show") }}</span>
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                             <h5 class="m-0 me-2">{{ __("Subscription End Date") }}</h5>
                             <div class="d-flex align-items-start justify-content-between">
                                 <div class="d-flex align-items-end mt-2">
-                                    <h4 class="mb-0 me-2 text-secondary">{{ saas_config.subscription_end_date  }} (<span style="color:#696cff !important" >{{saas_config.remaining_days}}</span> Remaining)</h4>
+                                    <h4 class="mb-0 me-2 text-secondary">{{ saas_config.subscription_end_date  }} (<span style="color:#696cff !important" >{{saas_config.remaining_days}}</span> {{__("Remaining")}})</h4>
                                 </div>
                                 <span class="badge bg-label-primary rounded p-2" style="line-height: 1;">
                                     <i class="bx bx-time bx-sm"></i>
@@ -323,7 +323,7 @@
             </div>
         </div>
     </div>
-    <h2>Self Services</h2>
+    <h2>{{ __("Self Services") }}</h2>
     <div class="row">
         {% if(salary_details.salary_details.length) { %}
         <div class="col-md-3 col-lg-3 col-xl-3 order-0 mb-2">
@@ -344,7 +344,7 @@
                     {% endfor %}
                     {% if(salary_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/salary-details">Show More</a>
+                        <a  href="/app/salary-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -363,7 +363,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -388,7 +388,7 @@
                     {% endfor %}
                     {% if(work_experience.len > 3   ) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a class="" href="/app/work-experience">Show More</a>
+                        <a class="" href="/app/work-experience">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -407,7 +407,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -432,7 +432,7 @@
                     {% endfor %}
                     {% if(dependants_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/dependants-details">Show More</a>
+                        <a  href="/app/dependants-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -451,7 +451,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -476,7 +476,7 @@
                     {% endfor %}
                     {% if(passport_detail.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/passport-detail">Show More</a>
+                        <a  href="/app/passport-detail">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -495,7 +495,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -520,7 +520,7 @@
                     {% endfor %}
                     {% if(health_insurance.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/health-insurance">Show More</a>
+                        <a  href="/app/health-insurance">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -539,7 +539,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -564,7 +564,7 @@
                     {% endfor %}
                     {% if(contact_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/contact-details">Show More</a>
+                        <a  href="/app/contact-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -583,7 +583,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -608,7 +608,7 @@
                     {% endfor %}
                     {% if(emergency_contact.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/emergency-contact">Show More</a>
+                        <a  href="/app/emergency-contact">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -627,7 +627,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -652,7 +652,7 @@
                     {% endfor %}
                     {% if(educational_qualification.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/educational-qualification">Show More</a>
+                        <a  href="/app/educational-qualification">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -671,7 +671,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -696,7 +696,7 @@
                     {% endfor %}
                     {% if(personal_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/personal-details">Show More</a>
+                        <a  href="/app/personal-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -715,7 +715,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -740,7 +740,7 @@
                     {% endfor %}
                     {% if(employee_id.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/employee-id">Show More</a>
+                        <a  href="/app/employee-id">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -759,7 +759,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -784,7 +784,7 @@
                     {% endfor %}
                     {% if(lateness_permission.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/lateness-permission">Show More</a>
+                        <a  href="/app/lateness-permission">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -803,7 +803,7 @@
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">No data to show</span>
+                           <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
