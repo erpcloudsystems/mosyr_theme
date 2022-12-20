@@ -249,62 +249,25 @@ def get_home_details():
         else:
             active_employee = 0
         
-        attendance_employee_present = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present'},pluck='employee')
-        attendance_employee_half_day = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Half Day'},pluck='employee')
-        attendance_employee_late_entry = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present' ,'late_entry':1 },pluck='employee')
-        attendance_employee_early_exit = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Present','early_exit':1},pluck='employee')
-        attendance_employee_work_home = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Work From Home'},pluck='employee')
-        attendance_employee_on_leave = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'On Leave'},pluck='employee')
-        attendance_employee_absent = frappe.get_list("Attendance",{'attendance_date':frappe.utils.today(),'docstatus':1,'status':'Absent'},pluck='employee')
-
-        active_employees_list = frappe.get_list("Employee",{'status':'Active'},pluck='name')
-        employees_not_absent = attendance_employee_present + attendance_employee_half_day + attendance_employee_late_entry + attendance_employee_early_exit + attendance_employee_work_home + attendance_employee_on_leave
-        for emp in active_employees_list:
-            if emp not in employees_not_absent:
-                attendance_employee_absent.append(emp)
-        attendance_employee_absent = set(attendance_employee_absent)
-        attendance_employee_name_absent = [] 
-        for emp in attendance_employee_absent:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_name_absent.append({"employee" : emp , 'employee_name' : emp_name})
-
-
-        employee_presents_final = []
-        attendance_employee_work_home_final = []
-        attendance_employee_half_day_final = []
-        employee_late_entry_final = []
-        attendance_employee_early_exit_final = []
-        attendance_employee_on_leave_final = []
-        for emp in attendance_employee_present:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            employee_presents_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in attendance_employee_work_home:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_work_home_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in attendance_employee_half_day:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_half_day_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in attendance_employee_late_entry:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            employee_late_entry_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in attendance_employee_early_exit:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_early_exit_final.append({"employee" : emp , 'employee_name' : emp_name})
-        for emp in attendance_employee_on_leave:
-            emp_name = frappe.get_doc("Employee" , emp).get_title()
-            attendance_employee_on_leave_final.append({"employee" : emp , 'employee_name' : emp_name})
-        
-
+        shifts_details = frappe.db.sql("""
+            SELECT st.name as shift, IFNULL(presents.total, 0) AS presents, IFNULL(absents.total, 0) AS absents, IFNULL(on_leaves.total, 0) AS on_leaves,
+                IFNULL(half_days.total, 0) AS half_days, IFNULL(from_homes.total, 0) AS from_homes, IFNULL(lates.total, 0) AS lates, IFNULL(earlies.total, 0) AS earlies
+            FROM `tabShift Type` st
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Present' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) presents ON presents.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Absent' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) absents ON absents.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='On Leave' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) on_leaves ON on_leaves.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Half Day' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) half_days ON half_days.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Work From Home' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) from_homes ON from_homes.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE late_entry=1 AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) lates ON lates.shift=st.name
+            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE early_exit=1 AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) earlies ON earlies.shift=st.name
+            WHERE st.name IN (SELECT shift FROM `tabAttendance` WHERE docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() group by shift)
+        """, as_dict=True)
+        for sd in shifts_details:
+            pass
 
         home_details.update({
             "saas_config" :saas_config,
-            "attendance_employee_present":{"attendance_employee_present":employee_presents_final , "len":(len(employee_presents_final))},
-            "attendance_employee_work_home": {"attendance_employee_work_home":attendance_employee_work_home_final,"len":len(attendance_employee_work_home_final)},
-            "attendance_employee_half_day": {"attendance_employee_half_day":attendance_employee_half_day_final,"len":len(attendance_employee_half_day_final)},
-            "attendance_employee_late_entry": {"attendance_employee_late_entry":employee_late_entry_final,"len":len(employee_late_entry_final)},
-            "attendance_employee_early_exit": {"attendance_employee_early_exit":attendance_employee_early_exit_final,"len":len(attendance_employee_early_exit_final)},
-            "attendance_employee_absent": {"attendance_employee_absent":attendance_employee_name_absent,"len":len(attendance_employee_name_absent)},
-            "attendance_employee_on_leave": {"attendance_employee_on_leave":attendance_employee_on_leave_final,"len":len(attendance_employee_on_leave_final)},
+            "shifts_details": shifts_details
         })
     home_details.update({
         "date":date,
