@@ -166,6 +166,7 @@
                             </div>
                             <table class="table table-bordered text-center">
                                 <tr>
+                                  <th class="attendance">{{__("Shift")}}</th>
                                   <th class="attendance" style="cursor: pointer;" data-val="Present">{{__("Present")}}</th>
                                   <th class="attendance" style="cursor: pointer;" data-val="Work From Home">{{__("Work From Home")}}</th>
                                   <th class="attendance" style="cursor: pointer;" data-val="Half Day">{{__("Half Day")}}</th>
@@ -174,15 +175,18 @@
                                   <th class="attendance" style="cursor: pointer;" data-val="Absent">{{__("Absent")}}</th>
                                   <th class="attendance" style="cursor: pointer;" data-val="On Leave">{{__("On Leave")}}</th>
                                 </tr>
+                                {% for shift_detail in shifts_details %}
                                 <tr >
-                                  <td>{{attendance_employee_present.len}}</td>
-                                  <td>{{attendance_employee_work_home.len}}</td>
-                                  <td>{{attendance_employee_half_day.len}}</td>
-                                  <td>{{attendance_employee_late_entry.len}}</td>
-                                  <td>{{attendance_employee_early_exit.len}}</td>
-                                  <td>{{attendance_employee_absent.len}}</td>
-                                  <td>{{attendance_employee_on_leave.len}}</td>
+                                  <td>{{shift_detail.shift}}</td>
+                                  <td>{{shift_detail.presents}}</td>
+                                  <td>{{shift_detail.from_homes}}</td>
+                                  <td>{{shift_detail.half_days}}</td>
+                                  <td>{{shift_detail.lates}}</td>
+                                  <td>{{shift_detail.earlies}}</td>
+                                  <td>{{shift_detail.absents}}</td>
+                                  <td>{{shift_detail.on_leaves}}</td>
                                 </tr>
+                                {% endfor %}
                               </table>
                         </div>
                     </div>
