@@ -185,7 +185,7 @@ def get_home_details():
             "subscription_end_date":frappe.conf.get("subscription_end_date" or ""),
         }
 
-        if frappe.session.user == 'Administrator':
+        if frappe.session.user in ['Administrator', 'support@mosyr.io']:
             employees = frappe.get_list("Employee",pluck='name')
             for emp in employees:
                 for k,v in get_leave_details(emp,frappe.utils.nowdate()).get('leave_allocation' or {}).items():
@@ -275,7 +275,7 @@ def get_home_details():
         "current_employee": current_employee,
         "leave_details": leave_details,
         "len_leave_details" : len(leave_details),
-        "len_leave_allocation":len(leave_details.get('leave_allocation')),
+        "len_leave_allocation":len(leave_details.get('leave_allocation', [])),
         "loans": loans,
         "employee": employee,
         "active_employee": active_employee,
