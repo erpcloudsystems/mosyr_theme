@@ -224,5 +224,6 @@ fixtures = [
                 "HOOK-0001"
             ]
         ]
-    ]}
+    ]},
+	{"dt": "Translation"}
 ]
