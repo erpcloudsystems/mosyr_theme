@@ -72,7 +72,7 @@ frappe.views.Container.prototype.change_to = function (label) {
     let listCurrentDoc = frappe.get_route()[0]
     if (currentDoc == 'Employee' && listCurrentDoc == 'List') {
         async function totalInactive(status) {
-            let total = await frappe.db.get_list('Employee', { filters: { 'status': status } })
+            let total = await frappe.db.get_list('Employee', { filters: { 'status': status }, limit:50000000 })
             let template = `    
                             <div class="col-sm-6 col-xl-4">
                                 <div class="card">
