@@ -85,7 +85,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-06-27 16:29:42.731990",
+ "modified": "2022-12-22 18:43:39.881627",
  "modified_by": "Administrator",
  "module": "Mosyr Theme",
  "name": "System Controller",
@@ -98,6 +98,16 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "SaaS Manager",
    "share": 1,
    "write": 1
   }
