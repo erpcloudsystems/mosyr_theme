@@ -1,10 +1,13 @@
 from __future__ import unicode_literals
 import frappe
-
+from six import iteritems
+from frappe.installer import update_site_config
+from erpnext.setup.install import create_user_type
 
 def after_install():
     set_sidebar()
     make_settings_dropdown_clean()
+    create_non_standard_user_types()
 
 
 def make_settings_dropdown_clean():
@@ -488,3 +491,47 @@ def set_sidebar():
         sc.append("sidebar_item", label)
     sc.save(ignore_permissions=True)
     frappe.db.commit()
+
+
+def create_non_standard_user_types():
+    non_stadard_users = {}
+    manager_user_type = get_manager_user_data()
+
+    non_stadard_users.update(manager_user_type)
+
+    user_type_limit = {}
+    for user_type, data in iteritems(non_stadard_users):
+        user_type_limit.setdefault(frappe.scrub(user_type), 120)
+    update_site_config("user_type_doctype_limit", user_type_limit)
+
+    for user_type, data in iteritems(non_stadard_users):
+        create_user_type(user_type, data)
+    frappe.db.commit()
+
+docs_for_manager = ["System Controller"]
+def get_manager_user_data():
+    doctypes = {}
+    for document in docs_for_manager:
+        doctypes.update(
+            {
+                document: [
+                    "read",
+                    "write",
+                    "create",
+                    "delete",
+                    "submit",
+                    "cancel",
+                    "amend",
+                ]
+            }
+        )
+
+    types = {
+        "SaaS Manager": {
+            "role": "SaaS Manager",
+            "apply_user_permission_on": "Employee",
+            "user_id_field": "user_id",
+            "doctypes": doctypes,
+        }
+    }
+    return types
