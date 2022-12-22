@@ -7,7 +7,7 @@ from erpnext.setup.install import create_user_type
 def after_install():
     set_sidebar()
     make_settings_dropdown_clean()
-    create_non_standard_user_types()
+    add_perms_to_system_controller()
 
 
 def make_settings_dropdown_clean():
@@ -492,46 +492,17 @@ def set_sidebar():
     sc.save(ignore_permissions=True)
     frappe.db.commit()
 
-
-def create_non_standard_user_types():
-    non_stadard_users = {}
-    manager_user_type = get_manager_user_data()
-
-    non_stadard_users.update(manager_user_type)
-
-    user_type_limit = {}
-    for user_type, data in iteritems(non_stadard_users):
-        user_type_limit.setdefault(frappe.scrub(user_type), 120)
-    update_site_config("user_type_doctype_limit", user_type_limit)
-
-    for user_type, data in iteritems(non_stadard_users):
-        create_user_type(user_type, data)
+def add_perms_to_system_controller():
+    user_type = frappe.db.exists("User Type", "SaaS Manager")
+    if not user_type: return
+    user_type = frappe.get_doc("User Type", "SaaS Manager")
+    user_type.append("user_doctypes", {
+        "document_type": "System Controller",
+        "read": 1,
+        "write": 1,
+        "create": 1
+    })
+    user_type.flags.ignore_mandatory = 1
+    user_type.flags.ignore_permission = 1
+    user_type.save()
     frappe.db.commit()
-
-docs_for_manager = ["System Controller"]
-def get_manager_user_data():
-    doctypes = {}
-    for document in docs_for_manager:
-        doctypes.update(
-            {
-                document: [
-                    "read",
-                    "write",
-                    "create",
-                    "delete",
-                    "submit",
-                    "cancel",
-                    "amend",
-                ]
-            }
-        )
-
-    types = {
-        "SaaS Manager": {
-            "role": "SaaS Manager",
-            "apply_user_permission_on": "Employee",
-            "user_id_field": "user_id",
-            "doctypes": doctypes,
-        }
-    }
-    return types
