@@ -23,6 +23,9 @@ def get_sidebar_items():
 
     for label in labels:
         for row in system_controller.sidebar_item:
+            if frappe.session.user not in ["Administrator", "support@mosr.io"]:
+                if row.doc_name in ["Translation", "System Controller"]:
+                    continue
             route = ''
             has_permission = False
             if row.type == 'Report':
