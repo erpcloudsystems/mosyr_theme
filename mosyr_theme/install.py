@@ -7,7 +7,7 @@ from erpnext.setup.install import create_user_type
 def after_install():
     set_sidebar()
     make_settings_dropdown_clean()
-    add_perms_to_system_controller()
+    # add_perms_to_system_controller()
 
 
 def make_settings_dropdown_clean():
@@ -492,17 +492,17 @@ def set_sidebar():
     sc.save(ignore_permissions=True)
     frappe.db.commit()
 
-def add_perms_to_system_controller():
-    user_type = frappe.db.exists("User Type", "SaaS Manager")
-    if not user_type: return
-    user_type = frappe.get_doc("User Type", "SaaS Manager")
-    user_type.append("user_doctypes", {
-        "document_type": "System Controller",
-        "read": 1,
-        "write": 1,
-        "create": 1
-    })
-    user_type.flags.ignore_mandatory = 1
-    user_type.flags.ignore_permission = 1
-    user_type.save()
-    frappe.db.commit()
+# def add_perms_to_system_controller():
+#     user_type = frappe.db.exists("User Type", "SaaS Manager")
+#     if not user_type: return
+#     user_type = frappe.get_doc("User Type", "SaaS Manager")
+#     user_type.append("user_doctypes", {
+#         "document_type": "System Controller",
+#         "read": 1,
+#         "write": 1,
+#         "create": 1
+#     })
+#     user_type.flags.ignore_mandatory = 1
+#     user_type.flags.ignore_permission = 1
+#     user_type.save()
+#     frappe.db.commit()
