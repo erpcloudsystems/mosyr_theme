@@ -660,6 +660,13 @@ progress {
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
+.grid-heading-row .row{
+  margin-left: 0;
+  margin-right: 0;
+}
+.grid-heading-row .grid-row{
+  padding: 0;
+}
 .row > * {
   flex-shrink: 0;
   width: 100%;
@@ -669,10 +676,24 @@ progress {
   margin-top: var(--bs-gutter-y);
 }
 
-.col {
+/* .col {
   flex: 1 0 0%;
+} */
+.grid-body .editable-row .form-control{
+  height: 100% !important;
+  /* border: 1px solid var(--table-border-color); */
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-
+.grid-body .editable-row .form-control:focus {
+  box-shadow: rgba(105, 108, 255, 0.5) 0px 1px 3px 0px, 
+              rgba(105, 108, 255, 0.5) 0px 0px 0px 1px !important;
+  /* border: 1px solid;
+  border-color: rgba(105, 108, 255) !important; */
+}
+.grid-body .editable-row .form-control:disabled{
+   padding-bottom: 11px !important;
+}
 .row-cols-auto > * {
   flex: 0 0 auto;
   width: auto;
@@ -7914,7 +7935,7 @@ button:focus {
 form .error:not(li):not(input) {
   color: #ff3e1d;
   font-size: 85%;
-  margin-top: 0.25rem;
+  /* margin-top: 0.25rem; */
 }
 form .invalid,
 form .is-invalid .invalid:before,
