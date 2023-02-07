@@ -1,2 +1,3 @@
 mosyr_theme.patches.make_settings_dropdown_clean
 mosyr_theme.patches.update_sidebar_items
+mosyr_theme.patches.update_sidebar_items_v2
