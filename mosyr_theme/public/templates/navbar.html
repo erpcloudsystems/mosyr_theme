@@ -1,7 +1,7 @@
 <header class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     role="navigation" id="layout-navbar">
-    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none custom-menu-btn">
-        <a class="nav-item nav-link px-0 me-xl-4 custom-sel" href="javascript:void(0)">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none custom-menu-btn-toggler custom-menu-btn">
+        <a class="nav-item nav-link px-0 me-xl-4 custom-sel layout-menu-toggle" href="javascript:void(0)">
             <i class="bx bx-menu bx-sm"></i>
         </a>
     </div>
@@ -20,7 +20,7 @@
             </form>
         </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li class="nav-item dropdown dropdown-lang dropdown-mobile d-none d-lg-block">
+            <li class="nav-item dropdown dropdown-lang dropdown-mobile d-lg-block">
                 {% if frappe.boot.language != "ar" %}
                 <a class="nav-link lang-switcher" data-toggle="dropdown" href="#" data-lang="ar">
                     <span data-lang="ar">

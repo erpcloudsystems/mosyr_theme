@@ -15,4 +15,16 @@ frappe.ui.toolbar.Toolbar.prototype.bind_events = function () {
             }
         })
     });
+    this.setup_sidebar_toggle();
+}
+
+frappe.ui.toolbar.Toolbar.prototype.setup_sidebar_toggle = function() {
+    let sidebar_toggle = $('header').find('.custom-menu-btn-toggler');
+    sidebar_toggle.click((event) => {
+        window.Helpers.toggleCollapsed()
+        if (frappe.utils.is_xs() || frappe.utils.is_sm()) {
+            event.preventDefault();
+            window.Helpers.toggleCollapsed()
+        }
+    });
 }

@@ -286,3 +286,8 @@ body.modal-open[style^="padding-right"] header.navbar {
     overflow-y: scroll;
     overflow-x: hidden;
 }
+
+
+.show-sidebar .layout-overlay{
+    display: block !important;;
+}
