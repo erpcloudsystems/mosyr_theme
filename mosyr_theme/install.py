@@ -302,6 +302,12 @@ side_bar_static = {
             "icon": "",
         },
         {
+            "type": "Report",
+            "doc_name": "Exit Permissions Summary",
+            "parent_name": "Timesheet Attendees management",
+            "icon": "",
+        },
+        {
             "type": "DocType",
             "doc_name": "Payroll Settings",
             "parent_name": "payroll",
