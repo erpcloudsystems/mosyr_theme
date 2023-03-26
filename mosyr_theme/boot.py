@@ -50,10 +50,28 @@ def get_sidebar_items():
                                 'name': row.doc_name, 'label': row.label,
                                 'has_permission': has_permission, 'icon': row.icon, 'route': route
                             })
+    reports = frappe.db.sql(f""" SELECT cr.report, sit.parent_name
+                            FROM `tabCustom Role` cr
+                            LEFT JOIN `tabHas Role` hr ON hr.parent=cr.name
+                            LEFT JOIN `tabSideBar Item Table` sit ON sit.doc_name = cr.report
+                            WHERE hr.role='{user_type}'
+                            """,as_dict=1)
     final_labels = []
     for l in labels:
         if l.get("child_items"):
             final_labels.append(l)
+    for items in final_labels:
+        for r in reports:
+            if r.parent_name == items.get("name"):
+                items.get("child_items").append({
+                'label': r.report,
+                'name': r.report,
+                'has_permission': 1,
+                'icon': '',
+                'route': f'query-report/{r.report}'
+                })
+
+
     return final_labels
 
 
