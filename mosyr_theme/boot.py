@@ -269,26 +269,121 @@ def get_home_details():
             active_employee = active_employee[0].get("employee", 0)
         else:
             active_employee = 0
+        shifts_details = {}
+        attendance_employee_list = []
+        toda_is = frappe.utils.nowdate()
+        today_attendance = frappe.db.sql("""
+            SELECT status, late_entry, early_exit, shift, employee
+            FROM `tabAttendance`
+            WHERE docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date='{}'
+            ORDER BY employee
+        """.format(toda_is), as_dict=True)
+        for ta in today_attendance:
+            attendance_employee_list.append(ta.employee)
+            presents = 1 if  ta.get("status") == "Present" else 0
+            absents = 1 if  ta.get("status") == "Absent" else 0
+            on_leaves = 1 if  ta.get("status") == "On Leave" else 0
+            half_days = 1 if  ta.get("status") == "Half Day" else 0
+            from_homes = 1 if  ta.get("status") == "Work From Home" else 0
+            if shifts_details.get(ta.shift):
+                old_shift_data = shifts_details.get(ta.shift, {})
+                shift_data = {
+                    "shift": ta.shift,
+                    "presents": cint(old_shift_data.get("presents")) + presents,
+                    "absents": cint(old_shift_data.get("absents")) + absents,
+                    "on_leaves": cint(old_shift_data.get("on_leaves")) + on_leaves,
+                    "half_days": cint(old_shift_data.get("half_days")) + half_days,
+                    "from_homes": cint(old_shift_data.get("from_homes")) + from_homes,
+                    "lates": cint(old_shift_data.get("lates")) + cint(ta.get("late_entry")),
+                    "earlies": cint(old_shift_data.get("earlies")) + cint(ta.get("early_exit")),
+                }
+                shifts_details.update({
+                    f"{ta.shift}": shift_data
+                })
+            else:
+                shifts_details.update({
+                    f"{ta.shift}":{
+                        "shift": ta.shift,
+                        "presents": presents,
+                        "absents": absents,
+                        "on_leaves": on_leaves,
+                        "half_days": half_days,
+                        "from_homes": from_homes,
+                        "lates": cint(ta.get("late_entry")),
+                        "earlies": cint(ta.get("early_exit"))
+                    }
+                })
         
-        shifts_details = frappe.db.sql("""
-            SELECT st.name as shift, IFNULL(presents.total, 0) AS presents, IFNULL(absents.total, 0) AS absents, IFNULL(on_leaves.total, 0) AS on_leaves,
-                IFNULL(half_days.total, 0) AS half_days, IFNULL(from_homes.total, 0) AS from_homes, IFNULL(lates.total, 0) AS lates, IFNULL(earlies.total, 0) AS earlies
-            FROM `tabShift Type` st
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Present' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) presents ON presents.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Absent' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) absents ON absents.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='On Leave' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) on_leaves ON on_leaves.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Half Day' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) half_days ON half_days.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE status='Work From Home' AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) from_homes ON from_homes.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE late_entry=1 AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) lates ON lates.shift=st.name
-            LEFT JOIN (SELECT shift, COUNT(name) AS total FROM `tabAttendance` WHERE early_exit=1 AND docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() GROUP BY shift) earlies ON earlies.shift=st.name
-            WHERE st.name IN (SELECT shift FROM `tabAttendance` WHERE docstatus=1 AND IFNULL(shift, '') <> '' AND attendance_date=curdate() group by shift)
+        attendance_employee_list_str = [f"'{emp}'"for emp in attendance_employee_list]
+        attendance_employee_list_str.append("''")
+        attendance_employee_list_str = ", ".join(attendance_employee_list_str)
+        logs = frappe.db.sql(f"""
+            SELECT *
+            FROM `tabEmployee Checkin`
+            WHERE CAST(time AS DATE)='{toda_is}' AND IFNULL(shift, '') <> '' 
+                  AND employee NOT IN ({attendance_employee_list_str})
         """, as_dict=True)
-        for sd in shifts_details:
-            pass
-
+        log_per_employee = {}
+        for log in logs:
+            if log_per_employee.get(log.employee):
+                emp_logs = log_per_employee.get(log.employee, {})
+                if emp_logs.get(log.shift):
+                    elis = emp_logs.get(log.shift, [])
+                    elis.append(log)
+                    emp_logs.update({
+                        f"{log.shift}": elis
+                    })
+                else:
+                    emp_logs.update({
+                        f"{log.shift}": [log]
+                    })
+            else:
+                log_per_employee.update({
+                    f"{log.employee}": {
+                        f"{log.shift}": [log]
+                    }
+                })
+        for emp, sd in log_per_employee.items():
+            for s, logs_in_shift in sd.items():
+                status, total_working_hours, late_entry, early_exit, in_time, out_time = get_attendance(s, logs_in_shift)
+                presents = 1 if  status == "Present" else 0
+                absents = 1 if  status == "Absent" else 0
+                on_leaves = 1 if  status == "On Leave" else 0
+                half_days = 1 if  status == "Half Day" else 0
+                from_homes = 1 if  status == "Work From Home" else 0
+                if shifts_details.get(s):
+                    old_shift_data = shifts_details.get(s, {})
+                    shift_data = {
+                        "shift": s,
+                        "presents": cint(old_shift_data.get("presents")) + presents,
+                        "absents": cint(old_shift_data.get("absents")) + absents,
+                        "on_leaves": cint(old_shift_data.get("on_leaves")) + on_leaves,
+                        "half_days": cint(old_shift_data.get("half_days")) + half_days,
+                        "from_homes": cint(old_shift_data.get("from_homes")) + from_homes,
+                        "lates": cint(old_shift_data.get("lates")) + cint(late_entry),
+                        "earlies": cint(old_shift_data.get("earlies")) + cint(early_exit),
+                    }
+                    shifts_details.update({
+                        f"{s}": shift_data
+                    })
+                else:
+                    shifts_details.update({
+                        f"{s}":{
+                            "shift": s,
+                            "presents": presents,
+                            "absents": absents,
+                            "on_leaves": on_leaves,
+                            "half_days": half_days,
+                            "from_homes": from_homes,
+                            "lates": cint(late_entry),
+                            "earlies": cint(early_exit)
+                        }
+                    })
+        shifts_details = [v for k, v in shifts_details.items()]
         home_details.update({
             "saas_config" :saas_config,
-            "shifts_details": shifts_details
+            "shifts_details": shifts_details,
+            "attendance_report_date": toda_is
         })
     home_details.update({
         "date":date,
@@ -360,3 +455,56 @@ def get_directory_size(path):
     
     # display size
     return  int(str(size))/1000000.0
+
+def get_attendance(shift, logs):
+    from mosyr.overrides import calculate_working_hours
+
+    shift = frappe.get_doc("Shift Type", shift)
+    late_entry = early_exit = False
+    total_working_hours, in_time, out_time = calculate_working_hours(
+        logs,
+        shift.determine_check_in_and_check_out,
+        shift.working_hours_calculation_based_on,
+    )
+    if (
+        cint(shift.enable_entry_grace_period)
+        and in_time
+        and in_time
+        > logs[0].shift_start
+        + timedelta(minutes=cint(shift.late_entry_grace_period))
+    ):
+        late_entry = True
+
+    if (
+        cint(shift.enable_exit_grace_period)
+        and out_time
+        and out_time
+        < logs[0].shift_end - timedelta(minutes=cint(shift.early_exit_grace_period))
+    ):
+        early_exit = True
+
+    if (
+        shift.working_hours_threshold_for_half_day
+        and total_working_hours < shift.working_hours_threshold_for_half_day
+    ):
+        return (
+            "Half Day",
+            total_working_hours,
+            late_entry,
+            early_exit,
+            in_time,
+            out_time,
+        )
+    if (
+        shift.working_hours_threshold_for_absent
+        and total_working_hours < shift.working_hours_threshold_for_absent
+    ):
+        return (
+            "Absent",
+            total_working_hours,
+            late_entry,
+            early_exit,
+            in_time,
+            out_time,
+        )
+    return "Present", total_working_hours, late_entry, early_exit, in_time, out_time
