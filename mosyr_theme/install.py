@@ -321,16 +321,22 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Salary Structure",
+            "doc_name": "Payroll Register Tool",
             "parent_name": "payroll",
             "icon": "",
         },
-        {
-            "type": "DocType",
-            "doc_name": "Salary Structure Assignment",
-            "parent_name": "payroll",
-            "icon": "",
-        },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Salary Structure",
+        #     "parent_name": "payroll",
+        #     "icon": "",
+        # },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Salary Structure Assignment",
+        #     "parent_name": "payroll",
+        #     "icon": "",
+        # },
         {
             "type": "DocType",
             "doc_name": "Employee Benefit",
