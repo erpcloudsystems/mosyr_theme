@@ -162,7 +162,7 @@
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
                             <div class="card-title">
-                                <h5 class="m-0 me-2">{{ __("Daily Attendance Record") }}</h5>
+                                <h5 class="m-0 me-2">{{ __("Attendance Records in") +" "+attendance_report_date  }}</h5>
                             </div>
                             <table class="table table-bordered text-center">
                                 <tr>
@@ -178,14 +178,14 @@
                                 {% if(shifts_details.length) { %}
                                     {% for shift_detail in shifts_details %}
                                     <tr >
-                                    <td>{{shift_detail.shift}}</td>
-                                    <td>{{shift_detail.presents}}</td>
-                                    <td>{{shift_detail.from_homes}}</td>
-                                    <td>{{shift_detail.half_days}}</td>
-                                    <td>{{shift_detail.lates}}</td>
-                                    <td>{{shift_detail.earlies}}</td>
-                                    <td>{{shift_detail.absents}}</td>
-                                    <td>{{shift_detail.on_leaves}}</td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.shift}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.presents}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.from_homes}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.half_days}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.lates}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.earlies}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.absents}}</span></td>
+                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.on_leaves}}</span></td>
                                     </tr>
                                     {% endfor %}
                                 {% } else { %}

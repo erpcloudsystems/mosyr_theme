@@ -91,18 +91,8 @@ frappe.views.Workspace.prototype.make_page = function (page) {
     }
     let attendance = $('.attendance')
     attendance.click(function (e) {
-        e.stopPropagation()
-        let status = e.target.getAttribute('data-val')
-        frappe.call({
-            method: "mosyr_theme.api.get_attendance_details",
-            args:{status: status},
-            callback: function(r){
-                (new frappe.ui.Dialog({
-                    
-                })).show()
-            }
-        })
-        console.log(status)
+        e.stopPropagation();
+        frappe.set_route("query-report", "Employee Attendance Sheet");
     });
 }
 
