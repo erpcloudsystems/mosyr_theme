@@ -5,3 +5,4 @@ mosyr_theme.patches.update_sidebar_itemsv3
 mosyr_theme.patches.update_sidebar_items_v4
 mosyr_theme.patches.update_sidebar_itemsv5
 mosyr_theme.patches.update_sidebar_items_v6
+mosyr_theme.patches.update_sidebar_itemsv6
