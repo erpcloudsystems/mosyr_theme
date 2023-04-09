@@ -274,7 +274,7 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Attendance Request",
-            "parent_name": "Timesheet Attendees management",
+            "parent_name": "Self service",
             "icon": "",
         },
         {
