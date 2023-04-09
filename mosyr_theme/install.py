@@ -321,22 +321,16 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Payroll Register Tool",
+            "doc_name": "Salary Structure",
             "parent_name": "payroll",
             "icon": "",
         },
-        # {
-        #     "type": "DocType",
-        #     "doc_name": "Salary Structure",
-        #     "parent_name": "payroll",
-        #     "icon": "",
-        # },
-        # {
-        #     "type": "DocType",
-        #     "doc_name": "Salary Structure Assignment",
-        #     "parent_name": "payroll",
-        #     "icon": "",
-        # },
+        {
+            "type": "DocType",
+            "doc_name": "Salary Structure Assignment",
+            "parent_name": "payroll",
+            "icon": "",
+        },
         {
             "type": "DocType",
             "doc_name": "Employee Benefit",
@@ -400,13 +394,13 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Compensatory Leave Request",
-            "parent_name": "Leave",
+            "parent_name": "Self service",
             "icon": "",
         },
         {
             "type": "DocType",
             "doc_name": "Travel Request",
-            "parent_name": "Leave",
+            "parent_name": "Self service",
             "icon": "",
         },
         {
