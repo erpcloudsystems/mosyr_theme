@@ -45,15 +45,15 @@ side_bar_static = {
     "sidebar_item": [
         {
             "type": "DocType",
-            "doc_name": "System Controller",
+            "doc_name": "Company",
             "parent_name": "System management",
             "icon": "upload",
         },
         {
             "type": "DocType",
-            "doc_name": "Company Controller",
+            "doc_name": "System Controller",
             "parent_name": "System management",
-            "icon": "tool",
+            "icon": "upload",
         },
         {
             "type": "DocType",
