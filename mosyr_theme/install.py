@@ -97,12 +97,12 @@ side_bar_static = {
             "parent_name": "HR management",
             "icon": "permission",
         },
-        {
-            "type": "DocType",
-            "doc_name": "Employee Grade",
-            "parent_name": "HR management",
-            "icon": "insert-below",
-        },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Employee Grade",
+        #     "parent_name": "HR management",
+        #     "icon": "insert-below",
+        # },
         {
             "type": "DocType",
             "doc_name": "Employment Type",
