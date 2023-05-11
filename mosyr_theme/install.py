@@ -111,12 +111,6 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Shift Type",
-            "parent_name": "HR management",
-            "icon": "group-by",
-        },
-        {
-            "type": "DocType",
             "doc_name": "Shift Builder",
             "parent_name": "HR management",
             "icon": "group-by",
