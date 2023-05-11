@@ -4,23 +4,23 @@ frappe.ui.Page.prototype.add_main_section = function () {
     if (this.single_column) {
         // nesting under col-sm-12 for consistency
         this.add_view("main", '<div class="row layout-main">\
-					<div class="col-md-12 layout-main-section-wrapper">\
+                    <div class="col-md-12 layout-main-section-wrapper">\
                         <div class="employee-cards row g-4 mb-4"></div>\
                         <div class="layout-main-section"></div>\
-						<div class="layout-footer hide"></div>\
-					</div>\
-				</div>');
+                        <div class="layout-footer hide"></div>\
+                    </div>\
+                </div>');
     } else {
         this.add_view("main", `
-				<div class="row layout-main">
-					<div class="col-lg-2 layout-side-section"></div>
-					<div class="col layout-main-section-wrapper">
+                <div class="row layout-main">
+                    <div class="col-lg-2 layout-side-section"></div>
+                    <div class="col layout-main-section-wrapper">
                         <div class="employee-cards row g-4 mb-4"></div>\
-						<div class="layout-main-section"></div>
-						<div class="layout-footer hide"></div>
-					</div>
-				</div>
-			`);
+                        <div class="layout-main-section"></div>
+                        <div class="layout-footer hide"></div>
+                    </div>
+                </div>
+            `);
     }
 
     this.setup_page();
@@ -100,6 +100,28 @@ frappe.views.Container.prototype.change_to = function (label) {
         totalInactive('Left')
     } else {
         $('.employee-cards').empty();
+    }
+
+    if (currentDoc == 'Loan' && listCurrentDoc == 'List') {
+        $(document).ready(function(){
+            setTimeout(function() { 
+                frappe.call({
+                    'method': 'mosyr_theme.api.get_loan_totals',
+                    callback: function(r){
+                        let totals = r.message.totals
+                        const totals_result = `
+                            <p class="total-title">Total Payable Amount: <span class="total-val">${totals.total_payment}</span></p>
+                            <p class="total-title">Total Amount Paid: <span class="total-val">${totals.total_amount_paid}</span></p>
+                            <p class="total-title">Total Amount Remaining: <span class="total-val">${totals.total_amount_remaining}</span></p>
+                        `;
+                        $("#loan-totals").append(totals_result)
+                        $('#loan-totals').css("border-top","1px solid #f4f5f6");
+                    }
+                })
+            }, 2000);
+        });
+    } else {
+        $('#loan-totals').empty();
     }
 
     return this.page;

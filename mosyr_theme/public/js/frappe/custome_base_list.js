@@ -1,7 +1,8 @@
 frappe.views.BaseList.prototype.setup_paging_area = function () {
     const paging_values = [20, 100, 500];
     this.$paging_area = $(
-        `<div class="list-paging-area level">
+        `<div id='loan-totals'></div>
+        <div class="list-paging-area level">
             <div class="level-left">
                 <div class="btn-group">
                     ${paging_values.map((value) => `
