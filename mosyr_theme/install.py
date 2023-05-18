@@ -454,7 +454,7 @@ side_bar_static = {
         },
         {
             "type": "DocType",
-            "doc_name": "Vehicle Service",
+            "doc_name": "Vehicle Services",
             "parent_name": "Vehicle management",
             "icon": "",
         },
