@@ -458,12 +458,12 @@ side_bar_static = {
             "parent_name": "Vehicle management",
             "icon": "",
         },
-        {
-            "type": "DocType",
-            "doc_name": "Vehicle Services",
-            "parent_name": "Vehicle management",
-            "icon": "",
-        },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Vehicle Services",
+        #     "parent_name": "Vehicle management",
+        #     "icon": "",
+        # },
         {
             "type": "DocType",
             "doc_name": "Document Manager",
