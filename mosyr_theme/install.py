@@ -249,6 +249,12 @@ side_bar_static = {
         },
         {
             "type": "DocType",
+            "doc_name": "Vehicle Services",
+            "parent_name": "Self service",
+            "icon": "",
+        },
+        {
+            "type": "DocType",
             "doc_name": "Mosyr Form",
             "parent_name": "E-form",
             "icon": "edit",
