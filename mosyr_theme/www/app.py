@@ -47,8 +47,6 @@ def get_context(context):
 
     style_urls = hooks["app_include_css"]
 
-    sidebar_items = get_sidebar_items()
-
     # Dashboard Data
     user_name = frappe.session.user
     # Loans
@@ -138,7 +136,6 @@ def get_context(context):
             "google_analytics_id": frappe.conf.get("google_analytics_id"),
             "google_analytics_anonymize_ip": frappe.conf.get("google_analytics_anonymize_ip"),
             "mixpanel_id": frappe.conf.get("mixpanel_id"),
-            "side_items": sidebar_items,
             "user_name": user_name,
             "setup_complete": frappe.utils.cint(frappe.db.get_value("System Settings", "System Settings", "setup_complete") or 0)
         }

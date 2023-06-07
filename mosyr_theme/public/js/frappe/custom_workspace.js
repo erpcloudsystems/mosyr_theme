@@ -29,7 +29,7 @@ frappe.views.Workspace.prototype.make_page = function (page) {
         "prev_year_totals_list": 0,
     }
 
-    if (frappe.boot.user && frappe.boot.user.user_type == "Employee Self Service") {
+    if (frappe.boot.user && frappe.boot.role_profile == "Self Service") {
         workspace_html = "self_service"
     }
     workspace_details = { ...workspace_details, ...(frappe.boot.home_details || {}) }

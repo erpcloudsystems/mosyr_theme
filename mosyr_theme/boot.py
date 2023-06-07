@@ -6,23 +6,28 @@ from frappe.utils import flt ,cint
 import datetime
 from datetime import datetime
 from datetime import datetime, timedelta
+from frappe.permissions import get_valid_perms
 
 def boot_session(bootinfo):
     bootinfo.language = frappe.local.lang
+    bootinfo.role_profile = frappe.db.get_value("User", frappe.session.user, "role_profile_name")
     bootinfo.sidebar_items = get_sidebar_items()
     bootinfo.desk_settings = get_desk_settings()
     bootinfo.home_details = get_home_details()
 
 
-def get_sidebar_items():
+def get_sidebar_items():    
     system_controller = frappe.get_single('System Controller')
     labels = []
     for row in system_controller.sidebar_labels:
         labels.append({'label': row.label, 'name': row.label,
                       'icon': row.icon, 'child_items': []})
 
+    result = get_valid_perms(user=frappe.session.user)
+    user_doctypes = [d.parent for d in result]
     for label in labels:
-        for row in system_controller.sidebar_item:
+        sidebar_items_list = frappe.get_list("SideBar Item Table", fields=["doc_name", "type", "parent_name", "label", "icon"], filters={"parent_name": label.get('label')})
+        for row in sidebar_items_list:
             if frappe.session.user not in ["Administrator", "support@mosr.io"]:
                 if row.doc_name in ["Translation", "System Controller"]:
                     continue
@@ -34,22 +39,23 @@ def get_sidebar_items():
                 has_permission = frappe.has_permission(
                     doctype=row.doc_name, user=frappe.session.user)
                 route = '-'.join(row.doc_name.lower().split(' '))
-
-            if label.get('label') == row.parent_name:
-                user_type = frappe.get_doc("User" , frappe.session.user).user_type
-                if user_type in ['System User' , 'Website User' , 'SaaS Manager']:
+                
+            
+            role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
+            user_type = frappe.get_doc("User" , frappe.session.user).user_type
+            
+            if role_profile_name in ['SaaS Manager']:
+                label.get('child_items').append({
+                            'name': row.doc_name, 'label': row.label,
+                            'has_permission': has_permission, 'icon': row.icon, 'route': route
+                        })
+            else:
+                if row.doc_name in user_doctypes:
                     label.get('child_items').append({
-                                'name': row.doc_name, 'label': row.label,
-                                'has_permission': has_permission, 'icon': row.icon, 'route': route
-                            })
-                else:
-                    user_doctypes=frappe.get_doc("User Type" , user_type).user_doctypes
-                    for doctype in user_doctypes:
-                        if doctype.document_type == row.doc_name:
-                            label.get('child_items').append({
-                                'name': row.doc_name, 'label': row.label,
-                                'has_permission': has_permission, 'icon': row.icon, 'route': route
-                            })
+                        'name': row.doc_name, 'label': row.label,
+                        'has_permission': has_permission, 'icon': row.icon, 'route': route
+                    })
+
     reports = frappe.db.sql(f""" SELECT DISTINCT(cr.report), sit.parent_name
                             FROM `tabCustom Role` cr
                             LEFT JOIN `tabHas Role` hr ON hr.parent=cr.name
@@ -120,8 +126,8 @@ def get_home_details():
     timesheet_list = []
     saas_config = {}
     current_employee = get_employee_by_user_id(frappe.session.user)
-    user_type = current_user.user_type
-    if user_type == 'Employee Self Service':
+    role_profile_name = current_user.role_profile_name
+    if role_profile_name == 'Self Service':
         if current_employee:
             current_employee = {
                 'emp_name': current_employee.employee_name,
