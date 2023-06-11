@@ -136,7 +136,13 @@ def get_home_details():
             emp = get_employee_by_user_id(
                 frappe.session.user).get("name", False)
             if emp:
-                leave_details = get_leave_details(emp, frappe.utils.nowdate())
+                try:
+                    leave_details = get_leave_details(emp, frappe.utils.nowdate())
+                except Exception as e:
+                    frappe.log_error(
+                        title= ("Error While boot"),
+                        message=e
+                    )
                 paid_salaries = frappe.db.sql(
                     """SELECT SUM(base_gross_pay) as base_gross_pay, SUM(base_total_deduction) base_total_deduction FROM `tabSalary Slip` WHERE employee='{}' and docstatus=1 """.format(emp), as_dict=True)
                 loans = frappe.db.sql(
@@ -186,8 +192,13 @@ def get_home_details():
             emp = get_employee_by_user_id(
                 frappe.session.user).get("name", False)
             if emp:
-                leave_details = get_leave_details(emp, frappe.utils.nowdate())
-
+                try:
+                    leave_details = get_leave_details(emp, frappe.utils.nowdate())
+                except Exception as e:
+                    frappe.log_error(
+                        title= ("Error While boot"),
+                        message=e
+                    )
         else:
             current_employee = {
                 'emp_name': current_user.full_name,
