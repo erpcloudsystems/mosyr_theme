@@ -323,3 +323,28 @@ body.modal-open[style^="padding-right"] header.navbar {
 		font-size: 14px !important;
 	}
 }
+
+.mr-5p {
+	margin-right: 5px;
+}
+.tab-btn  {
+	color: #fff !important;
+	border-radius: 5px !important;
+	font-size: 14px !important;
+	font-weight: 700 !important;
+}
+.tab-btn.present {
+	background-color: #1bbf8a  !important;
+}
+.tab-btn.late-entry {
+	background-color: #f7b03b  !important;
+}
+.tab-btn.early-exit {
+	background-color: #827f7f !important;
+}
+.tab-btn.overtime {
+	background-color: #674577  !important;
+}
+.tab-btn.absent {
+	background-color: #db5249  !important;
+}
