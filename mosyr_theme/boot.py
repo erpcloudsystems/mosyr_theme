@@ -44,7 +44,7 @@ def get_sidebar_items():
             role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
             user_type = frappe.get_doc("User" , frappe.session.user).user_type
             
-            if role_profile_name in ['SaaS Manager']:
+            if role_profile_name in ['SaaS Manager', 'Self Service']:
                 label.get('child_items').append({
                             'name': row.doc_name, 'label': row.label,
                             'has_permission': has_permission, 'icon': row.icon, 'route': route
@@ -403,6 +403,7 @@ def get_home_details():
             "attendance_report_date": toda_is
         })
     attendence_details = get_employee_attendence_details()
+    
     home_details.update({
         "date":date,
         "current_user": current_user,
@@ -538,7 +539,7 @@ def get_employee_attendence_details():
         "early_exit":[],
         "overtime":[]
     }
-    attendance_list = frappe.db.get_list("Attendance", fields=["name"], filters={"attendance_date":date})
+    attendance_list = frappe.db.get_list("Attendance", fields=["name"], filters={"attendance_date":date}, ignore_permissions=True)
     for row in attendance_list:
         doc = frappe.get_doc("Attendance", row.get("name"))
         if doc.status == "Present" and not doc.late_entry and not doc.early_exit:
@@ -572,8 +573,5 @@ def get_employee_attendence_details():
                 "in_time": "_",
                 "out_name": "_"
             })
-    print("**************************************************")
-    print(result)
-    print(attendance_list)
-    print("**************************************************")
+
     return result
