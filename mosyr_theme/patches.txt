@@ -9,8 +9,4 @@ mosyr_theme.patches.update_sidebar_itemsv6
 mosyr_theme.patches.update_sidebar_items_v7
 mosyr_theme.patches.update_sidebar_items_v8
 mosyr_theme.patches.update_sidebar_items_v9
-mosyr_theme.patches.update_sidebar_items_v10
-mosyr_theme.patches.update_sidebar_items_v11
-mosyr_theme.patches.update_sidebar_items_v12
-mosyr_theme.patches.update_sidebar_items_v13
-mosyr_theme.patches.update_sidebar_items_v14
+mosyr_theme.patches.update_sidebar_items_1

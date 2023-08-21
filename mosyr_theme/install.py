@@ -316,6 +316,12 @@ side_bar_static = {
         },
         {
             "type": "DocType",
+            "doc_name": "Employee Shift Change Tool",
+            "parent_name": "Timesheet Attendees management",
+            "icon": "",
+        },
+        {
+            "type": "DocType",
             "doc_name": "Payroll Settings",
             "parent_name": "payroll",
             "icon": "",
