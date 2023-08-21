@@ -32,6 +32,7 @@ side_bar_static = {
         {"label": "HR management", "icon": "s"},
         {"label": "Employees list", "icon": "share"},
         {"label": "Self service", "icon": "reply-all"},
+        {"label": "Letters", "icon": "small-file"},
         {"label": "E-form", "icon": "permission"},
         {"label": "Timesheet Attendees management", "icon": "milestone"},
         {"label": "payroll", "icon": "accounting"},
@@ -97,12 +98,12 @@ side_bar_static = {
             "parent_name": "HR management",
             "icon": "permission",
         },
-        {
-            "type": "DocType",
-            "doc_name": "Employee Grade",
-            "parent_name": "HR management",
-            "icon": "insert-below",
-        },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Employee Grade",
+        #     "parent_name": "HR management",
+        #     "icon": "insert-below",
+        # },
         {
             "type": "DocType",
             "doc_name": "Employment Type",
@@ -245,6 +246,18 @@ side_bar_static = {
             "type": "DocType",
             "doc_name": "Exit Permission",
             "parent_name": "Self service",
+            "icon": "",
+        },
+        {
+            "type": "DocType",
+            "doc_name": "Vehicle Services",
+            "parent_name": "Self service",
+            "icon": "",
+        },
+        {
+            "type": "DocType",
+            "doc_name": "Letter",
+            "parent_name": "Letters",
             "icon": "",
         },
         {
@@ -458,12 +471,12 @@ side_bar_static = {
             "parent_name": "Vehicle management",
             "icon": "",
         },
-        {
-            "type": "DocType",
-            "doc_name": "Vehicle Service",
-            "parent_name": "Vehicle management",
-            "icon": "",
-        },
+        # {
+        #     "type": "DocType",
+        #     "doc_name": "Vehicle Services",
+        #     "parent_name": "Vehicle management",
+        #     "icon": "",
+        # },
         {
             "type": "DocType",
             "doc_name": "Document Manager",
