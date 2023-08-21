@@ -2,7 +2,7 @@
 import subprocess
 import frappe
 from erpnext.hr.doctype.leave_application.leave_application import get_leave_details
-from frappe.utils import flt ,cint
+from frappe.utils import flt ,cint, today
 import datetime
 from datetime import datetime
 from datetime import datetime, timedelta
@@ -44,7 +44,7 @@ def get_sidebar_items():
             role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
             user_type = frappe.get_doc("User" , frappe.session.user).user_type
             
-            if role_profile_name in ['SaaS Manager']:
+            if role_profile_name in ['SaaS Manager', 'Self Service']:
                 label.get('child_items').append({
                             'name': row.doc_name, 'label': row.label,
                             'has_permission': has_permission, 'icon': row.icon, 'route': route
@@ -402,6 +402,8 @@ def get_home_details():
             "shifts_details": shifts_details,
             "attendance_report_date": toda_is
         })
+    attendence_details = get_employee_attendence_details()
+    
     home_details.update({
         "date":date,
         "current_user": current_user,
@@ -416,6 +418,7 @@ def get_home_details():
         "leave_encashment": leave_encashment,
         "timesheet_list": timesheet_list,
         "total_leave_all_employees":total_leave_all_employees,
+        "attendence_details": attendence_details,
         # Self Services
         "salary_details": {"salary_details": salary_details[:3], "len": len(salary_details)},
         "work_experience": {"work_experience": work_experience[:3], "len": len(work_experience)},
@@ -525,3 +528,50 @@ def get_attendance(shift, logs):
             out_time,
         )
     return "Present", total_working_hours, late_entry, early_exit, in_time, out_time
+
+
+def get_employee_attendence_details():
+    date = '2023-08-16'
+    result = {
+        "present":[],
+        "late_entry":[],
+        "absent":[],
+        "early_exit":[],
+        "overtime":[]
+    }
+    attendance_list = frappe.db.get_list("Attendance", fields=["name"], filters={"attendance_date":date}, ignore_permissions=True)
+    for row in attendance_list:
+        doc = frappe.get_doc("Attendance", row.get("name"))
+        if doc.status == "Present" and not doc.late_entry and not doc.early_exit:
+            result.get('present').append({
+                "employee_name":doc.employee_name,
+                "shift":doc.shift,
+                "in_time": doc.in_time,
+                "out_name":doc.out_time
+            })
+            
+        elif doc.status == "Present" and doc.late_entry:
+            result.get('late_entry').append({
+                "employee_name":doc.employee_name,
+                "shift":doc.shift,
+                "in_time": doc.in_time,
+                "out_name":doc.out_time
+            })
+            
+        elif doc.status == "Present" and doc.early_exit:
+            result.get('early_exit').append({
+                "employee_name":doc.employee_name,
+                "shift":doc.shift,
+                "in_time": doc.in_time,
+                "out_name":doc.out_time
+            })
+        
+        elif doc.status == "Absent":
+            result.get('absent').append({
+                "employee_name":doc.employee_name,
+                "shift":doc.shift,
+                "in_time": "_",
+                "out_name": "_"
+            })
+
+    return result

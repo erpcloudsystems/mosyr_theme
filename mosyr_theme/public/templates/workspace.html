@@ -5,14 +5,13 @@
                 <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
                     <div class="card" style="min-height: 120px;">
                         <div class="card-body custom-bg">
-                            <h5 class="m-0 me-2"
-                            style="clear: both;
+                            <h5 class="m-0 me-2" style="clear: both;
                             overflow: hidden;
                             white-space: nowrap;
-                            max-width: 250px;"
-                            >{{ __("Welcome") }} {{ __(current_employee.emp_name) }}</h5>
+                            max-width: 250px;">{{ __("Welcome") }} {{ __(current_employee.emp_name) }}</h5>
                             <div class="d-flex align-items-center justify-content-between">
-                                <a href="{{ current_employee.emp_route }}" class="text-primary create-new-doc" style="font-size: 1.125rem; font-weight: 500;">
+                                <a href="{{ current_employee.emp_route }}" class="text-primary create-new-doc"
+                                    style="font-size: 1.125rem; font-weight: 500;">
                                     {{ __("View Profile") }}
                                 </a>
                             </div>
@@ -29,33 +28,33 @@
                                 </div>
                                 <script>
                                     function currentTime() {
-                                            let date = new Date(); 
-                                            let hh = date.getHours();
-                                            let mm = date.getMinutes();
-                                            let ss = date.getSeconds();
-                                            let dd = date.getDate();
-                                            let m  = (date.getMonth())+1;
-                                            let yy = date.getFullYear();
-                                            let session = "AM";
+                                        let date = new Date();
+                                        let hh = date.getHours();
+                                        let mm = date.getMinutes();
+                                        let ss = date.getSeconds();
+                                        let dd = date.getDate();
+                                        let m = (date.getMonth()) + 1;
+                                        let yy = date.getFullYear();
+                                        let session = "AM";
 
-                                            if(hh == 0){
-                                                hh = 12;
-                                            }
-                                            if(hh > 12){
-                                                hh = hh - 12;
-                                                session = "PM";
-                                            }
+                                        if (hh == 0) {
+                                            hh = 12;
+                                        }
+                                        if (hh > 12) {
+                                            hh = hh - 12;
+                                            session = "PM";
+                                        }
 
-                                            hh = (hh < 10) ? "0" + hh : hh;
-                                            mm = (mm < 10) ? "0" + mm : mm;
-                                            ss = (ss < 10) ? "0" + ss : ss;
-                                            
-                                            let time = `${dd}-${m}-${yy} ${hh}:${mm}:${ss} ${session}`;
+                                        hh = (hh < 10) ? "0" + hh : hh;
+                                        mm = (mm < 10) ? "0" + mm : mm;
+                                        ss = (ss < 10) ? "0" + ss : ss;
 
-                                            document.getElementById("current-clock-datetime").innerText = time; 
-                                            let t = setTimeout(function(){ currentTime() }, 1000);
-                                            }
-                                            currentTime();
+                                        let time = `${dd}-${m}-${yy} ${hh}:${mm}:${ss} ${session}`;
+
+                                        document.getElementById("current-clock-datetime").innerText = time;
+                                        let t = setTimeout(function () { currentTime() }, 1000);
+                                    }
+                                    currentTime();
                                 </script>
                                 <span class="badge  rounded p-2">
                                     <i class="bx bx-time bx-sm"></i>
@@ -65,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row"> 
+            <div class="row">
                 <div class="col-md-6 col-lg-6 col-xl-6 order-0 mb-4">
                     {% if(employee>0) { %}
                     <div class="card mb-2">
@@ -79,11 +78,9 @@
                                     {{ __("Employee") }}</span>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
-                                style="width: 
+                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 
                                 calc({{ active_employee }} * 100% / {{ employee }})
-                                "
-                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                " aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +89,7 @@
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h5 class="card-title m-0 me-2">{{ __("Employees") }}</h5>
                         </div>
-                        
+
                         <div class="card-body">
                             <span class="card-title text-nowrap mb-1">{{__("Nothing to show")}}</span>
                         </div>
@@ -114,7 +111,8 @@
                                         <img src="/assets/mosyr_theme/img/icons/unicons/chart.png" alt="User"
                                             class="rounded" />
                                     </div>
-                                    <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                    <div
+                                        class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                         <div class="me-2">
                                             <small class="text-muted d-block mb-1">{{ row.employee_name }}</small>
                                             <h6 class="mb-0">{{ row.customer }} - {{ row.parent_project }}</h6>
@@ -133,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                {%  if (len_leave_allocation) { %}
+                {% if (len_leave_allocation) { %}
                 <div class="col-md-12 col-lg-12 order-1 mb-4">
                     <div class="card">
                         <div class="card-body" id="leaves-chart-container"></div>
@@ -146,13 +144,12 @@
                             <div class="card-title">
                                 <h5 class="m-0 me-2">{{ __("Leave Statistics") }}</h5>
                             </div>
-                            <div class="d-flex align-items-start justify-content-center"
-                            style="width: 150px;
+                            <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                             position: absolute;
                             left: 50%;
                             top: 50%;
                             transform: translate(-50%, -50%);">
-                                   <span class="text-center">{{ __("No data to show") }}</span>
+                                <span class="text-center">{{ __("No data to show") }}</span>
                             </div>
                         </div>
                     </div>
@@ -162,38 +159,152 @@
                     <div class="card" style="height: 100%;">
                         <div class="card-body">
                             <div class="card-title">
-                                <h5 class="m-0 me-2">{{ __("Attendance Records in") +" "+attendance_report_date  }}</h5>
+                                <h5 class="m-0 me-2">{{ __("Attendance Records in") +" "+attendance_report_date }}</h5>
                             </div>
-                            <table class="table table-bordered text-center">
-                                <tr>
-                                  <th class="attendance">{{__("Shift")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Present">{{__("Present")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Work From Home">{{__("Work From Home")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Half Day">{{__("Half Day")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Late Entry">{{__("Late Entry")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Exit Early">{{__("Exit Early")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="Absent">{{__("Absent")}}</th>
-                                  <th class="attendance" style="cursor: pointer;" data-val="On Leave">{{__("On Leave")}}</th>
-                                </tr>
-                                {% if(shifts_details.length) { %}
-                                    {% for shift_detail in shifts_details %}
-                                    <tr >
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.shift}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.presents}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.from_homes}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.half_days}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.lates}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.earlies}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.absents}}</span></td>
-                                        <td style="padding: 5px 0 5px 0 !important;"><span>{{shift_detail.on_leaves}}</span></td>
-                                    </tr>
-                                    {% endfor %}
-                                {% } else { %}
-                                <tr class="text-center">
-                                    <td colspan="8" class="text-center"><span class="text-center">{{ __("No data to show") }}</span></td>
-                                </tr>
-                                {% } %}
-                              </table>
+                            <div>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item mr-5p">
+                                        <button class="nav-link tab-btn present active " id="present-tab" data-toggle="tab" href="#present"
+                                            role="tab" aria-controls="present" aria-selected="true">{{ __("Present") }}</button>
+                                    </li>
+                                    <li class="nav-item mr-5p">
+                                        <button class="nav-link tab-btn late-entry"  id="late_entry-tab" data-toggle="tab" href="#late_entry" role="tab"
+                                            aria-controls="late_entry" aria-selected="false">{{ __("Late Entry") }}</button>
+                                    </li>
+                                    <li class="nav-item mr-5p">
+                                        <button class="nav-link tab-btn early-exit"  id="early_exit-tab" data-toggle="tab" href="#early_exit" role="tab"
+                                        aria-controls="early_exit" aria-selected="false">{{ __("Early Exit") }}</button>
+                                    </li>
+                                    <li class="nav-item mr-5p">
+                                        <button class="nav-link tab-btn overtime"  id="overtime-tab" data-toggle="tab" href="#overtime" role="tab"
+                                        aria-controls="overtime" aria-selected="false">{{ __("Overtime") }}</button>
+                                    </li>
+                                    <li class="nav-item mr-5p">
+                                        <button class="nav-link tab-btn absent"  id="absent-tab" data-toggle="tab" href="#absent" role="tab"
+                                            aria-controls="absent" aria-selected="false">{{ __("Absent") }}</button>
+                                    </li>
+                                    
+                                    <!-- Add more tabs as needed -->
+                                </ul>
+                                {% if attendence_details %}
+                                <div class="tab-content p-0" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="present" role="tabpanel"
+                                        aria-labelledby="present-tab">
+                                        {% if attendence_details.present %}
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>{{__("Shift")}}</th>
+                                                    <th>{{__("Employee")}}</th>
+                                                    <th>{{__("In Time")}}</th>
+                                                    <th>{{__("Out Time")}}</th>
+                                                </tr>
+                                                {% for row in attendence_details.present %}
+                                                    <tr>
+                                                        <td>{{__(row.shift)}}</td>
+                                                        <td>{{__(row.employee_name)}}</td>
+                                                        <td>{{__(row.in_time)}}</td>
+                                                        <td>{{__(row.out_name)}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% else %}
+                                            <p>There Is No Present Employees</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="tab-pane fade" id="late_entry" role="tabpanel" aria-labelledby="late_entry-tab">
+                                        {% if attendence_details.late_entry %}
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>{{__("Shift")}}</th>
+                                                    <th>{{__("Employee")}}</th>
+                                                    <th>{{__("In Time")}}</th>
+                                                    <th>{{__("Out Time")}}</th>
+                                                </tr>
+                                                {% for row in attendence_details.late_entry %}
+                                                    <tr>
+                                                        <td>{{__(row.shift)}}</td>
+                                                        <td>{{__(row.employee_name)}}</td>
+                                                        <td>{{__(row.in_time)}}</td>
+                                                        <td>{{__(row.out_name)}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% else %}
+                                            <p>There Is No Present Employees</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="tab-pane fade" id="absent" role="tabpanel" aria-labelledby="absent-tab">
+                                        {% if attendence_details.absent %}
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>{{__("Shift")}}</th>
+                                                    <th>{{__("Employee")}}</th>
+                                                    <th>{{__("In Time")}}</th>
+                                                    <th>{{__("Out Time")}}</th>
+                                                </tr>
+                                                {% for row in attendence_details.absent %}
+                                                    <tr>
+                                                        <td>{{__(row.shift)}}</td>
+                                                        <td>{{__(row.employee_name)}}</td>
+                                                        <td>{{__(row.in_time)}}</td>
+                                                        <td>{{__(row.out_name)}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% else %}
+                                            <p>There Is No Present Employees</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="tab-pane fade" id="early_exit" role="tabpanel" aria-labelledby="early_exit-tab">
+                                        {% if attendence_details.early_exit %}
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>{{__("Shift")}}</th>
+                                                    <th>{{__("Employee")}}</th>
+                                                    <th>{{__("In Time")}}</th>
+                                                    <th>{{__("Out Time")}}</th>
+                                                </tr>
+                                                {% for row in attendence_details.early_exit %}
+                                                    <tr>
+                                                        <td>{{__(row.shift)}}</td>
+                                                        <td>{{__(row.employee_name)}}</td>
+                                                        <td>{{__(row.in_time)}}</td>
+                                                        <td>{{__(row.out_name)}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% else %}
+                                            <p>There Is No Present Employees</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="tab-pane fade" id="overtime" role="tabpanel" aria-labelledby="overtime-tab">
+                                        {% if attendence_details.overtime %}
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>{{__("Shift")}}</th>
+                                                    <th>{{__("Employee")}}</th>
+                                                    <th>{{__("In Time")}}</th>
+                                                    <th>{{__("Out Time")}}</th>
+                                                </tr>
+                                                {% for row in attendence_details.overtime %}
+                                                    <tr>
+                                                        <td>{{__(row.shift)}}</td>
+                                                        <td>{{__(row.employee_name)}}</td>
+                                                        <td>{{__(row.in_time)}}</td>
+                                                        <td>{{__(row.out_name)}}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% else %}
+                                            <p>There Is No Present Employees</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                    <p>{{ __("There Is No Employee Attendence") }}</p>
+                                {% endif %}
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -215,8 +326,7 @@
                                 </span>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-                                    style="width: 
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 
                                     calc({{ saas_config.used_space }} * 100% / {{ saas_config.storage_space }});
                                     " aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -236,8 +346,7 @@
                                 </span>
                             </div>
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-primary" role="progressbar"
-                                    style="width: 
+                                <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 
                                     calc({{ saas_config.active_users }} * 100% / {{ saas_config.available_users }});
                                     " aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -250,7 +359,9 @@
                             <h5 class="m-0 me-2">{{ __("Subscription End Date") }}</h5>
                             <div class="d-flex align-items-start justify-content-between">
                                 <div class="d-flex align-items-end mt-2">
-                                    <h4 class="mb-0 me-2 text-secondary">{{ saas_config.subscription_end_date  }} (<span style="color:#696cff !important" >{{saas_config.remaining_days}}</span> {{__("Days Remaining")}})</h4>
+                                    <h4 class="mb-0 me-2 text-secondary">{{ saas_config.subscription_end_date }} (<span
+                                            style="color:#696cff !important">{{saas_config.remaining_days}}</span>
+                                        {{__("Days Remaining")}})</h4>
                                 </div>
                                 <span class="badge bg-label-primary rounded p-2" style="line-height: 1;">
                                     <i class="bx bx-time bx-sm"></i>
@@ -280,9 +391,9 @@
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/chart-success.png"
                                         alt="chart success" class="rounded" />
-                                    </div>
                                 </div>
-                                <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
+                            </div>
+                            <span class="fw-semibold d-block mb-1">{{ __("Total Loans") }}</span>
                             <h3 class="card-title mb-2"> {{loans || "0"}} </h3>
                         </div>
                     </div>
@@ -293,7 +404,7 @@
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/cc-warning.png" alt="Credit Card"
-                                    class="rounded" />
+                                        class="rounded" />
                                 </div>
                             </div>
                             <span class="fw-semibold d-block mb-1">{{ __("Active Employee") }}</span>
@@ -307,7 +418,7 @@
                             <div class="card-title d-flex align-items-start justify-content-between">
                                 <div class="avatar flex-shrink-0">
                                     <img src="/assets/mosyr_theme/img/icons/unicons/paypal.png" alt="Credit Card"
-                                    class="rounded" />
+                                        class="rounded" />
                                 </div>
                             </div>
                             <span class="fw-semibold d-block mb-1">{{ __("Paid salaries") }}</span>
@@ -354,7 +465,7 @@
                     {% endfor %}
                     {% if(salary_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/salary-details">{{ __("Show More") }}</a>
+                        <a href="/app/salary-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -367,13 +478,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Salary Details") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -385,18 +495,18 @@
                 <div class="card-body">
                     <h5 class="m-0 me-2">{{ __("Work Experience") }}</h5>
                     {% for item in work_experience.work_experience %}
-                        <div class="d-flex align-items-start justify-content-between">
-                            <div class="d-flex align-items-end mt-2">
-                                <h6 class="mb-0">
-                                    <a href="/app/work-experience/{{ item.name }}">{{ item.name }}</a>
-                                </h6>
-                            </div>
-                            <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
-                                {{ item.workflow_state }}
-                            </span>
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/work-experience/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
                         </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
                     {% endfor %}
-                    {% if(work_experience.len > 3   ) { %}
+                    {% if(work_experience.len > 3 ) { %}
                     <span style="float: right;margin-top: 12px;">
                         <a class="" href="/app/work-experience">{{ __("Show More") }}</a>
                     </span>
@@ -411,13 +521,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Work Experience") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -429,20 +538,20 @@
                 <div class="card-body">
                     <h5 class="m-0 me-2">{{ __("Dependants Details") }}</h5>
                     {% for item in dependants_details.dependants_details %}
-                        <div class="d-flex align-items-start justify-content-between">
-                            <div class="d-flex align-items-end mt-2">
-                                <h6 class="mb-0">
-                                    <a href="/app/dependants-details/{{ item.name }}">{{ item.name }}</a>
-                                </h6>
-                            </div>
-                            <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
-                                {{ item.workflow_state }}
-                            </span>
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div class="d-flex align-items-end mt-2">
+                            <h6 class="mb-0">
+                                <a href="/app/dependants-details/{{ item.name }}">{{ item.name }}</a>
+                            </h6>
                         </div>
+                        <span class="badge {{ item.workflow_state }} rounded p-2" style="line-height: 1;">
+                            {{ item.workflow_state }}
+                        </span>
+                    </div>
                     {% endfor %}
                     {% if(dependants_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/dependants-details">{{ __("Show More") }}</a>
+                        <a href="/app/dependants-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -455,13 +564,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Dependants Details") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -486,7 +594,7 @@
                     {% endfor %}
                     {% if(passport_detail.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/passport-detail">{{ __("Show More") }}</a>
+                        <a href="/app/passport-detail">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -499,13 +607,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Passport Detail") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -530,7 +637,7 @@
                     {% endfor %}
                     {% if(health_insurance.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/health-insurance">{{ __("Show More") }}</a>
+                        <a href="/app/health-insurance">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -543,13 +650,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Health Insurance") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -574,7 +680,7 @@
                     {% endfor %}
                     {% if(contact_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/contact-details">{{ __("Show More") }}</a>
+                        <a href="/app/contact-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -587,13 +693,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Contact Details") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -618,7 +723,7 @@
                     {% endfor %}
                     {% if(emergency_contact.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/emergency-contact">{{ __("Show More") }}</a>
+                        <a href="/app/emergency-contact">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -631,13 +736,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Emergency Contact") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -662,7 +766,7 @@
                     {% endfor %}
                     {% if(educational_qualification.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/educational-qualification">{{ __("Show More") }}</a>
+                        <a href="/app/educational-qualification">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -675,13 +779,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Educational Qualification") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -706,7 +809,7 @@
                     {% endfor %}
                     {% if(personal_details.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/personal-details">{{ __("Show More") }}</a>
+                        <a href="/app/personal-details">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -719,13 +822,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Personal Details") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -750,7 +852,7 @@
                     {% endfor %}
                     {% if(employee_id.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/employee-id">{{ __("Show More") }}</a>
+                        <a href="/app/employee-id">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -763,13 +865,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Employee ID") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
@@ -794,7 +895,7 @@
                     {% endfor %}
                     {% if(lateness_permission.len > 3) { %}
                     <span style="float: right;margin-top: 12px;">
-                        <a  href="/app/lateness-permission">{{ __("Show More") }}</a>
+                        <a href="/app/lateness-permission">{{ __("Show More") }}</a>
                     </span>
                     {% } %}
                 </div>
@@ -807,13 +908,12 @@
                     <div class="card-title">
                         <h5 class="m-0 me-2">{{ __("Lateness Permission") }}</h5>
                     </div>
-                    <div class="d-flex align-items-start justify-content-center"
-                    style="width: 150px;
+                    <div class="d-flex align-items-start justify-content-center" style="width: 150px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
                     transform: translate(-50%, -50%);">
-                           <span class="text-center">{{ __("No data to show") }}</span>
+                        <span class="text-center">{{ __("No data to show") }}</span>
                     </div>
                 </div>
             </div>
