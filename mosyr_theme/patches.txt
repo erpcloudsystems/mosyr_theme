@@ -1,6 +1,5 @@
 mosyr_theme.patches.make_settings_dropdown_clean
 mosyr_theme.patches.update_sidebar_items
-mosyr_theme.patches.update_sidebar_items_v2
 mosyr_theme.patches.update_sidebar_itemsv3
 mosyr_theme.patches.update_sidebar_items_v4
 mosyr_theme.patches.update_sidebar_itemsv5
@@ -10,3 +9,4 @@ mosyr_theme.patches.update_sidebar_items_v7
 mosyr_theme.patches.update_sidebar_items_v8
 mosyr_theme.patches.update_sidebar_items_v9
 mosyr_theme.patches.update_sidebar_items_1
+mosyr_theme.patches.update_sidebar_items_v112
