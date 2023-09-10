@@ -29,9 +29,10 @@ def get_sidebar_items():
         sidebar_items_list = frappe.get_list("SideBar Item Table", fields=["doc_name", "type", "parent_name", "label", "icon"], filters={"parent_name": label.get('label')})
         for row in sidebar_items_list:
             role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
-            if frappe.session.user not in ["Administrator", "support@mosr.io"] or role_profile_name not in ["SaaS Manager", "SaaS User"]:
-                if row.doc_name in ["Translation", "System Controller", "Company"]:
-                    continue
+            if frappe.session.user not in ["Administrator", "support@mosr.io"]:
+                if role_profile_name not in ["SaaS Manager", "SaaS User"]:
+                    if row.doc_name in ["Translation", "System Controller", "Company"]:
+                        continue
             route = ''
             has_permission = False
             if row.type == 'Report':
