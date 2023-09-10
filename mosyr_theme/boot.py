@@ -29,7 +29,7 @@ def get_sidebar_items():
         sidebar_items_list = frappe.get_list("SideBar Item Table", fields=["doc_name", "type", "parent_name", "label", "icon"], filters={"parent_name": label.get('label')})
         for row in sidebar_items_list:
             if frappe.session.user not in ["Administrator", "support@mosr.io"]:
-                if row.doc_name in ["Translation", "System Controller"]:
+                if row.doc_name in ["Translation", "System Controller", "Company"]:
                     continue
             route = ''
             has_permission = False
@@ -44,11 +44,12 @@ def get_sidebar_items():
             role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
             user_type = frappe.get_doc("User" , frappe.session.user).user_type
             
-            if role_profile_name in ['SaaS Manager', 'Self Service']:
-                label.get('child_items').append({
-                            'name': row.doc_name, 'label': row.label,
-                            'has_permission': has_permission, 'icon': row.icon, 'route': route
-                        })
+            if role_profile_name in ['SaaS Manager', 'Self Service', 'SaaS User']:
+                if has_permission:
+                    label.get('child_items').append({
+                                'name': row.doc_name, 'label': row.label,
+                                'has_permission': has_permission, 'icon': row.icon, 'route': route
+                            })
             else:
                 if row.doc_name in user_doctypes:
                     label.get('child_items').append({
