@@ -513,6 +513,12 @@ side_bar_static = {
             "parent_name": "Custody management",
             "icon": "",
         },
+		{
+            "type": "DocType",
+            "doc_name": "Return Custody",
+            "parent_name": "Custody management",
+            "icon": "",
+        },
     ],
     "shortcuts": [],
     "charts": [],
