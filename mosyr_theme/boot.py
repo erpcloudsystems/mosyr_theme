@@ -21,8 +21,7 @@ def get_sidebar_items():
     labels = []
     for row in system_controller.sidebar_labels:
         labels.append({'label': row.label, 'name': row.label,
-                      'icon': row.icon, 'child_items': []})
-
+                        'icon': row.icon, 'child_items': []})
     result = get_valid_perms(user=frappe.session.user)
     user_doctypes = [d.parent for d in result]
     for label in labels:
@@ -34,8 +33,18 @@ def get_sidebar_items():
                     continue
             route = ''
             has_permission = False
+
             if row.type == 'Report':
                 route = 'query-report/' + row.doc_name
+                report_name = row.doc_name
+                user_name = frappe.session.user
+                doc = frappe.get_doc("Report", report_name)
+
+                # Check if the user has report permission on the report
+                has_report_permission = frappe.has_permission(doc.ref_doctype, user=user_name, ptype='report')
+                has_permission  =  has_report_permission
+
+
             elif row.type == 'DocType':
                 has_permission = frappe.has_permission(
                     doctype=row.doc_name, user=frappe.session.user)
@@ -43,8 +52,8 @@ def get_sidebar_items():
                 
             
             user_type = frappe.get_doc("User" , frappe.session.user).user_type
-            
             if role_profile_name in ['SaaS Manager', 'Self Service', 'SaaS User']:
+
                 if has_permission:
                     label.get('child_items').append({
                                 'name': row.doc_name, 'label': row.label,
