@@ -16,46 +16,6 @@
             </a>
         </li>
         <!-- Layouts -->
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle custom-side-link" id="{{ item.label || item.name}}">
-                <div class="add-val"></div>
-                <!-- <span class="menu-icon sidebar-icon" icon-name="{{item.icon}}">{{ frappe.utils.icon(item.icon || "folder-normal") }}</span> -->
-                <div id="Demo" data-i18n="Demo">Demo</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="/app/shift-builder" class="menu-link" id="Shift Builder">
-                        <div id="Shift Builder" data-i18n="Shift Builder">{{ __("Shift Builder") }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/app/shift-type" class="menu-link" id="Shift Type">
-                        <div id="Shift Type" data-i18n="Shift Type">{{ __("Shift Type") }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/app/shift-assignment" class="menu-link" id="Shift Assignment">
-                        <div id="Shift Assignment" data-i18n="Shift Assignment">{{ __("Shift Assignment") }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/app/employee-checkin" class="menu-link" id="Employee Checkin">
-                        <div id="Employee Checkin" data-i18n="Employee Checkin">{{ __("Employee Checkin") }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/app/attendance" class="menu-link" id="Attendance">
-                        <div id="Attendance" data-i18n="Attendance">{{ __("Attendance") }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="/app/extra-salary" class="menu-link" id="Extra Salary">
-                        <div id="Extra Salary" data-i18n="Extra Salary">{{ __("Extra Salary") }}</div>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
         {% for item in frappe.boot.sidebar_items %}
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle custom-side-link" id="{{ item.label || item.name}}">

@@ -46,13 +46,14 @@
 		<img src="{{ splash_image or " /assets/frappe/images/frappe-framework-logo.png" }}"
 			style="max-width: 100px; max-height: 100px;">
 	</div>
+	
 	<div class="layout-wrapper layout-content-navbar"
 	          {% if setup_complete == '0' or setup_complete == 0 %} id="hide-sidebar" {% endif %}>
 			<div class="layout-container">
 				<!-- Menu -->
-				<aside id="mosyrsidebar"></aside>
+				<aside id="mosyrsidebar"   ></aside>
 				<!-- / Menu -->
-				<div class="layout-page">
+				<div class="layout-page {% if query_report_page %} pl-0 {% endif %}" >
 					<div class="main-section">
 						<header></header>
 						<div class="custom_content">
@@ -107,5 +108,35 @@
 		<script src="/assets/mosyr_theme/js/apexcharts.js"></script>
 		<script src="/assets/mosyr_theme/js/main.js"></script>
 		<script src="/assets/mosyr_theme/js/dashboards-analytics.js"></script>
+		<script defer>
+				const sidebar_list = [
+					"System management",
+					"User management",
+					"HR management",
+					"Employees list",
+					"Letters",
+					"Timesheet Attendees management",
+					"payroll",
+					"Employees performance",
+					"Leave",
+					"Loans",
+					"Vehicle management",
+					"Documents management",
+					"Custody management",
+					"E-form"
+				]
+
+
+			
+				$('.page-body').ready(()=>{
+					if (frappe.user.has_role("Self Service") && ! frappe.user.has_role("SaaS Manager") && ! frappe.user.has_role("SaaS User"))
+						sidebar_list.forEach(item =>{
+							$(`[data-i18n="${item}"]`).closest('.menu-item').remove()
+						})
+					
+				})
+
+			
+		</script>
 </body>
 </html>

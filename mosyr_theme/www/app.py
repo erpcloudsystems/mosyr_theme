@@ -18,6 +18,14 @@ base_template_path = "templates/www/app.html"
 
 
 def get_context(context):
+    current_path = frappe.form_dict.get("sidebar", None)
+    query_report_page = False
+    # Check if the path contains "/app/query-report"
+    if 'no' == current_path:
+        # Perform actions for the '/app/query-report' path
+        # For example, set a context variable
+        query_report_page = True
+
     if frappe.session.user == "Guest":
         frappe.throw(_("Log in to access this page."), frappe.PermissionError)
     elif frappe.db.get_value("User", frappe.session.user, "user_type") == "Website User":
@@ -137,7 +145,9 @@ def get_context(context):
             "google_analytics_anonymize_ip": frappe.conf.get("google_analytics_anonymize_ip"),
             "mixpanel_id": frappe.conf.get("mixpanel_id"),
             "user_name": user_name,
-            "setup_complete": frappe.utils.cint(frappe.db.get_value("System Settings", "System Settings", "setup_complete") or 0)
+            "setup_complete": frappe.utils.cint(frappe.db.get_value("System Settings", "System Settings", "setup_complete") or 0),
+            "current_path": current_path,
+            "query_report_page":query_report_page
         }
     )
 
