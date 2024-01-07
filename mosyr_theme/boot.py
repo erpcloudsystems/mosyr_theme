@@ -1,7 +1,7 @@
 
 import subprocess
 import frappe
-from erpnext.hr.doctype.leave_application.leave_application import get_leave_details
+from hrms.hr.doctype.leave_application.leave_application import get_leave_details
 from frappe.utils import flt ,cint, today
 import datetime
 from datetime import datetime
