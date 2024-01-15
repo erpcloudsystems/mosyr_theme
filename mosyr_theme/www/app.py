@@ -127,7 +127,91 @@ def get_context(context):
     total_resutl = get_total_emps_every_month()
     current_year_totals_list = total_resutl.get("current_year_totals_list")
     prev_year_totals_list = total_resutl.get("prev_year_totals_list")
-
+    doctype_list = [
+        "Company",
+        "System Controller",
+        "Translation",
+        "User",
+        "Users Permission Manager",
+        "Department",
+        "Branch",
+        "Employee Group",
+        "Designation",
+        "Employment Type",
+        "Shift Builder",
+        "Staffing Plan",
+        "Holiday List",
+        "Leave Type",
+        "Leave Period",
+        "Leave Policy",
+        "Leave Policy Assignment",
+        "Leave Allocation",
+        "Leave Encashment",
+        "Employee Health Insurance",
+        "Leave Block List",
+        "Employee",
+        "End Of Service",
+        "Insurances and Risk",
+        "Leave Application",
+        "Shift Request",
+        "Contact Details",
+        "Educational Qualification",
+        "Emergency Contact",
+        "Health Insurance",
+        "Personal Details",
+        "Salary Details",
+        "Exit Permission",
+        "Vehicle Services",
+        "Letter",
+        "Mosyr Form",
+        "Attendance",
+        "Employee Attendance Tool",
+        "Attendance Request",
+        "Upload Attendance",
+        "Employee Checkin",
+        "Employee Attendance Sheet",
+        "Biomitric Devices",
+        "Exit Permissions Summary",
+        "Employee Shift Change Tool",
+        "Employees Attendance",
+        "Payroll Settings",
+        "Salary Component",
+        "Payroll Register Tool",
+        "Employee Benefit",
+        "Employee Deduction",
+        "Payroll Entry",
+        "Salary Slip",
+        "Retention Bonus",
+        "Employee Incentive",
+        "Files in Saudi banks format",
+        "Appraisal",
+        "Appraisal Template",
+        "Leave Application",
+        "Compensatory Leave Request",
+        "Travel Request",
+        "Leave Encashment",
+        "Employee Leave Balance",
+        "Employee Leave Balance Summary",
+        "Leave Balance Encashment",
+        "Loan Type",
+        "Loan",
+        "Loan Application",
+        "Vehicle",
+        "Vehicle Log",
+        "Document Manager",
+        "Document Type",
+        "Custody",
+        "Cash Custody",
+        "Cash Custody Expense",
+        "Return Custody"
+    ]
+   
+    custom_docperm = frappe.db.sql(f"Select *  FROM `tabCustom DocPerm` WHERE role='{frappe.session.user}'" ,as_dict =1 )
+    list_custom_docperm = []
+    for doc in custom_docperm:
+        list_custom_docperm.append(doc.parent)
+    frappe.msgprint(f"{len(list(set(doctype_list) - set(list_custom_docperm)))}")
+    frappe.msgprint(f"{len(doctype_list)}")
     context.update(
         {
             "no_cache": 1,
@@ -147,7 +231,11 @@ def get_context(context):
             "user_name": user_name,
             "setup_complete": frappe.utils.cint(frappe.db.get_value("System Settings", "System Settings", "setup_complete") or 0),
             "current_path": current_path,
-            "query_report_page":query_report_page
+            "query_report_page":query_report_page,
+            "custom_docperm":list(set(doctype_list) - set(list_custom_docperm)),
+            "doctype_list": doctype_list,
+            "lenth_doctype_list": len(doctype_list),
+            "lenth_remove": len(list(set(doctype_list) - set(list_custom_docperm))),
         }
     )
 
