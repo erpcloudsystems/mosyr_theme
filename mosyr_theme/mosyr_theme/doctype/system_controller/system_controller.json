@@ -43,6 +43,7 @@
    "options": "Sidebar Label"
   },
   {
+   "allow_bulk_edit": 1,
    "fieldname": "sidebar_item",
    "fieldtype": "Table",
    "label": "Sidebar Item",
@@ -85,7 +86,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-09-10 16:55:16.463976",
+ "modified": "2024-01-22 10:56:22.801091",
  "modified_by": "Administrator",
  "module": "Mosyr Theme",
  "name": "System Controller",

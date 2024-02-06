@@ -127,34 +127,37 @@
 				]
 
 			
-			
-				$('.page-body').ready(()=>{
-					if (frappe.user.has_role("Self Service") && ! frappe.user.has_role("SaaS Manager") && ! frappe.user.has_role("SaaS User"))
-						sidebar_list.forEach(item =>{
-							$(`[data-i18n="${item}"]`).closest('.menu-item').remove()
-						})
-					
+				frappe.ready(()=>{
+					$('.page-body').ready(()=>{
+						if (frappe.user.has_role("Self Service") && ! frappe.user.has_role("SaaS Manager") && ! frappe.user.has_role("SaaS User"))
+							sidebar_list.forEach(item =>{
+								$(`[data-i18n="${item}"]`).closest('.menu-item').remove()
+							})
+						
+					})
 				})
-
 			
 		</script>
 		<script defer>
-			{% for doctype in custom_docperm %}
-				console.log("{{doctype}}")
-				$('.page-body').ready(()=>{
-					if (frappe.user.has_role("SaaS User") && !frappe.user.has_role("SaaS Manager") && !frappe.user.has_role("Self Service")) {
-					const x = $(`[data-i18n="{{doctype}}"]`).closest('.menu-item').closest('.menu-item');
-					$(`[data-i18n="{{doctype}}"]`).closest('.menu-item').remove();
-					if (x.children().length == 1) {
+			frappe.ready(()=>{
+				{% for doctype in custom_docperm %}
+					$('.page-body').ready(()=>{
+						if (frappe.user.has_role("SaaS User") && !frappe.user.has_role("SaaS Manager") && !frappe.user.has_role("Self Service")) {
+						const x = $(`[data-i18n="{{doctype}}"]`).closest('.menu-item').closest('.menu-item');
 						$(`[data-i18n="{{doctype}}"]`).closest('.menu-item').remove();
+						if (x.children().length == 1) {
+							$(`[data-i18n="{{doctype}}"]`).closest('.menu-item').remove();
+						}
 					}
-				}
-				})
-			{% endfor %}
+					})
+				{% endfor %}
+			})
+			
 		</script>
 
 		<script defer>
-			$('.page-body').ready(()=>{
+			frappe.ready(()=>{
+				$('.page-body').ready(()=>{
 				if (frappe.user.has_role("SaaS User") && !frappe.user.has_role("SaaS Manager") && !frappe.user.has_role("Self Service"))
 
 					{
@@ -166,6 +169,9 @@
 					})}
 					
 				})
+		
+			})
+			
 		</script>
 </body>
 </html>

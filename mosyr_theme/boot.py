@@ -25,7 +25,7 @@ def get_sidebar_items():
     result = get_valid_perms(user=frappe.session.user)
     user_doctypes = [d.parent for d in result]
     for label in labels:
-        sidebar_items_list = frappe.get_list("SideBar Item Table", fields=["doc_name", "type", "parent_name", "label", "icon"], filters={"parent_name": label.get('label')}, order_by="creation")
+        sidebar_items_list = frappe.get_list("SideBar Item Table", fields=["doc_name", "type", "parent_name", "label", "icon"], filters={"parent_name": label.get('label')}, order_by="idx")
         for row in sidebar_items_list:
             role_profile_name = frappe.get_doc("User" , frappe.session.user).role_profile_name
             if frappe.session.user not in ["Administrator", "support@mosr.io"]:
