@@ -327,6 +327,24 @@ side_bar_static = {
             "icon": "",
         },
         {
+            "type": "Report",
+            "doc_name": "Daily Attendance",
+            "parent_name": "Timesheet Attendees management",
+            "icon": "",
+        },
+        {
+            "type": "Report",
+            "doc_name": "Monthly Attendance",
+            "parent_name": "Timesheet Attendees management",
+            "icon": "",
+        },
+        {
+            "type": "Report",
+            "doc_name": "Summerize Employee Attendance",
+            "parent_name": "Timesheet Attendees management",
+            "icon": "",
+        },
+        {
             "type": "DocType",
             "doc_name": "Payroll Settings",
             "parent_name": "payroll",
@@ -462,6 +480,12 @@ side_bar_static = {
         {
             "type": "DocType",
             "doc_name": "Loan Application",
+            "parent_name": "Loans",
+            "icon": "",
+        },
+        {
+            "type": "Report",
+            "doc_name": "Loan Details",
             "parent_name": "Loans",
             "icon": "",
         },
