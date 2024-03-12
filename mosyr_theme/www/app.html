@@ -127,7 +127,6 @@
 				]
 
 			
-				frappe.ready(()=>{
 					$('.page-body').ready(()=>{
 						if (frappe.user.has_role("Self Service") && ! frappe.user.has_role("SaaS Manager") && ! frappe.user.has_role("SaaS User"))
 							sidebar_list.forEach(item =>{
@@ -135,11 +134,9 @@
 							})
 						
 					})
-				})
 			
 		</script>
 		<script defer>
-			frappe.ready(()=>{
 				{% for doctype in custom_docperm %}
 					$('.page-body').ready(()=>{
 						if (frappe.user.has_role("SaaS User") && !frappe.user.has_role("SaaS Manager") && !frappe.user.has_role("Self Service")) {
@@ -151,12 +148,10 @@
 					}
 					})
 				{% endfor %}
-			})
 			
 		</script>
 
 		<script defer>
-			frappe.ready(()=>{
 				$('.page-body').ready(()=>{
 				if (frappe.user.has_role("SaaS User") && !frappe.user.has_role("SaaS Manager") && !frappe.user.has_role("Self Service"))
 
@@ -170,7 +165,6 @@
 					
 				})
 		
-			})
 			
 		</script>
 </body>

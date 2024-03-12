@@ -189,8 +189,20 @@ side_bar_static = {
             "icon": "",
         },
         {
+            "type": "DocType",
+            "doc_name": "Renewal Employee",
+            "parent_name": "Employees list",
+            "icon": "",
+        },
+        {
             "type": "Report",
             "doc_name": "Insurances and Risk",
+            "parent_name": "Employees list",
+            "icon": "",
+        },
+        {
+            "type": "Report",
+            "doc_name": "Employees annual vacation entitlements and end-of-service benefits",
             "parent_name": "Employees list",
             "icon": "",
         },
@@ -454,7 +466,7 @@ side_bar_static = {
         },
         {
             "type": "Report",
-            "doc_name": "Employee Leave Balance",
+            "doc_name": "Employee Leaves Balances",
             "parent_name": "Leave",
             "icon": "",
         },
